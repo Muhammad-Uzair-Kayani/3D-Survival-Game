@@ -31,22 +31,16 @@ dependency.
 
 ## Build
 
-Requires CMake 3.20 or newer and a C++20 compiler. To generate a Visual Studio
-2022 solution and build the console client:
+Put `premake5.exe` from a [Premake release](https://github.com/premake/premake-core/releases)
+that supports `vs2026` in the project root or on PATH. Run:
 
-```powershell
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64
-cmake --build build --config Debug
+```cmd
+GenerateProjects.bat
 ```
 
-The embedded Python policy is optional and requires Python development files
-plus a pybind11 CMake package:
+Open `build\premake\vs2026\SurvivalGame.sln` and press **Ctrl+F5**.
+The executable is `build\premake\vs2026\bin\Debug\GameRuntime.exe`.
+For Visual Studio 2022, run `GenerateProjects.bat vs2022` and open the
+solution under `build\premake\vs2022`.
 
-```powershell
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DBUILD_PYTHON_PLUGIN=ON
-cmake --build build --config Debug
-.\build\Debug\GameRuntime.exe
-```
-
-Run `GameRuntime` from the generated build folder; enter `P` to request an
-action from `python/policy.py`.
+For the optional Python policy setup, see [the architecture guide](docs/architecture.md#build).

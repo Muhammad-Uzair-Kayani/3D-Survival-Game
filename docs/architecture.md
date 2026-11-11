@@ -15,7 +15,7 @@ does not read input, print to the console, render graphics, or depend on Python
 or PlagC. A client submits an action and receives a plain `GameSnapshot`.
 
 `GameRuntime` links the static library. It handles keyboard input and displays
-the returned snapshot. With `BUILD_PYTHON_PLUGIN=ON`, the client also loads the
+the returned snapshot. When generated with the Python options, the client also loads the
 Python policy in-process through pybind11's embedding API. Python returns an
 action name; C++ validates the name and remains responsible for applying the
 action to the authoritative simulation.
@@ -27,27 +27,25 @@ boundary.
 
 ## Build
 
-Visual Studio 2022 console application:
+Use `GenerateProjects.bat` to generate the normal console build. The optional
+Python build needs a full 64-bit Windows CPython installation and pybind11.
+Use the same Python installation for pip and the build:
 
-```powershell
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64
-cmake --build build --config Debug
-.\build\Debug\GameRuntime.exe
+```cmd
+py -m pip install pybind11
+py -c "import sys, pybind11; print(sys.base_prefix); print(pybind11.get_include())"
 ```
 
-To include the embedded Python policy, install Python development files and a
-pybind11 CMake package, then configure with the option enabled:
+Pass the two printed paths, in order, to the generator:
 
-```powershell
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DBUILD_PYTHON_PLUGIN=ON
-cmake --build build --config Debug
-.\build\Debug\GameRuntime.exe
+```cmd
+GenerateProjects.bat vs2026 --python-root="C:\path\to\Python" --pybind-include="C:\path\to\pybind11\include"
 ```
 
-Enter `P` at the runtime prompt to ask `python/policy.py` for the next action.
-The included policy is a deterministic shortest-path baseline, not a trained
-neural policy. It can be replaced with model inference while keeping the
-observation/action boundary stable.
+Open `build\premake\vs2026-python\SurvivalGame.sln` and press **Ctrl+F5**.
+Keep the selected Python installation on PATH so Windows can load its DLL.
+Enter `P` to ask `python/policy.py` for a move. The included policy uses
+deterministic shortest-path search.
 
 ## Current slice
 

@@ -1,0 +1,26 @@
+# Premake output and local executable
+/build/
+/premake5.exe
+
+# Build folders from earlier CMake instructions
+/build-python/
+/build-vs22/
+/build-vs2022/
+/build-vs26/
+
+# Visual Studio local settings
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+/push.bat
+
+# Python local environments and caches
+/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local training outputs
+/data/
+/models/
