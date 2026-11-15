@@ -1,0 +1,205 @@
+{
+  "windows_run": "https://github.com/Muhammad-Uzair-Kayani/PlagC-Public/actions/runs/43624382105",
+  "cases": [
+    {
+      "test_case": "physics",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 5.95000031031668,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 0
+    },
+    {
+      "test_case": "combat",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 5.95000031031668,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 0
+    },
+    {
+      "test_case": "gate",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 5.95000031031668,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 188,
+      "python_failures": 0
+    },
+    {
+      "test_case": "gate_save",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 5.95000031031668,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 188,
+      "python_failures": 0
+    },
+    {
+      "test_case": "gate_negative",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 5.95000031031668,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 0
+    },
+    {
+      "test_case": "save",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 5.95000031031668,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 0
+    },
+    {
+      "test_case": "assets",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 5.95000031031668,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 0
+    },
+    {
+      "test_case": "social",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 5.95000031031668,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 0
+    },
+    {
+      "test_case": "melee",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 5.95000031031668,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 0
+    },
+    {
+      "test_case": "lifecycle",
+      "test_passed": true,
+      "phase": "Defeat",
+      "elapsed": 0.0166666675359011,
+      "arrived": 0,
+      "alive": 0,
+      "navigation_polygons": 187,
+      "python_failures": 0
+    },
+    {
+      "test_case": "python",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 1.95000010170043,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 0
+    },
+    {
+      "test_case": "fallback",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 1.95000010170043,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 1
+    },
+    {
+      "test_case": "python_exit",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 3.95000020600855,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 1
+    },
+    {
+      "test_case": "python_fault_malformed",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 3.95000020600855,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 1
+    },
+    {
+      "test_case": "python_fault_stale",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 3.95000020600855,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 1
+    },
+    {
+      "test_case": "python_fault_timeout",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 3.95000020600855,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 1
+    },
+    {
+      "test_case": "python_fault_duplicate",
+      "test_passed": true,
+      "phase": "Incomplete",
+      "elapsed": 3.95000020600855,
+      "arrived": 0,
+      "alive": 5,
+      "navigation_polygons": 187,
+      "python_failures": 1
+    },
+    {
+      "test_case": "peaceful",
+      "test_passed": true,
+      "phase": "Victory",
+      "elapsed": 17.2333342321217,
+      "arrived": 5,
+      "alive": 5,
+      "navigation_polygons": 188,
+      "python_failures": 0
+    },
+    {
+      "test_case": "solo",
+      "test_passed": true,
+      "phase": "Victory",
+      "elapsed": 40.8000021278858,
+      "arrived": 1,
+      "alive": 1,
+      "navigation_polygons": 187,
+      "python_failures": 0
+    },
+    {
+      "test_case": "autoplay",
+      "test_passed": true,
+      "phase": "Victory",
+      "elapsed": 46.9000024460256,
+      "arrived": 4,
+      "alive": 4,
+      "navigation_polygons": 188,
+      "python_failures": 0
+    }
+  ]
+}

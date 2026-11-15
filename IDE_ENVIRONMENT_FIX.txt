@@ -1,0 +1,23 @@
+Visual Studio inherited-environment fix
+
+Replace BOTH files in your existing LastLightGodot folder:
+  BuildFromVS.bat
+  scripts/build.py
+
+Then use the already-open Visual Studio solution and press Ctrl+Shift+B.
+Setup, engine cloning and Premake regeneration are unnecessary for this patch.
+After the build succeeds, use Ctrl+F5 to run.
+
+The previous marker failure was caused by whitespace from cmd's echo command.
+The IDE path now calls vcvars64.bat directly in BuildFromVS.bat, then starts
+Python with the inherited x64 compiler environment. That path no longer
+captures/parses an environment marker. The command-line fallback additionally
+accepts trailing whitespace around its marker.
+
+Windows verification:
+https://github.com/Muhammad-Uzair-Kayani/PlagC-Public/actions/runs/43594358771/job/132445592612
+
+The Windows job executed the actual wrapper in a directory with spaces,
+verified argument forwarding and inherited cl.exe/INCLUDE/LIB, initialized
+Visual Studio through the command-line fallback, and compiled/ran a C++ probe.
+This verifies the build launcher, not a complete Godot Windows build or GPU run.

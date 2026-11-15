@@ -1,0 +1,40 @@
+LAST LIGHT — ART AND AUDIO CREDITS
+
+Quaternius, Universal Animation Library 1 and 2 [Standard]. CC0.
+https://quaternius.com/  https://quaternius.itch.io/
+Runtime mannequin rig and free Standard animation clips.
+
+okokok123, Secondary Weapon Pack (Glock mesh), Free3D.
+https://free3d.com/3d-model/secondary-weapon-pack-426438.html
+Free3D listing: Personal Use License. Original reference photographs omitted.
+Runtime mesh simplified and given neutral materials for this personal project.
+
+Dwarven Expedition Pack - Stylized Assets, tobyfredson / FlorianAlexandru.
+https://www.cgtrader.com/items/2112749
+User-supplied downloadable free sample, CGTrader terms apply.
+Runtime modular meshes and reduced PBR textures incorporated into game content.
+
+Sword: user-supplied sword.zip (Sword_Low_Done.FBX).
+No additional license text was located in that archive. Original rights apply.
+
+Sound effects are generated for Last Light (pickup, shot, hurt, gate, radio,
+revive); no sounds from the model reference archives are used.
+
+Godot 4.5.1 is MIT-licensed; see accompanying Godot-LICENSE.txt and
+Godot-COPYRIGHT.txt for engine and third-party dependency notices.
+
+ARCTIC UPDATE - ADDITIONAL CC0 CONTENT
+Kenney Nature Kit 2.1, Survival Kit 2.0, Furniture Kit 2.0, Blaster Kit 2.1,
+City Kit Industrial 2.0. All five packs include CC0 licence text.
+https://kenney.nl/assets  https://creativecommons.org/publicdomain/zero/1.0/
+Source URLs, archive hashes and selected models: content/free-assets.json.
+Additional SMG/rifle/shotgun meshes are normalized derivatives of Blaster Kit.
+
+FROSTWORKS UPDATE - ADDITIONAL CC0 CONTENT
+Kenney Car Kit and Sci-Fi Sounds. CC0 1.0.
+https://kenney.nl/assets/car-kit
+https://kenney.nl/assets/sci-fi-sounds
+Selected vehicles and converted PCM spatial action sounds. Pack licence text
+is included inside assets/arctic; provenance and hashes are in free-assets.json.
+Industrial roofs, weathering shaders, machinery, road markings, cover layout,
+character equipment and mission design are generated for Last Light.

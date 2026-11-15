@@ -1,5 +1,66 @@
+# Local tools and generated builds
+/.tools/
 /build/
+/dist/
+/reports/
+
+# Godot generated caches
+/game/.godot/
+/game/.import/
+/game/assets/imported/
+
+# Download/import staging
+/assets/incoming/
+/incoming/
+
+# Visual Studio local files
+.vs/
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
+*.obj
+*.o
+*.pch
+*.ipch
+*.pdb
+*.ilk
+*.idb
+*.tlog/
+
+# Python environments and caches
+.venv/
+venv/
 __pycache__/
 *.py[cod]
-data/
-models/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Personal diagnostics, saves and AI learning
+diagnostics/
+user-data/
+app-data/
+local-data/
+/save.json
+/save-frostworks.json
+/survivors-v1.json
+/survivors-v2.json
+
+# Temporary files
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Keep required shared files
+!/game/game-content.pck
+!/Deliverables/
+!/Deliverables/LastLight-Windows-x64.zip
+!/.gitmodules
+!/godot.lock.json
+
+# Keep vendor/godot registered as a Git submodule.
+# Do not globally ignore *.exe, *.dll, *.pck, *.zip or *.json.

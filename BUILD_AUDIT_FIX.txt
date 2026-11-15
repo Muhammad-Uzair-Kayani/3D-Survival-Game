@@ -1,0 +1,46 @@
+LAST LIGHT - COMPLETE WINDOWS BUILD AUDIT
+
+Apply to the existing project:
+1. Close Visual Studio. Copy this ZIP's LastLightGodot contents into your
+   existing LastLightGodot directory, replacing matching project files.
+2. Keep vendor/godot, .tools, and existing build outputs. Do not delete or
+   re-clone the engine. No reinstall of Visual Studio is part of this update.
+3. Open build/premake/vs2022/LastLightGodot.sln.
+4. Choose Release | x64 and Build > Build Solution (Ctrl+Shift+B).
+5. After a successful build, run RunGame.bat or Ctrl+F5.
+
+For a new extraction, follow README.md: Setup.bat, GenerateProjects.bat vs2022,
+then open the generated solution. Premake remains the Visual Studio frontend.
+
+Optional fast configuration check from the project directory:
+  BuildGame.bat --configure-only
+Normal build:
+  BuildGame.bat --jobs 1
+
+Why the previous build selected MinGW:
+Godot 4.5.1 asks SCons to enumerate installed Visual Studio versions separately
+from the environment initialized by vcvars64.bat. When enumeration fails,
+Godot selects MinGW even though cl.exe is working. The project-owned SCons
+entry point now uses the selected compiler/SDK environment, supplies the
+MSVC tool-family metadata expected by SCons, and bypasses redundant installer
+probing. It does not edit Godot source files or installed SCons files.
+
+Before Godot, a real x64 C++ program including Windows SDK and standard
+library headers is compiled, linked with a compiled resource, and executed.
+The compiler must be VS2022 or newer. BuildGame uses the project-local Python.
+The working IDE tools path is remembered for later command-line/test runs.
+Existing standard VS locations are checked even if vswhere returns no entries.
+
+Diagnostics are retained under reports/:
+  msvc-preflight.log  - actual compiler, linker and resource-probe diagnostics
+  msvc-toolchain.json - selected tool paths, compiler toolset and SDK
+  godot-configure.log - complete SCons dry-run build graph
+  godot-build.log     - complete engine and client-module build output
+
+Other audit fixes:
+- Python shutdown cannot recursively re-enter itself on a failed socket write.
+- Partial Python messages are cleared before reconnecting.
+- Tests cover a Python process exiting during play and authored AI fallback.
+- Tests remove stale reports; Windows test saves use isolated application data.
+
+See docs/validation.md for the executed acceptance checks and their limits.

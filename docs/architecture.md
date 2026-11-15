@@ -1,55 +1,49 @@
-# Initial Architecture
+# Godot source integration
 
-## Project boundaries
+The pinned Godot 4.5.1 source stays an unchanged submodule. Its SCons
+`custom_modules` option compiles `modules/last_light` into the engine executable.
+There is no separately loaded gameplay DLL. Premake generates the VS2022 build
+frontend and invokes the validated MSVC/SCons wrapper.
 
-```text
-GameRuntime (console client) ─────> survival_core (C++ static library)
-       │
-       └── optional PythonPolicyPlugin (pybind11 embedded Python)
-                     │
-                     └── python/policy.py
-```
+`last_light_game.cpp` owns the spatial adapter and fixed 60 Hz authority loop.
+`domain.h` owns portable action/life/inventory/social/blend rules.
+`world_contract.h` owns the portable observation boundary, gate timing and
+reward. `decisions.cpp` converts local perceptions into features and goals,
+then requests engine navigation. `python_bridge.cpp` validates transport and
+masked intentions. `persistence.cpp` validates a candidate save before committing
+it. `frontend.cpp` exposes a small UI DTO and explicit commands; GDScript menus
+cannot directly edit authoritative health or inventory.
 
-`survival_core` owns simulation state and exposes a small public C++ API. It
-does not read input, print to the console, render graphics, or depend on Python
-or PlagC. A client submits an action and receives a plain `GameSnapshot`.
+`visuals.cpp` builds the skeletal blend graph and bone attachments.
+`level_art.cpp` loads modular art and creates matching static collision.
+Navigation is baked from the same world collision and rebaked after the gate
+rises. Dynamic actors use local separation and stuck-path retries. Physics
+runs at 60 Hz, AI at 5 Hz, HUD at 10 Hz; default rendering is 30 FPS, 960×540,
+OpenGL Compatibility. Pausing stops world time; loss of focus also pauses.
 
-`GameRuntime` links the static library. It handles keyboard input and displays
-the returned snapshot. When generated with the Python options, the client also loads the
-Python policy in-process through pybind11's embedding API. Python returns an
-action name; C++ validates the name and remains responsible for applying the
-action to the authoritative simulation.
+The optional Python service is a separate process. `python/train.py` owns
+real-engine evaluation, GA evolution, validation and held-out comparison.
+`docs/contract.md` specifies the feature/action/protocol boundary. Protocol
+failure switches to the authored controller and is reported explicitly.
 
-The game contract and policy observation use plain values. No PlagC entity,
-renderer, physics object, or Python type appears in `survival_core`. A later
-PlagC adapter can replace the grid world while preserving the public client
-boundary.
+Save schema 3 contains actor poses, inventory, action timers, local beliefs,
+RNG state, objective/gate state and counters. Old schema 1/2 saves are
+rejected. Contact/solver caches are not serialized, so restoration is valid
+game state, not a promise of bit-identical physics replay. Decision traces and
+reports are diagnostic records, not input recordings for deterministic replay.
 
-## Build
+Prepared meshes/textures reside in `game/game-content.pck`; build packaging
+includes this data inside the game's resource PCK. Raw game sources do not
+require an editor import pass. A stock Godot executable lacks the custom native
+class and cannot run this main scene; use the built executable or source build.
 
-Use `GenerateProjects.bat` to generate the normal console build. The optional
-Python build needs a full 64-bit Windows CPython installation and pybind11.
-Use the same Python installation for pip and the build:
-
-```cmd
-py -m pip install pybind11
-py -c "import sys, pybind11; print(sys.base_prefix); print(pybind11.get_include())"
-```
-
-Pass the two printed paths, in order, to the generator:
-
-```cmd
-GenerateProjects.bat vs2026 --python-root="C:\path\to\Python" --pybind-include="C:\path\to\pybind11\include"
-```
-
-Open `build\premake\vs2026-python\SurvivalGame.sln` and press **Ctrl+F5**.
-Keep the selected Python installation on PATH so Windows can load its DLL.
-Enter `P` to ask `python/policy.py` for a move. The included policy uses
-deterministic shortest-path search.
-
-## Current slice
-
-The first slice provides a deterministic, turn-stepped grid, collision checks,
-a destination, a C++ console client, and an optional in-process Python policy
-adapter. Seeded scenarios, multiple agents, survival systems, perception,
-social memory, and neuroevolution training are subsequent milestones.
+The Arctic client adds `arctic_world.cpp` (world/asset construction),
+`environment_gameplay.cpp` (transactional supplies, timed actions, smoke, doors
+and conditions), `strategy.h` (portable bounded forward search),
+`strategic_decisions.cpp` (perceived opportunities and local skills), and
+`profiles.cpp` (independent durable survivor adaptation, inspection and reset).
+Mission saves and reset revisions prevent an older mission from resurrecting
+cleared personal memories. Profile writes are bounded, validated and atomic.
+Snow and vegetation share MultiMesh geometry. Dynamic doors and low crates use
+physical collision plus local skills/steering; permanent obstacles enter the
+navigation bake. The gate triggers a rebake once opened.

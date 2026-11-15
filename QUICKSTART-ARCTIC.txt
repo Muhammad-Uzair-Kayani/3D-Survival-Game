@@ -1,0 +1,75 @@
+LAST LIGHT - ARCTIC UPGRADE - SOURCE BUILD
+
+Extract the full LastLightGodot folder, preferably to C:\Dev\LastLightGodot.
+For an existing checkout, back up your files, then overwrite client files from
+this ZIP. Keep vendor\godot and .tools to reuse your engine/build cache.
+
+1. Setup.bat
+2. GenerateProjects.bat vs2022
+3. Open build\premake\vs2022\LastLightGodot.sln
+4. Release | x64, startup project LastLight, Ctrl+F5.
+
+Alternative: BuildGame.bat --jobs 1 then RunGame.bat.
+Premake drives the pinned Godot SCons source build. No CMake step is used.
+Godot and the C++ client compile into the Windows GUI executable; Python is an
+optional separate process. Setup registers the pinned Godot source submodule.
+The prepared art is included inside game\game-content.pck; no editor import,
+Blender or extra asset download is needed.
+
+FIRST TEST
+Choose Peaceful first. Start Survival. M opens the tactical map. Find the access
+key, power the generator (fuel is faster; hand-crank works without fuel),
+calibrate any two of three relays, then use the radio. Reach either extraction.
+There are four independent survivors. Standard adds five distractor roles;
+Hostile enables eight bots. F10 enables autoplay so you can inspect the agents.
+The Arctic base spans 300x300 metres with 124 loot entries and 36 interactable
+objects, including seven doors and 22 searchable supply crates.
+
+WASD move; mouse camera; Shift sprint; Ctrl crouch; Space jump; Alt roll.
+RMB aim; LMB fire/melee; R reload; 1 pistol; 2 sword; 3 SMG; 4 rifle; 5 shotgun.
+E interact/pickup/revive; C close nearby door; H medkit; B bandage; F eat;
+T drink; Q smoke; V decoy; G offer compatible ammo; Y invite a nearby teammate.
+I survivor inspector; M tactical map; Esc pause; F5 save; F9 load; Tab spectate;
+F10 autoplay; F1 diagnostics; X cancel an action.
+
+INSPECT AND RESET
+I opens the live inspector (the world continues). Select Maya, Rafi, Lian or
+Omar. It shows six personality/social scores, remembered trust/fear, experience
+history, learned intention biases, historical region risk, current resources,
+chosen plan, alternative scores/costs/risk, and the remaining plan steps.
+Reset this survivor clears that survivor's learned preferences and personal
+memory immediately. Health and inventory are preserved. Further play can teach
+new experiences immediately; reset is not a permanent learning freeze.
+The main-menu checkbox resets all four profiles for a new game. Pause-menu
+profiles can also be inspected/reset while the world is paused.
+
+Profiles persist across missions and launches in:
+%APPDATA%\Godot\app_userdata\Last Light\survivors-v1.json
+Mission save: save.json in the same directory. Mission loading does not rewind
+persistent learning. Loading a save made before a reset cannot resurrect the
+reset profile. Old prototype mission saves use an incompatible schema and are
+rejected safely; start a new Arctic mission. Settings are retained.
+
+AI SYSTEMS
+Bounded forward planning compares explicit prerequisites, alternative regional
+routes, equipment, current threats and personal risk memories. Local skills
+handle combat, self-care, retreat/smoke, doors, rescue and surplus sharing.
+The optional Python MLP gives intention guidance. Individual output preferences
+adapt online and persist; the shared pretrained base network remains fixed
+during play. Separate GA training can evolve that base network using real
+headless episodes. These are bounded game AI systems, not human reasoning.
+
+New Arctic art uses five Kenney CC0 packs: Nature, Survival, Blaster, Furniture,
+and City Industrial. UAL1 supplies locomotion; UAL2 supplies advanced actions.
+Movement, stance, aim and action blending use the existing rigs. See asset
+credits for the supplied pistol/sword terms and retained older test-map art.
+
+BUILD STATUS AT PACKAGING
+The current C++ module compiles in the source-built Linux Godot engine. Core
+C++ domain/strategy/world tests and Python tests passed (native Windows tests
+are skipped on Linux). The full 28-case Linux engine suite passes, including the new Arctic mission,
+profiles, equipment, sharing, animation, crossfire and interaction checks.
+Native Windows validation is run separately; see the accompanying download
+message for the exact revision's final build result.
+Windows 10 Vega performance still requires your local test.
+Start at 960x540/30 FPS.

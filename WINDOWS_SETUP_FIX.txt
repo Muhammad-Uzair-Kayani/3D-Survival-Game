@@ -1,0 +1,26 @@
+Windows setup fix: long paths and interrupted Godot checkout
+
+1. Move the ENTIRE LastLightGodot project folder to a short location, for
+   example C:\Dev\LastLightGodot. Keep its .git directory and vendor folder.
+   The pasted log shows this project owns its own Git repository.
+2. Extract this fix ZIP directly INTO that project folder. Replace
+   scripts\setup.py. Keep the existing vendor\godot checkout.
+3. Open Command Prompt in that folder and run:
+
+   Setup.bat --repair-missing
+   BuildGame.bat --jobs 1
+   RunGame.bat
+
+The updated script enables Git long-path support BEFORE submodule checkout.
+The explicit repair option reconstructs an empty checkout index when needed
+and restores absent tracked files from HEAD. Existing file contents and
+existing staged edits are preserved. If real local edits remain, setup stops
+and reports them for review instead of switching revisions.
+
+The short folder also helps MSVC/Windows SDK tools that may retain their own
+path-length limits. Existing downloaded Git objects are reused; deleting or
+recloning the engine is unnecessary for the error shown in the pasted log.
+
+Validation: nine automated tests pass on Linux, including long nested paths,
+missing files, empty index recovery, staged-edit preservation and resume
+without recloning. Windows execution is not available in this environment.

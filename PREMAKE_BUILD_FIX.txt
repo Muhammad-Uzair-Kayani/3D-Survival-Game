@@ -1,0 +1,33 @@
+Premake / Visual Studio build frontend
+
+Setup has already succeeded in your log. Keep the existing vendor/godot and
+.tools folders. This patch does not require another engine clone or Setup run.
+
+1. Extract this ZIP directly into your existing LastLightGodot folder and
+   replace scripts/build.py and any matching wrapper files.
+2. Put your working premake5.exe beside GenerateProjects.bat, or keep it on PATH.
+3. Run:
+
+   GenerateProjects.bat vs2022
+   start "" "build\premake\vs2022\LastLightGodot.sln"
+
+4. In Visual Studio choose Release | x64, set LastLight as startup project,
+   and press Ctrl+F5. The first source build is lengthy and uses one job.
+
+The generated project supplies its own Visual Studio C++ tools path to the
+build wrapper. You do not need to initialize a Developer Command Prompt or
+put cl.exe on your ordinary terminal PATH. Build/Clean/Rebuild are available
+in the IDE. The game executable and PCK are packaged under dist/ automatically.
+
+Godot is compiled by its required SCons build internally. Premake supplies the
+Visual Studio solution/frontend; there is no CMake step. Visual Studio still
+needs an installed C++ toolset and Windows SDK. Premake does not install them.
+The old VS2022-only detection filter has been replaced with IDE/developer-env
+support and detection that includes preview/Build Tools installations.
+
+A short project folder such as C:\Dev\LastLightGodot remains recommended for
+MSVC/SDK path limits. Move the entire project folder together if shortening it.
+
+Verification: 14 automated tool/setup/environment tests passed. VS2022 solution
+build/debug commands were generated and checked with spaces in the project path.
+Windows/MSVC execution was not available in the validation environment.

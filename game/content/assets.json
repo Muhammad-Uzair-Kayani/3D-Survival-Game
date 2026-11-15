@@ -1,0 +1,40 @@
+{
+  "survivor_scene": "res://assets/ual1.glb",
+  "survivor_scale": 0.94,
+  "survivor_yaw_degrees": 180.0,
+  "clips": {},
+  "note": "Quaternius UAL1 and UAL2 CC0 rigs; action library merged at runtime.",
+  "actions_scene": "res://assets/ual2.glb",
+  "pistol_scene": "res://assets/pistol.glb",
+  "sword_scene": "res://assets/sword.glb",
+  "pistol_transform": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ]
+  },
+  "sword_transform": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ]
+  },
+  "gun_scenes": [
+    "res://assets/pistol.glb",
+    "res://assets/arctic/smg.glb",
+    "res://assets/arctic/rifle.glb",
+    "res://assets/arctic/shotgun.glb"
+  ]
+}

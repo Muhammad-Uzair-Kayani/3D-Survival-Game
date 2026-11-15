@@ -1,0 +1,21 @@
+Fix for: The network path was not found while calling vcvars64.bat
+
+The failure was in the Python build wrapper's cmd.exe argument quoting.
+The Visual Studio tools script was located successfully.
+
+Extract this patch ZIP directly into your existing LastLightGodot folder.
+Replace scripts/build.py. Keep the rest of the project and downloaded Godot.
+
+Then return to the existing Visual Studio solution and press Ctrl+Shift+B
+(Build Solution). After a successful build, press Ctrl+F5 to run.
+Setup, submodule cloning and solution regeneration are unnecessary for this fix.
+
+The wrapper now passes an explicit raw Windows command line to CreateProcess,
+uses CALL for the quoted .bat path, and reads the environment after a marker.
+It retains Visual Studio initialization diagnostics if that script fails.
+It also preserves the earlier Path/PATH case normalization.
+
+Validation: 18 automated checks passed, including exact quoting for the
+reported C:\Program Files\Microsoft Visual Studio\2022\Community path,
+environment parsing, initialization-error output and prior setup recovery.
+Windows execution is not available in the validation environment.

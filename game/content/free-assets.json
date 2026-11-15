@@ -1,0 +1,154 @@
+[
+  {
+    "name": "nature-kit",
+    "author": "Kenney",
+    "source": "https://kenney.nl/assets/nature-kit",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "original_zip_sha256": "fa7974a0d342bfe63c38664ba9f8ec1a4aab8ea25f099bdc56870e33588c4d9d",
+    "models": [
+      "bridge_wood.glb",
+      "campfire_logs.glb",
+      "log_stack.glb",
+      "rock_largeA.glb",
+      "rock_largeB.glb",
+      "rock_tallA.glb",
+      "stone_smallA.glb",
+      "tent_detailedOpen.glb",
+      "tree_pineRoundA.glb",
+      "tree_pineRoundC.glb",
+      "tree_pineTallA.glb",
+      "tree_pineTallB.glb"
+    ]
+  },
+  {
+    "name": "survival-kit",
+    "author": "Kenney",
+    "source": "https://kenney.nl/assets/survival-kit",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "original_zip_sha256": "c3586341b5932c87eb43d75d915434f47daed168b17ed36a03e8ca9977c7443e",
+    "models": [
+      "barrel.glb",
+      "bedroll.glb",
+      "bottle-large.glb",
+      "bottle.glb",
+      "box-large.glb",
+      "box.glb",
+      "campfire-pit.glb",
+      "chest.glb",
+      "structure-metal-roof.glb",
+      "structure-metal-wall.glb",
+      "structure-metal.glb",
+      "tent.glb",
+      "tool-axe.glb",
+      "tool-hammer.glb",
+      "workbench.glb"
+    ]
+  },
+  {
+    "name": "furniture-kit",
+    "author": "Kenney",
+    "source": "https://kenney.nl/assets/furniture-kit",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "original_zip_sha256": "e67652d0932cee41683f74711c03d3e192a2af9979ef8e6b237711f5482d46b0",
+    "models": [
+      "bedBunk.glb",
+      "bedSingle.glb",
+      "bookcaseClosed.glb",
+      "chair.glb",
+      "computerKeyboard.glb",
+      "computerScreen.glb",
+      "desk.glb",
+      "kitchenCabinet.glb",
+      "kitchenFridge.glb",
+      "lampSquareCeiling.glb",
+      "lampWall.glb",
+      "loungeSofa.glb",
+      "radio.glb",
+      "table.glb"
+    ]
+  },
+  {
+    "name": "blaster-kit",
+    "author": "Kenney",
+    "source": "https://kenney.nl/assets/blaster-kit",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "original_zip_sha256": "91e3093e95427d59625e7e2ce2d0399b861600160fd0b4ada7714796b67cea8c",
+    "models": [
+      "blaster-a.glb",
+      "blaster-b.glb",
+      "blaster-c.glb",
+      "blaster-d.glb",
+      "blaster-e.glb",
+      "blaster-f.glb",
+      "blaster-g.glb",
+      "blaster-h.glb",
+      "clip-large.glb",
+      "clip-small.glb",
+      "crate-medium.glb",
+      "crate-small.glb",
+      "grenade-a.glb",
+      "smoke.glb"
+    ]
+  },
+  {
+    "name": "city-kit-industrial",
+    "author": "Kenney",
+    "source": "https://kenney.nl/assets/city-kit-industrial",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "original_zip_sha256": "5b381164e5760f3830a2dbee43b972deee38b2a695d091b56e238ab2910c96d2",
+    "models": [
+      "building-a.glb",
+      "building-e.glb",
+      "building-h.glb",
+      "detail-tank.glb",
+      "shipping-container-a.glb",
+      "shipping-container-b.glb",
+      "solar-panel-flat.glb",
+      "water-tower.glb",
+      "windmill-low.glb"
+    ]
+  },
+  {
+    "name": "car-kit",
+    "author": "Kenney",
+    "source": "https://kenney.nl/assets/car-kit",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "original_zip_sha256": "fac7dacac5c7874348cf19729af3ef205f3d366493edaf0a827d93f4fdf3d0c4",
+    "models": [
+      "truck-flat.glb",
+      "wheel-truck.glb",
+      "cone.glb",
+      "delivery.glb",
+      "suv.glb",
+      "truck.glb",
+      "wheel-dark.glb",
+      "ambulance.glb",
+      "delivery-flat.glb",
+      "wheel-default.glb",
+      "van.glb"
+    ]
+  },
+  {
+    "name": "sci-fi-sounds",
+    "author": "Kenney",
+    "source": "https://kenney.nl/assets/sci-fi-sounds",
+    "license": "CC0 1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "original_zip_sha256": "119340f351a5098ad814f78719438c0da355a9ce8a4c8a3af6a8d48aa3d49e04",
+    "models": [
+      "shotgun.wav",
+      "door.wav",
+      "pistol.wav",
+      "impact.wav",
+      "smg.wav",
+      "radio.wav",
+      "rifle.wav"
+    ]
+  }
+]

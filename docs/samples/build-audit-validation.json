@@ -1,0 +1,35 @@
+{
+  "date_utc": "2026-11-14",
+  "windows_acceptance_url": "https://github.com/Muhammad-Uzair-Kayani/PlagC-Public/actions/runs/43598877158",
+  "windows_job_id": 132459143194,
+  "tested_commit": "343b252d7da5a21246041276567abfa204582866",
+  "godot_commit": "f62fdbde15035c5576dad93e586201f4d41ef0cb",
+  "platform": "Windows Server 2022 CI, VS2022, x64",
+  "scons": "4.11.1",
+  "python_tests": {
+    "passed": 29,
+    "skipped": 0
+  },
+  "engine_cases": [
+    "physics",
+    "combat",
+    "gate",
+    "save",
+    "python",
+    "fallback",
+    "python_exit",
+    "solo",
+    "autoplay"
+  ],
+  "premake_generated_solution_msbuild": "passed",
+  "neural_training_episodes": 8,
+  "held_out_evaluation_episodes": 12,
+  "separate_pck": "passed",
+  "packaged_python": "passed",
+  "embedded_pck": "passed",
+  "windows_gui_subsystem": "passed",
+  "static_cpp_runtime": "passed",
+  "target_vega_gpu_rendering_and_fps": "not measured",
+  "tested_source_zip_sha256": "023936b67804c8a770bc2824626ee874d4fc01291224d484df4040f771ee7c88",
+  "delivery_note": "Final archive adds validation documentation. Executable code and tests match the Windows-tested archive."
+}

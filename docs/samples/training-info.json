@@ -1,0 +1,30 @@
+{
+  "population": 30,
+  "generations": 3,
+  "training_seeds": [
+    101,
+    102,
+    103,
+    104
+  ],
+  "validation_seeds": [
+    501,
+    502,
+    503,
+    504
+  ],
+  "held_out_seeds": [
+    901,
+    902,
+    903,
+    904
+  ],
+  "training_frame_limit": 6000,
+  "evaluation_frame_limit": 18000,
+  "training_episodes": 360,
+  "validation_episodes": 12,
+  "held_out_episodes": 16,
+  "checkpoint_schema": 2,
+  "policy_sha256": "8c656a6e96099723c4c771c95b07d047ee6aac0194e3b39847019f71b3ec294b",
+  "evaluation_engine_sha256": "8d40353ba7a9f2e351a1b095bfd45f774572ca1379c075844d1f88b9db59ec9f"
+}

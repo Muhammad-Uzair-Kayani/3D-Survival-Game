@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "engine": "actual source-built Godot 4.5.1",
+  "population": 2,
+  "generations": 2,
+  "episode_frame_limit": 600,
+  "compared_fields": [
+    "generation",
+    "population",
+    "rng_state",
+    "history",
+    "best",
+    "champion"
+  ],
+  "resumed_matches_uninterrupted": true
+}
