@@ -135,7 +135,7 @@ Dictionary LastLightGame::profile_info(const Actor &actor) const {
 	return row;
 }
 bool LastLightGame::save_profiles() {
-	if (!arctic || automated_run) {
+	if (!arctic || automated_run || fixed_profiles) {
 		return true;
 	}
 	Dictionary file;
@@ -178,7 +178,7 @@ bool LastLightGame::save_profiles() {
 	return true;
 }
 void LastLightGame::load_profiles() {
-	if (!arctic || automated_run) {
+	if (!arctic || automated_run || fixed_profiles) {
 		return;
 	}
 	String profile_path = FileAccess::exists("user://survivors-v2.json") ? "user://survivors-v2.json" : "user://survivors-v1.json";
@@ -361,6 +361,9 @@ void LastLightGame::load_profiles() {
 	actors = candidate;
 }
 bool LastLightGame::reset_profile(int id) {
+	if (fixed_profiles) {
+		return false;
+	}
 	auto a = find_actor(id);
 	if (!a || id < 2 || id > 5) {
 		return false;
@@ -413,7 +416,7 @@ bool LastLightGame::reset_profile(int id) {
 	return saved;
 }
 void LastLightGame::record_experience(Actor &a, const String &kind, int peer, float reward) {
-	if (!arctic || a.stats.id < 2 || a.stats.id > 5 || controller == "nomemory") {
+	if (fixed_profiles || !arctic || a.stats.id < 2 || a.stats.id > 5 || controller == "nomemory") {
 		return;
 	}
 	int key = int(session_id.hash() % 1000000000) + 1;
@@ -466,7 +469,7 @@ void LastLightGame::record_experience(Actor &a, const String &kind, int peer, fl
 	}
 }
 void LastLightGame::learn_tick(Actor &a) {
-	if (!arctic || a.stats.id < 2 || a.stats.id > 5 || elapsed - a.last_learning < 4) {
+	if (fixed_profiles || !arctic || a.stats.id < 2 || a.stats.id > 5 || elapsed - a.last_learning < 4) {
 		return;
 	}
 	int key = int(session_id.hash() % 1000000000) + 1;

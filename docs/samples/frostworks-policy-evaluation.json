@@ -1,0 +1,638 @@
+{
+  "engine_sha256": "f39f79ac3e8ce926ef14e31dee6eb95f63a702d7469e2b96189d529ada0eccbe",
+  "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+  "frames": 36060,
+  "process_fps": 60,
+  "held_out_seeds": [
+    9721,
+    9829,
+    9931
+  ],
+  "planner": {
+    "overall": {
+      "missions": 9,
+      "missions_with_extraction": 4,
+      "survivor_extraction_rate": 0.4,
+      "survivor_losses": 1,
+      "mean_time_to_extraction_seconds": 315.4222429063584,
+      "mean_damage": 91.11111111111111
+    },
+    "by_mode": {
+      "Peaceful": {
+        "missions": 3,
+        "missions_with_extraction": 3,
+        "survivor_extraction_rate": 1.0,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": 278.757794189453,
+        "mean_damage": 0.0
+      },
+      "Standard": {
+        "missions": 3,
+        "missions_with_extraction": 1,
+        "survivor_extraction_rate": 0.2,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": 498.7444864908853,
+        "mean_damage": 90.33333333333333
+      },
+      "Hostile": {
+        "missions": 3,
+        "missions_with_extraction": 0,
+        "survivor_extraction_rate": 0.0,
+        "survivor_losses": 1,
+        "mean_time_to_extraction_seconds": null,
+        "mean_damage": 183.0
+      }
+    },
+    "episodes": [
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 348.816684858873,
+        "arrival_times": [
+          253.583343505859,
+          283.516693115234,
+          348.816680908203,
+          253.633346557617,
+          252.066680908203
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 20932,
+        "controller": "rule",
+        "checkpoint": "",
+        "neural_decisions": [
+          0,
+          0,
+          0
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 9721
+      },
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 348.600018180907,
+        "arrival_times": [
+          253.800018310547,
+          283.516693115234,
+          348.600006103516,
+          253.850006103516,
+          252.300018310547
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 20919,
+        "controller": "rule",
+        "checkpoint": "",
+        "neural_decisions": [
+          0,
+          0,
+          0
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 9829
+      },
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 354.883351841941,
+        "arrival_times": [
+          253.583343505859,
+          283.516693115234,
+          354.883361816406,
+          253.633346557617,
+          252.066680908203
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 21296,
+        "controller": "rule",
+        "checkpoint": "",
+        "neural_decisions": [
+          0,
+          0,
+          0
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 9931
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 99.0,
+        "physics_frames": 36060,
+        "controller": "rule",
+        "checkpoint": "",
+        "neural_decisions": [
+          0,
+          0,
+          0
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 1,
+        "power_on": true,
+        "key": true,
+        "radio": false,
+        "mode": "Standard",
+        "seed": 9721
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 121.0,
+        "physics_frames": 36060,
+        "controller": "rule",
+        "checkpoint": "",
+        "neural_decisions": [
+          0,
+          0,
+          0
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 1,
+        "power_on": false,
+        "key": true,
+        "radio": false,
+        "mode": "Standard",
+        "seed": 9829
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 3,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          354.11669921875,
+          589.016723632812,
+          553.100036621094
+        ],
+        "damage_received": 51.0,
+        "physics_frames": 36060,
+        "controller": "rule",
+        "checkpoint": "",
+        "neural_decisions": [
+          0,
+          0,
+          0
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Standard",
+        "seed": 9931
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 4,
+        "losses": 1,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 252.0,
+        "physics_frames": 36060,
+        "controller": "rule",
+        "checkpoint": "",
+        "neural_decisions": [
+          0,
+          0,
+          0
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 1,
+        "power_on": false,
+        "key": true,
+        "radio": false,
+        "mode": "Hostile",
+        "seed": 9721
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 109.0,
+        "physics_frames": 36060,
+        "controller": "rule",
+        "checkpoint": "",
+        "neural_decisions": [
+          0,
+          0,
+          0
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 1,
+        "power_on": true,
+        "key": true,
+        "radio": false,
+        "mode": "Hostile",
+        "seed": 9829
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 188.0,
+        "physics_frames": 36060,
+        "controller": "rule",
+        "checkpoint": "",
+        "neural_decisions": [
+          0,
+          0,
+          0
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 1,
+        "power_on": true,
+        "key": true,
+        "radio": false,
+        "mode": "Hostile",
+        "seed": 9931
+      }
+    ]
+  },
+  "frozen": {
+    "overall": {
+      "missions": 9,
+      "missions_with_extraction": 5,
+      "survivor_extraction_rate": 0.4444444444444444,
+      "survivor_losses": 2,
+      "mean_time_to_extraction_seconds": 256.8900146484375,
+      "mean_damage": 82.77777777777777
+    },
+    "by_mode": {
+      "Peaceful": {
+        "missions": 3,
+        "missions_with_extraction": 3,
+        "survivor_extraction_rate": 1.0,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": 196.5333435058594,
+        "mean_damage": 0.0
+      },
+      "Standard": {
+        "missions": 3,
+        "missions_with_extraction": 0,
+        "survivor_extraction_rate": 0.0,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": null,
+        "mean_damage": 41.666666666666664
+      },
+      "Hostile": {
+        "missions": 3,
+        "missions_with_extraction": 2,
+        "survivor_extraction_rate": 0.3333333333333333,
+        "survivor_losses": 2,
+        "mean_time_to_extraction_seconds": 437.9600280761718,
+        "mean_damage": 206.66666666666666
+      }
+    },
+    "episodes": [
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 230.200012005866,
+        "arrival_times": [
+          228.150009155273,
+          179.350006103516,
+          164.783340454102,
+          180.183349609375,
+          230.200012207031
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 13815,
+        "controller": "native",
+        "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+        "neural_decisions": [
+          4313,
+          134,
+          134
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 9721
+      },
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 230.200012005866,
+        "arrival_times": [
+          228.150009155273,
+          179.350006103516,
+          164.783340454102,
+          180.183349609375,
+          230.200012207031
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 13815,
+        "controller": "native",
+        "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+        "neural_decisions": [
+          4313,
+          134,
+          134
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 9829
+      },
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 230.200012005866,
+        "arrival_times": [
+          228.150009155273,
+          179.350006103516,
+          164.783340454102,
+          180.183349609375,
+          230.200012207031
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 13815,
+        "controller": "native",
+        "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+        "neural_decisions": [
+          4313,
+          134,
+          134
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 9931
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 59.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+        "neural_decisions": [
+          13232,
+          250,
+          250
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Standard",
+        "seed": 9721
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 4.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+        "neural_decisions": [
+          12868,
+          246,
+          246
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          2
+        ],
+        "mission": 1,
+        "power_on": true,
+        "key": true,
+        "radio": false,
+        "mode": "Standard",
+        "seed": 9829
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 62.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+        "neural_decisions": [
+          12995,
+          217,
+          217
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 1,
+        "power_on": true,
+        "key": true,
+        "radio": false,
+        "mode": "Standard",
+        "seed": 9931
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 4,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          422.316680908203,
+          564.133361816406,
+          426.233367919922,
+          420.250030517578
+        ],
+        "damage_received": 16.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+        "neural_decisions": [
+          10839,
+          213,
+          213
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Hostile",
+        "seed": 9721
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 1,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          356.86669921875
+        ],
+        "damage_received": 82.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+        "neural_decisions": [
+          12400,
+          364,
+          364
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": false,
+        "key": true,
+        "radio": true,
+        "mode": "Hostile",
+        "seed": 9829
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 3,
+        "losses": 2,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 522.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+        "neural_decisions": [
+          12231,
+          221,
+          221
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": false,
+        "key": true,
+        "radio": true,
+        "mode": "Hostile",
+        "seed": 9931
+      }
+    ]
+  }
+}

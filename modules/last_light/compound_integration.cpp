@@ -25,6 +25,114 @@ void LastLightGame::compound_integration_step() {
         if(physics_frames==8){player->target=Vector3(130,0,192);player->nav->set_target_position(player->target);integration_ok=integration_ok&&player->skeleton&&player->animation_tree&&player->pack_model&&player->vest_model;}
         if(player->skeleton){int leg=player->skeleton->find_bone("thigh_l");if(physics_frames==25&&leg>=0)leg_pose=player->skeleton->get_bone_pose_rotation(leg);if(physics_frames==45){integration_ok=integration_ok&&leg>=0&&leg_pose.angle_to(player->skeleton->get_bone_pose_rotation(leg))>.03f;}if(physics_frames==60)player->crouching=true;if(physics_frames==85)integration_ok=integration_ok&&player->stance_weight>.8f;}
     }
+	if (script_case == "compound_neural_training" && physics_frames >= 120 &&
+			physics_frames < 120 + 24 * 54 && (physics_frames - 120) % 24 == 0) {
+		// Exercise controlled perception and equipment states on actual terrain.
+		// In particular, place two discoverable casualties at different positions.
+		const int scenario = (physics_frames - 120) / 24;
+		auto &a = *find_actor(4);
+		auto &enemy = *find_actor(10);
+		const Vector3 sites[] = { { 160, .1, 230 }, { 127, .1, 195 }, { 110, .1, 152 }, { 176, .1, 156 }, { 148, .1, 171 } };
+		const bool supply_trial = scenario >= 30 && scenario < 48;
+		const bool landing_trial = scenario >= 48;
+		const Vector3 pos = landing_trial ? (scenario % 2 ? exit_position : alternative_exit) :
+				supply_trial ? sites[0] : sites[scenario / 6];
+		a.body->set_position(pos);
+		a.target = pos;
+		a.nav->set_target_position(pos);
+		a.yaw = Math::PI;
+		a.stats.state = State::Idle;
+		a.stats.health = scenario % 6 == 0 ? 24 : scenario % 6 == 1 ? 63 : 100;
+		a.stats.hunger = scenario % 6 == 0 ? 18 : 90;
+		a.stats.stamina = scenario % 6 == 0 ? 20 : 100;
+		a.order = scenario < 30 ? 0 : supply_trial ? 3 : 1 + scenario % 4;
+		a.order_peer = 2;
+		a.order_until = elapsed + (a.order ? 10 + scenario % 30 : 0);
+		a.order_position = pos + Vector3(2, 0, 2);
+		a.stats.inventory = Inventory();
+		a.stats.inventory.pistol = true;
+		a.stats.inventory.owned_weapons = 1;
+		a.stats.inventory.rounds = scenario % 6 == 1 ? 0 : scenario % 6 == 2 ? 1 : weapon_spec(a.stats.inventory.weapon_kind).magazine;
+		a.stats.inventory.hydration = scenario % 6 == 0 ? 22 : 85;
+		a.stats.inventory.smoke = scenario % 6 == 2 ? 2 : 0;
+		a.stats.inventory.decoys = scenario % 6 == 2 ? 2 : 0;
+		a.stats.inventory.cold = scenario % 6 == 0 ? 84 : 0;
+		a.stats.inventory.medkits = 2;
+		a.stats.inventory.armour = scenario % 6 == 3 ? 65 : 0;
+		a.stats.inventory.fuel = scenario % 6 == 3;
+		a.stats.inventory.tools = scenario % 6 == 3;
+		a.stats.inventory.coat = scenario % 6 == 3;
+		a.stats.inventory.backpack = scenario % 6 == 3;
+		a.suppression = scenario % 6 == 2 ? .75f : .05f;
+		a.last_damage_at = scenario % 6 == 2 ? elapsed - 1 : -100;
+		a.next_tactical_scan = 0;
+		a.next_investigate = 0;
+		a.tactical_until = 0;
+		a.contacts.clear();
+		const bool combat = landing_trial || (!supply_trial && (scenario % 6 == 2 || scenario % 6 == 3 || scenario % 6 == 5));
+		enemy.bot_role = 0;
+		enemy.stats.health = combat ? 100 : 0;
+		enemy.stats.state = combat ? State::Idle : State::Dead;
+		enemy.body->set_position(pos + Vector3(0, 0, landing_trial ? 5 : 14));
+		enemy.target = enemy.body->get_position();
+		enemy.nav->set_target_position(enemy.target);
+		enemy.body->set_collision_layer(combat ? 2 : 0);
+		for (int id : { 2, 3 }) {
+			auto &ally = *find_actor(id);
+			const bool downed = scenario % 6 == 4 || scenario % 6 == 5;
+			ally.stats.state = downed ? State::Downed : State::Idle;
+			ally.stats.health = downed ? 0 : 100;
+			ally.stats.bleed = id == 2 ? 7 : 17;
+			ally.body->set_position(pos + Vector3(id == 2 ? -3 : 3, 0, 5));
+			ally.nav->set_target_position(ally.body->get_position());
+			a.memory[id].trust = scenario % 2 ? .75f : .15f;
+		}
+		a.noise_danger = false;
+		a.last_noise = pos + Vector3(4, 0, 7);
+		a.last_noise_at = scenario % 6 == 1 ? elapsed - 1 : -100;
+		if (scenario >= 24) {
+			key_found = power_on = true;
+			radio_done = !supply_trial;
+			mission = radio_done ? 2 : 1;
+			gate_open = scenario % 2 == 0;
+		}
+		if (landing_trial) {
+			const int landing = scenario % 2 ? 0 : 1;
+			beacon_active[landing] = true;
+			beacon_times[landing] = elapsed + 20;
+		}
+		if (supply_trial) {
+			// Use real item definitions and make one supply visible on clear ground.
+			// An unarmed actor seeks a gun. An armed actor seeks compatible reserve.
+			static const char *const supplies[] = { "pistol", "smg", "rifle", "shotgun", "ammo", "smg_ammo", "rifle_ammo", "shells",
+				"medkit", "bandage", "food", "water", "fuel", "smoke", "armour", "coat", "backpack", "tools" };
+			int supply = scenario - 30;
+			auto &inventory = a.stats.inventory;
+			inventory.pistol = supply >= 4;
+			inventory.weapon_kind = supply >= 4 && supply < 8 ? supply - 4 : 0;
+			inventory.owned_weapons = inventory.pistol ? 1 << inventory.weapon_kind : 0;
+			inventory.rounds = inventory.reserve = 0;
+			inventory.medkits = inventory.bandages = inventory.food = inventory.water = 0;
+			inventory.tools = inventory.coat = inventory.backpack = inventory.armour = 0;
+			a.known_items.clear();
+			a.known_item_kinds.clear();
+			for (auto &item : items) {
+				if (item.kind == supplies[supply]) {
+					item.position = pos + Vector3(0, .3, 3);
+					item.visual->set_position(item.position);
+					item.available = true;
+					item.visual->show();
+					break;
+				}
+			}
+		}
+		perceive_compound(a);
+		a.react_at = elapsed;
+		a.next_plan = 0;
+		decide_compound(a);
+		build_compound_plan(a);
+		integration_ok = integration_ok && a.stats.active();
+	}
 	if (script_case == "compound_security") {
 		WorldObject *panel = nullptr;
 		for (auto &o : world_objects) {

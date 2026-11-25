@@ -41,6 +41,7 @@ Dictionary LastLightGame::snapshot() const {
 	data["world"] = compound_world ? "frostworks" : arctic ? "arctic"
 														   : "lab";
 	data["session_id"] = session_id;
+	data["checkpoint"] = neural_checkpoint;
 	data["power_on"] = power_on;
 	Array objects;
 	for (const auto &object : world_objects) {
@@ -424,6 +425,8 @@ bool LastLightGame::restore(const Dictionary &data) {
 		a.alternatives.clear();
 		a.plan_step = 0;
 		a.next_plan = 0;
+		a.neural_cover_options.clear();
+		a.next_tactical_scan = 0;
 		a.reposition_until = 0;
 		a.known_items.clear();
 		a.known_item_kinds.clear();
@@ -650,6 +653,14 @@ bool LastLightGame::load_game() {
 		return false;
 	}
 	Variant value = JSON::parse_string(file->get_as_text());
+	if (value.get_type() == Variant::DICTIONARY && !neural_checkpoint.is_empty()) {
+		Dictionary saved = value;
+		String saved_checkpoint = saved.get("checkpoint", "");
+		if (!saved_checkpoint.is_empty() && saved_checkpoint != neural_checkpoint) {
+			notify("This save uses another neural checkpoint. Load that checkpoint or start a new mission.");
+			return false;
+		}
+	}
 	if (value.get_type() != Variant::DICTIONARY || !restore(value)) {
 		notify("Save rejected; current game unchanged");
 		return false;
@@ -666,7 +677,12 @@ void LastLightGame::finish_report() {
 		return;
 	}
 	reported = true;
+	if (neural_trace.is_valid()) {
+		neural_outcome();
+		neural_trace->flush();
+	}
 	Dictionary report = snapshot();
+	neural_status(report);
 	report["phase"] = victory ? "Victory" : defeat ? "Defeat"
 												   : "Incomplete";
 	report["physics_frames"] = physics_frames;
@@ -725,6 +741,19 @@ void LastLightGame::finish_report() {
 	report["path_cost"] = path_total;
 	report["health_at_arrival"] = arrived ? arrival_health / arrived : 0.;
 	report["damage_received"] = damage_total;
+	Array arrival_times;
+	int losses = 0;
+	for (const auto &actor : actors) {
+		if (!actor.stats.survivor) {
+			continue;
+		}
+		if (actor.stats.state == lastlight::State::Extracted) {
+			arrival_times.push_back(actor.arrived_time);
+		}
+		losses += actor.stats.state == lastlight::State::Dead;
+	}
+	report["arrival_times"] = arrival_times;
+	report["losses"] = losses;
 	String output = JSON::stringify(report, "  ");
 	if (!report_path.is_empty()) {
 		DirAccess::make_dir_recursive_absolute(report_path.get_base_dir());

@@ -400,6 +400,7 @@ Dictionary LastLightGame::get_game_state() const {
 	out["message"] = message_time > 0 ? message : String();
 	out["hint"] = interaction_hint;
 	out["debug"] = debug_overlay;
+	neural_status(out);
 	out["autoplay"] = autoplay;
 	out["python"] = python_ready;
 	out["python_failures"] = python_failures;

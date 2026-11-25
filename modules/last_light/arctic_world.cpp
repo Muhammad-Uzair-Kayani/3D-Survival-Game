@@ -434,13 +434,13 @@ void fragment(){vec3 c=base_color.rgb;if(use_palette){c*=texture(palette,UV).rgb
 			if (gz >= 151 || gx >= 151 || map_rows[gz][gx] != '.') {
 				continue;
 			}
-			bool near = false;
+			bool near_existing_obstacle = false;
 			for (const auto &node : strategic_nodes) {
 				if (lastlight::distance({ x, z }, node.position) < 13) {
-					near = true;
+					near_existing_obstacle = true;
 				}
 			}
-			if (near) {
+			if (near_existing_obstacle) {
 				continue;
 			}
 			float scale = 2.2f + (rng() % 100) * .012f;
@@ -486,13 +486,13 @@ void fragment(){vec3 c=base_color.rgb;if(use_palette){c*=texture(palette,UV).rgb
 		if (map_rows[int(z / 2)][int(x / 2)] != '.') {
 			continue;
 		}
-		bool near = false;
+		bool near_existing_obstacle = false;
 		for (auto &node : strategic_nodes) {
 			if (lastlight::distance({ x, z }, node.position) < 14) {
-				near = true;
+				near_existing_obstacle = true;
 			}
 		}
-		if (near) {
+		if (near_existing_obstacle) {
 			continue;
 		}
 		prop("nature-kit", i % 2 ? "rock_largeA" : "rock_largeB", Vector3(x, 0, z), Vector3(2 + (i % 3), 1.3, 2), true);

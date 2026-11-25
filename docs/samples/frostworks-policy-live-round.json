@@ -1,0 +1,1129 @@
+{
+  "round": 1,
+  "training_examples": 28396,
+  "accepted": false,
+  "no_difficulty_regression": true,
+  "starting_id": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+  "candidate_id": "9ce662045121556bb2c07f5b557281de89c67e013d39c780d1a4d6ccf49d7df4",
+  "starting": {
+    "overall": {
+      "missions": 6,
+      "missions_with_extraction": 5,
+      "survivor_extraction_rate": 0.5666666666666667,
+      "survivor_losses": 1,
+      "mean_time_to_extraction_seconds": 303.6431507783778,
+      "mean_damage": 43.333333333333336
+    },
+    "by_mode": {
+      "Peaceful": {
+        "missions": 2,
+        "missions_with_extraction": 2,
+        "survivor_extraction_rate": 1.0,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": 196.5333435058594,
+        "mean_damage": 0.0
+      },
+      "Standard": {
+        "missions": 2,
+        "missions_with_extraction": 1,
+        "survivor_extraction_rate": 0.1,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": 556.683349609375,
+        "mean_damage": 54.0
+      },
+      "Hostile": {
+        "missions": 2,
+        "missions_with_extraction": 2,
+        "survivor_extraction_rate": 0.6,
+        "survivor_losses": 1,
+        "mean_time_to_extraction_seconds": 439.9861297607422,
+        "mean_damage": 76.0
+      }
+    },
+    "episodes": [
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 230.200012005866,
+        "arrival_times": [
+          228.150009155273,
+          179.350006103516,
+          164.783340454102,
+          180.183349609375,
+          230.200012207031
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 13815,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          4313,
+          134,
+          134
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 1613
+      },
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 230.200012005866,
+        "arrival_times": [
+          228.150009155273,
+          179.350006103516,
+          164.783340454102,
+          180.183349609375,
+          230.200012207031
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 13815,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          4313,
+          134,
+          134
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 1699
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 74.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          13422,
+          168,
+          168
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 1,
+        "power_on": false,
+        "key": true,
+        "radio": false,
+        "mode": "Standard",
+        "seed": 1613
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 1,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          556.683349609375
+        ],
+        "damage_received": 34.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          12956,
+          237,
+          237
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Standard",
+        "seed": 1699
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 3,
+        "alive": 4,
+        "losses": 1,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          436.233367919922,
+          405.350006103516,
+          405.350006103516
+        ],
+        "damage_received": 100.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          10363,
+          237,
+          237
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": false,
+        "key": true,
+        "radio": true,
+        "mode": "Hostile",
+        "seed": 1613
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 3,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          423.316680908203,
+          428.016693115234,
+          541.650024414062
+        ],
+        "damage_received": 52.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          11532,
+          244,
+          244
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Hostile",
+        "seed": 1699
+      }
+    ]
+  },
+  "candidate": {
+    "overall": {
+      "missions": 6,
+      "missions_with_extraction": 5,
+      "survivor_extraction_rate": 0.5666666666666667,
+      "survivor_losses": 1,
+      "mean_time_to_extraction_seconds": 303.6431507783778,
+      "mean_damage": 43.333333333333336
+    },
+    "by_mode": {
+      "Peaceful": {
+        "missions": 2,
+        "missions_with_extraction": 2,
+        "survivor_extraction_rate": 1.0,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": 196.5333435058594,
+        "mean_damage": 0.0
+      },
+      "Standard": {
+        "missions": 2,
+        "missions_with_extraction": 1,
+        "survivor_extraction_rate": 0.1,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": 556.683349609375,
+        "mean_damage": 54.0
+      },
+      "Hostile": {
+        "missions": 2,
+        "missions_with_extraction": 2,
+        "survivor_extraction_rate": 0.6,
+        "survivor_losses": 1,
+        "mean_time_to_extraction_seconds": 439.9861297607422,
+        "mean_damage": 76.0
+      }
+    },
+    "episodes": [
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 230.200012005866,
+        "arrival_times": [
+          228.150009155273,
+          179.350006103516,
+          164.783340454102,
+          180.183349609375,
+          230.200012207031
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 13815,
+        "controller": "native",
+        "checkpoint": "9ce662045121556bb2c07f5b557281de89c67e013d39c780d1a4d6ccf49d7df4",
+        "neural_decisions": [
+          4313,
+          134,
+          134
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 1613
+      },
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 230.200012005866,
+        "arrival_times": [
+          228.150009155273,
+          179.350006103516,
+          164.783340454102,
+          180.183349609375,
+          230.200012207031
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 13815,
+        "controller": "native",
+        "checkpoint": "9ce662045121556bb2c07f5b557281de89c67e013d39c780d1a4d6ccf49d7df4",
+        "neural_decisions": [
+          4313,
+          134,
+          134
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 1699
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 74.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "9ce662045121556bb2c07f5b557281de89c67e013d39c780d1a4d6ccf49d7df4",
+        "neural_decisions": [
+          13422,
+          168,
+          168
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 1,
+        "power_on": false,
+        "key": true,
+        "radio": false,
+        "mode": "Standard",
+        "seed": 1613
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 1,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          556.683349609375
+        ],
+        "damage_received": 34.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "9ce662045121556bb2c07f5b557281de89c67e013d39c780d1a4d6ccf49d7df4",
+        "neural_decisions": [
+          12956,
+          237,
+          237
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Standard",
+        "seed": 1699
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 3,
+        "alive": 4,
+        "losses": 1,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          436.233367919922,
+          405.350006103516,
+          405.350006103516
+        ],
+        "damage_received": 100.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "9ce662045121556bb2c07f5b557281de89c67e013d39c780d1a4d6ccf49d7df4",
+        "neural_decisions": [
+          10363,
+          237,
+          237
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": false,
+        "key": true,
+        "radio": true,
+        "mode": "Hostile",
+        "seed": 1613
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 3,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          423.316680908203,
+          428.016693115234,
+          541.650024414062
+        ],
+        "damage_received": 52.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "9ce662045121556bb2c07f5b557281de89c67e013d39c780d1a4d6ccf49d7df4",
+        "neural_decisions": [
+          11532,
+          244,
+          244
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Hostile",
+        "seed": 1699
+      }
+    ]
+  },
+  "coverage": {
+    "decision_groups": [
+      27434,
+      843,
+      843
+    ],
+    "candidate_counts_by_kind": [
+      {
+        "0": 21593,
+        "11": 27434,
+        "1": 1300,
+        "9": 8071,
+        "5": 5247,
+        "2": 4170,
+        "3": 2896,
+        "6": 474,
+        "10": 148,
+        "12": 44,
+        "4": 101,
+        "7": 9
+      },
+      {
+        "118": 28,
+        "113": 481,
+        "112": 296,
+        "119": 191,
+        "121": 349,
+        "117": 17,
+        "114": 367,
+        "115": 48,
+        "116": 236,
+        "120": 3
+      },
+      {
+        "118": 15,
+        "121": 1843,
+        "113": 1400,
+        "112": 475,
+        "120": 370,
+        "119": 73,
+        "114": 500,
+        "117": 46,
+        "115": 86,
+        "116": 166
+      }
+    ],
+    "chosen_counts_by_kind": [
+      {
+        "1": 613,
+        "11": 1008,
+        "0": 16127,
+        "9": 4004,
+        "2": 1754,
+        "3": 2139,
+        "5": 1726,
+        "6": 8,
+        "12": 6,
+        "4": 40,
+        "10": 4,
+        "7": 5
+      },
+      {
+        "118": 10,
+        "113": 345,
+        "112": 107,
+        "119": 71,
+        "121": 88,
+        "114": 72,
+        "117": 6,
+        "115": 27,
+        "116": 114,
+        "120": 3
+      },
+      {
+        "118": 7,
+        "121": 190,
+        "112": 76,
+        "113": 310,
+        "120": 31,
+        "119": 49,
+        "114": 54,
+        "117": 13,
+        "115": 19,
+        "116": 94
+      }
+    ],
+    "observed_range": {
+      "health": [
+        0.03999999910593033,
+        1.0
+      ],
+      "stamina": [
+        0.16799014806747437,
+        1.0
+      ],
+      "hunger": [
+        0.0,
+        1.0
+      ],
+      "hydration": [
+        0.7395551800727844,
+        1.0
+      ],
+      "cold": [
+        0.0,
+        0.1660594940185547
+      ],
+      "armour": [
+        0.0,
+        1.0
+      ],
+      "loaded": [
+        0.13333334028720856,
+        0.800000011920929
+      ],
+      "reserve": [
+        0.15000000596046448,
+        0.800000011920929
+      ],
+      "magazine": [
+        0.1666666716337204,
+        0.800000011920929
+      ],
+      "weapon_range": [
+        0.23333333432674408,
+        0.9166666865348816
+      ],
+      "weapon_kind": [
+        0.25,
+        1.0
+      ],
+      "owned_weapons": [
+        0.06666667014360428,
+        0.9333333373069763
+      ],
+      "medkits": [
+        0.0,
+        1.0
+      ],
+      "bandages": [
+        0.0,
+        1.3333333730697632
+      ],
+      "food": [
+        0.0,
+        1.0
+      ],
+      "water": [
+        0.3333333432674408,
+        1.3333333730697632
+      ],
+      "fuel": [
+        0.0,
+        0.3333333432674408
+      ],
+      "smoke": [
+        0.0,
+        1.0
+      ],
+      "decoys": [
+        0.0,
+        0.3333333432674408
+      ],
+      "tools": [
+        0.0,
+        1.0
+      ],
+      "coat": [
+        0.0,
+        1.0
+      ],
+      "backpack": [
+        0.0,
+        1.0
+      ],
+      "weight": [
+        0.12416666001081467,
+        0.6866666674613953
+      ],
+      "capacity": [
+        0.5833333134651184,
+        1.0
+      ],
+      "caution": [
+        0.4000000059604645,
+        0.800000011920929
+      ],
+      "confidence": [
+        0.5,
+        0.699999988079071
+      ],
+      "aggression": [
+        0.25,
+        0.44999998807907104
+      ],
+      "loyalty": [
+        0.5,
+        0.800000011920929
+      ],
+      "generosity": [
+        0.30000001192092896,
+        0.800000011920929
+      ],
+      "curiosity": [
+        0.5,
+        0.8500000238418579
+      ],
+      "role": [
+        0.0,
+        1.0
+      ],
+      "order": [
+        0.0,
+        0.0
+      ],
+      "order_time": [
+        0.0,
+        0.0
+      ],
+      "key": [
+        0.0,
+        1.0
+      ],
+      "power": [
+        0.0,
+        1.0
+      ],
+      "relays": [
+        0.0,
+        1.0
+      ],
+      "radio": [
+        0.0,
+        1.0
+      ],
+      "shortcut": [
+        0.0,
+        0.0
+      ],
+      "time_left": [
+        1.9985276460647583,
+        2.999972105026245
+      ],
+      "north_active": [
+        0.0,
+        1.0
+      ],
+      "north_time": [
+        0.0,
+        0.6875
+      ],
+      "west_active": [
+        0.0,
+        1.0
+      ],
+      "west_time": [
+        0.0,
+        1.0
+      ],
+      "known_items": [
+        0.0,
+        0.5333333611488342
+      ],
+      "known_caches": [
+        0.0,
+        1.5833333730697632
+      ],
+      "known_contacts": [
+        0.0,
+        0.8333333134651184
+      ],
+      "suppression": [
+        0.0,
+        1.0
+      ],
+      "allies": [
+        0.0,
+        1.0
+      ],
+      "enemies": [
+        0.0,
+        0.25
+      ],
+      "distance": [
+        0.0,
+        1.0
+      ],
+      "contact_age": [
+        0.0,
+        1.0
+      ],
+      "contact_confidence": [
+        0.0,
+        1.0
+      ],
+      "contact_health": [
+        0.0,
+        1.0
+      ],
+      "contact_speed": [
+        0.0,
+        0.8333849310874939
+      ],
+      "danger": [
+        0.0,
+        1.0
+      ],
+      "visible": [
+        0.0,
+        1.0
+      ],
+      "hostile": [
+        0.0,
+        1.0
+      ],
+      "firing_lane": [
+        0.0,
+        1.0
+      ],
+      "ready": [
+        0.0,
+        1.0
+      ],
+      "protected_here": [
+        0.0,
+        1.0
+      ],
+      "cover_available": [
+        0.0,
+        1.0
+      ],
+      "peek_available": [
+        0.0,
+        1.0
+      ],
+      "flank_available": [
+        0.0,
+        1.0
+      ],
+      "retreat_available": [
+        0.0,
+        1.0
+      ],
+      "needs_loot": [
+        0.0,
+        1.0
+      ],
+      "has_medical": [
+        0.0,
+        1.0
+      ],
+      "downed_ally": [
+        0.0,
+        0.0
+      ],
+      "rescue_safe": [
+        0.0,
+        0.0
+      ],
+      "heard": [
+        0.0,
+        1.0
+      ],
+      "waiting": [
+        0.0,
+        1.0
+      ],
+      "cover_distance": [
+        0.0,
+        4.0
+      ],
+      "committed": [
+        0.0,
+        1.0
+      ],
+      "tactical": [
+        0.0,
+        1.0
+      ],
+      "job": [
+        0.0,
+        1.0
+      ],
+      "route": [
+        0.0,
+        1.0
+      ],
+      "teacher_prior": [
+        -4.0,
+        0.6282069683074951
+      ],
+      "previous": [
+        0.0,
+        1.0
+      ],
+      "target_present": [
+        0.0,
+        1.0
+      ],
+      "target_dx": [
+        -2.46479868888855,
+        2.194150447845459
+      ],
+      "target_dy": [
+        -0.362914115190506,
+        0.35621336102485657
+      ],
+      "target_dz": [
+        -2.4998860359191895,
+        2.1717982292175293
+      ],
+      "target_distance": [
+        0.0,
+        2.8686697483062744
+      ],
+      "target_visible": [
+        0.0,
+        1.0
+      ],
+      "target_trust": [
+        0.0,
+        0.0
+      ],
+      "target_fear": [
+        0.0,
+        0.699999988079071
+      ],
+      "target_speed": [
+        0.0,
+        0.8333849310874939
+      ],
+      "target_value": [
+        0.0,
+        1.4277946949005127
+      ],
+      "target_risk": [
+        0.0,
+        1.274999976158142
+      ],
+      "target_reserved": [
+        0.0,
+        1.0
+      ],
+      "target_contested": [
+        0.0,
+        0.0
+      ],
+      "target_health": [
+        0.0,
+        0.0
+      ],
+      "target_bleed": [
+        0.0,
+        0.0
+      ],
+      "plan_cost": [
+        0.0,
+        3.744192600250244
+      ],
+      "plan_risk": [
+        0.0,
+        0.2707200050354004
+      ],
+      "plan_complete": [
+        0.0,
+        1.0
+      ],
+      "plan_steps": [
+        0.0,
+        2.0833332538604736
+      ],
+      "plan_health": [
+        0.0,
+        1.0
+      ],
+      "plan_ammo": [
+        0.0,
+        1.7000000476837158
+      ],
+      "plan_weight": [
+        0.0,
+        0.6866666674613953
+      ],
+      "t_progress": [
+        0.0,
+        1.0
+      ],
+      "t_acquire": [
+        0.0,
+        1.0
+      ],
+      "t_cover": [
+        0.0,
+        1.0
+      ],
+      "t_peek": [
+        0.0,
+        1.0
+      ],
+      "t_flank": [
+        0.0,
+        1.0
+      ],
+      "t_withdraw": [
+        0.0,
+        1.0
+      ],
+      "t_reload": [
+        0.0,
+        1.0
+      ],
+      "t_treat": [
+        0.0,
+        1.0
+      ],
+      "t_rescue": [
+        0.0,
+        0.0
+      ],
+      "t_investigate": [
+        0.0,
+        1.0
+      ],
+      "t_suppress": [
+        0.0,
+        1.0
+      ],
+      "t_hold": [
+        0.0,
+        1.0
+      ],
+      "t_smoke": [
+        0.0,
+        1.0
+      ],
+      "s_key": [
+        0.0,
+        1.0
+      ],
+      "s_power": [
+        0.0,
+        1.0
+      ],
+      "s_relay": [
+        0.0,
+        1.0
+      ],
+      "s_radio": [
+        0.0,
+        1.0
+      ],
+      "s_extract": [
+        0.0,
+        1.0
+      ],
+      "s_secure": [
+        0.0,
+        1.0
+      ],
+      "s_gate": [
+        0.0,
+        1.0
+      ],
+      "s_guard": [
+        0.0,
+        1.0
+      ],
+      "s_loot": [
+        0.0,
+        1.0
+      ],
+      "s_search": [
+        0.0,
+        1.0
+      ],
+      "s_heal": [
+        0.0,
+        0.0
+      ],
+      "s_warm": [
+        0.0,
+        0.0
+      ],
+      "s_travel": [
+        0.0,
+        0.0
+      ],
+      "s_other": [
+        0.0,
+        0.0
+      ],
+      "i_pistol": [
+        0.0,
+        0.0
+      ],
+      "i_smg": [
+        0.0,
+        0.0
+      ],
+      "i_rifle": [
+        0.0,
+        0.0
+      ],
+      "i_shotgun": [
+        0.0,
+        0.0
+      ],
+      "i_ammo": [
+        0.0,
+        0.0
+      ],
+      "i_smg_ammo": [
+        0.0,
+        1.0
+      ],
+      "i_rifle_ammo": [
+        0.0,
+        1.0
+      ],
+      "i_shells": [
+        0.0,
+        1.0
+      ],
+      "i_medkit": [
+        0.0,
+        1.0
+      ],
+      "i_bandage": [
+        0.0,
+        1.0
+      ],
+      "i_food": [
+        0.0,
+        1.0
+      ],
+      "i_water": [
+        0.0,
+        0.0
+      ],
+      "i_fuel": [
+        0.0,
+        1.0
+      ],
+      "i_smoke": [
+        0.0,
+        1.0
+      ],
+      "i_armour": [
+        0.0,
+        1.0
+      ],
+      "i_coat": [
+        0.0,
+        1.0
+      ],
+      "i_backpack": [
+        0.0,
+        1.0
+      ],
+      "i_tools": [
+        0.0,
+        1.0
+      ]
+    }
+  }
+}

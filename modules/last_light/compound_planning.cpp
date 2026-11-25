@@ -1,9 +1,27 @@
 #include "last_light_game.h"
 #include <cmath>
 namespace {
+using lastlight::Feature;
+
 float flat(Vector3 a, Vector3 b) {
 	a.y = b.y = 0;
 	return a.distance_to(b);
+}
+Feature strategic_kind(const std::string &kind) {
+	if (kind == "key") return Feature::s_key;
+	if (kind == "power" || kind == "crank") return Feature::s_power;
+	if (kind == "relay") return Feature::s_relay;
+	if (kind == "radio") return Feature::s_radio;
+	if (kind == "extract") return Feature::s_extract;
+	if (kind == "secure") return Feature::s_secure;
+	if (kind == "gate") return Feature::s_gate;
+	if (kind == "guard") return Feature::s_guard;
+	if (kind == "loot") return Feature::s_loot;
+	if (kind == "search") return Feature::s_search;
+	if (kind == "heal") return Feature::s_heal;
+	if (kind == "warm") return Feature::s_warm;
+	if (kind == "travel") return Feature::s_travel;
+	return Feature::s_other;
 }
 } //namespace
 void LastLightGame::build_compound_plan(Actor &a) {
@@ -304,8 +322,62 @@ void LastLightGame::build_compound_plan(Actor &a) {
 		}
 	}
 	std::stable_sort(jobs.begin(), jobs.end(), [](const Job &a, const Job &b) { return a.bid < b.bid; });
+	const bool use_choices = neural_choices_enabled(a);
+	auto job_kind = [](const Job &job) {
+		if (job.support) return Feature::s_guard;
+		if (job.id >= 14000) return Feature::s_loot;
+		switch (job.goal) {
+			case HaveKey: return Feature::s_key;
+			case Power: return Feature::s_power;
+			case RelayOne:
+			case RelayTwo:
+			case RelayThree: return Feature::s_relay;
+			case HaveSignal: return Feature::s_radio;
+			case Escaped: return Feature::s_extract;
+			case SecuredPower: return Feature::s_secure;
+			case Safe: return Feature::s_gate;
+			case Scouted: return Feature::s_search;
+			default: return Feature::s_other;
+		}
+	};
 	if (!jobs.empty()) {
-		auto chosen = jobs.front();
+		int selected = 0;
+		if (use_choices) {
+			NeuralFeatures context = neural_context(a);
+			context.set(Feature::job, 1);
+			std::vector<NeuralChoice> choices;
+			for (const auto &job : jobs) {
+				const Feature kind = job_kind(job);
+				auto &row = choices.emplace_back(NeuralChoice{ context, -job.bid / 40.f, int(kind), job.id });
+				auto &x = row.features;
+				x.set(kind, 1);
+				neural_target(x, a, job.position);
+				x.set(Feature::previous, job.id == a.task_claim);
+				x.set(Feature::target_risk, input.current_risk[nearest_region(job.position)]);
+				if (job.support) {
+					const auto peer = a.contacts.find(job.support);
+					x.set(Feature::target_visible, peer != a.contacts.end() && peer->second.visible);
+					if (auto memory = a.memory.find(job.support); memory != a.memory.end()) {
+						x.set(Feature::target_trust, memory->second.trust);
+						x.set(Feature::target_fear, memory->second.threat);
+					}
+				}
+				if (job.id >= 14000) {
+					const int item = job.id - 14000;
+					neural_item(x, a.known_item_kinds[item]);
+					x.set(Feature::target_visible, a.visible_items.count(item));
+				}
+				const auto lease = mission_claims.find(job.id);
+				x.set(Feature::target_reserved, lease != mission_claims.end() && lease->second.owner != a.stats.id &&
+						lease->second.until > elapsed && known_claim(lease->second));
+				x.set(Feature::target_contested, job.goal == Escaped && input.current_risk[nearest_region(job.position)] > .25f);
+			}
+			int choice = neural_choose(a, choices, 0, 1);
+			if (controller == "native") {
+				selected = choice;
+			}
+		}
+		auto chosen = jobs[selected];
 		int previous_task = a.task_claim;
 		bool changed_task = a.task_claim != chosen.id;
 		a.task_claim = chosen.id;
@@ -317,6 +389,25 @@ void LastLightGame::build_compound_plan(Actor &a) {
 				if (action.kind == "loot" && action.target == chosen.id - 14000) {
 					action.add |= uint32_t(1) << 29;
 				}
+			}
+		}
+		if (controller == "native" && (job_kind(chosen) == Feature::s_loot || job_kind(chosen) == Feature::s_search)) {
+			// Keep the selected item or cache as the goal. Other steps can
+			// still serve as preparation without satisfying this specific job.
+			const std::string kind = chosen.id >= 14000 ? "loot" : "search";
+			const int target = chosen.id >= 14000 ? chosen.id - 14000 : chosen.id;
+			constexpr uint32_t selected_target = uint32_t(1) << 29;
+			bool found = false;
+			for (auto &action : input.actions) {
+				if (action.kind == kind && action.target == target) {
+					action.add |= selected_target;
+					found = true;
+				} else {
+					action.add &= ~selected_target;
+				}
+			}
+			if (found) {
+				input.goal = selected_target;
 			}
 		}
 		if (chosen.id >= 12000 && chosen.id < 13000) {
@@ -362,10 +453,45 @@ void LastLightGame::build_compound_plan(Actor &a) {
 	auto result = make_strategy(input);
 	a.alternatives = result.alternatives;
 	if (!result.alternatives.empty()) {
-		a.plan = controller == "random" ? result.alternatives[rng() % result.alternatives.size()] : result.alternatives.front();
+		int selected = controller == "random" ? rng() % result.alternatives.size() : 0;
+		if (use_choices) {
+			NeuralFeatures context = neural_context(a);
+			context.set(Feature::route, 1);
+			std::vector<NeuralChoice> choices;
+			for (const auto &plan : result.alternatives) {
+				const auto step = std::find_if(plan.steps.begin(), plan.steps.end(), [](const StrategicStep &s) { return s.kind != "travel"; });
+				const Feature kind = step == plan.steps.end() ? Feature::s_travel : strategic_kind(step->kind);
+				auto &row = choices.emplace_back(NeuralChoice{ context, plan.score / 35.f, int(kind), step == plan.steps.end() ? 0 : step->target });
+				auto &x = row.features;
+				x.set(kind, 1);
+				if (!plan.steps.empty()) {
+					const auto &first = plan.steps.front();
+					neural_target(x, a, Vector3(first.point.x, first.height, first.point.z));
+					x.set(Feature::target_risk, input.current_risk[first.node]);
+				}
+				if (step != plan.steps.end() && step->kind == "loot") {
+					neural_item(x, a.known_item_kinds[step->target]);
+				}
+				x.set(Feature::plan_cost, plan.cost, 120);
+				x.set(Feature::plan_risk, plan.risk, 10);
+				x.set(Feature::plan_complete, plan.complete);
+				x.set(Feature::plan_steps, plan.steps.size(), 12);
+				x.set(Feature::plan_health, plan.expected_health, 100);
+				x.set(Feature::plan_ammo, plan.expected_ammo, 40);
+				x.set(Feature::plan_weight, plan.expected_weight, 24);
+			}
+			int choice = neural_choose(a, choices, 0, 2);
+			if (controller == "native") {
+				selected = choice;
+			}
+		}
+		a.plan = result.alternatives[selected];
 		a.plan_step = 0;
 		a.next_plan = elapsed + 8;
 	} else {
+		if (controller == "native" && a.plan.label != "No affordable plan; reassess nearby safety") {
+			++neural_fallbacks[2];
+		}
 		a.plan = StrategicPlan();
 		a.plan.complete = false;
 		a.plan.label = "No affordable plan; reassess nearby safety";

@@ -155,6 +155,17 @@ void LastLightGame::setup() {
 			policy_path = next();
 		} else if (key == "--controller") {
 			controller = next();
+			controller_explicit = true;
+		} else if (key == "--checkpoint") {
+			neural_path = next();
+		} else if (key == "--decision-log") {
+			neural_trace_path = next();
+		} else if (key == "--fixed-profiles") {
+			fixed_profiles = true;
+		} else if (key == "--explore") {
+			String value = next();
+			neural_temperature = value.to_float();
+			bad_args |= !value.is_valid_float() || !std::isfinite(neural_temperature) || neural_temperature <= 0 || neural_temperature > 1;
 		} else if (key == "--world") {
 			requested_world = next();
 			if (requested_world != "arctic" && requested_world != "lab" && requested_world != "classic") {
@@ -166,11 +177,16 @@ void LastLightGame::setup() {
 			bad_args = true;
 		}
 	}
-	if (controller != "rule" && controller != "random" && controller != "neural" && controller != "nomemory") {
+	if (controller != "rule" && controller != "random" && controller != "neural" && controller != "nomemory" && controller != "native") {
 		bad_args = true;
 	}
+	bad_args |= (!neural_path.is_empty() && controller != "native") ||
+			(neural_temperature > 0 && (!autoplay || controller != "native" || neural_trace_path.is_empty())) ||
+			(controller == "native" && !python_executable.is_empty()) ||
+			(!neural_trace_path.is_empty() && controller != "rule" && controller != "native") ||
+			(!neural_trace_path.is_empty() && !report_path.is_empty() && neural_trace_path == report_path);
 	if (bad_args) {
-		print_error("Invalid Last Light arguments. Use --bots 0..8, --seed 0..2147483647, --frames 60..180000, --controller rule|random|neural|nomemory, --world arctic|classic|lab, --report PATH, --trace PATH, --python PATH, --policy PATH.");
+		print_error("Invalid Last Light arguments. Use --bots 0..8, --seed 0..2147483647, --frames 60..180000, --controller rule|random|neural|nomemory|native, --world arctic|classic|lab, --report PATH, --trace PATH, --python PATH, --policy PATH, --checkpoint PATH, --decision-log PATH, --fixed-profiles, --explore TEMPERATURE.");
 		get_tree()->quit(64);
 		return;
 	}
@@ -191,6 +207,32 @@ void LastLightGame::setup() {
 		arctic = true;
 	}
 	compound_world = arctic && requested_world != "classic" && (!smoke || script_case.begins_with("compound"));
+	if (!compound_world && (controller == "native" || !neural_trace_path.is_empty())) {
+		print_error("Native neural decisions and decision logs require Frostworks.");
+		get_tree()->quit(64);
+		return;
+	}
+	const String bundled = "res://content/frostworks-policy.llnp";
+	if (compound_world && !controller_explicit && !smoke && !autoplay && python_executable.is_empty() && FileAccess::exists(bundled)) {
+		controller = "native";
+	}
+	if (controller == "native") {
+		fixed_profiles = true;
+		if (!load_native_policy(neural_path.is_empty() ? bundled : neural_path)) {
+			print_error("Cannot load the requested Frostworks neural checkpoint.");
+			get_tree()->quit(65);
+			return;
+		}
+	}
+	if (!neural_trace_path.is_empty()) {
+		neural_trace = FileAccess::open(neural_trace_path, FileAccess::WRITE);
+		if (neural_trace.is_null()) {
+			print_error("Cannot open Frostworks decision log.");
+			get_tree()->quit(64);
+			return;
+		}
+	}
+	neural_rng.seed(uint32_t(seed) ^ 0xf4e391b3u);
 	world_extent = arctic ? 300 : 40;
 	if (compound_world) {
 		save_path = "user://save-frostworks.json";
@@ -1574,6 +1616,9 @@ void LastLightGame::physics(float dt) {
 		refresh_compound_routes();
 	}
 	if (compound_world) {
+		if (neural_trace.is_valid() && physics_frames % 60 == 0) {
+			neural_outcome();
+		}
 		step_compound_ai();
 	}
 	ai_clock += dt;

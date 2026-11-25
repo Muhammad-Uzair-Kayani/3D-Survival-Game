@@ -286,11 +286,15 @@ func _show_panel(screen: String) -> void:
         scenarios.select(0 if selected_bots==0 else 2 if selected_bots==8 else 1)
         scenarios.item_selected.connect(func(index:int):selected_bots=scenarios.get_item_id(index))
         modal_body.add_child(scenarios)
-        var reset_option:=CheckButton.new()
-        reset_option.text="Reset survivor learning for this new game"
-        reset_option.button_pressed=reset_new_game
-        reset_option.toggled.connect(func(value:bool):reset_new_game=value)
-        modal_body.add_child(reset_option)
+        if state.get("controller","")=="native":
+            var checkpoint: String = state.get("checkpoint","")
+            modal_body.add_child(_label("Frozen neural policy  " + checkpoint.left(12),14,TEAL))
+        else:
+            var reset_option:=CheckButton.new()
+            reset_option.text="Reset survivor learning for this new game"
+            reset_option.button_pressed=reset_new_game
+            reset_option.toggled.connect(func(value:bool):reset_new_game=value)
+            modal_body.add_child(reset_option)
         modal_body.add_child(_button("START SURVIVAL",_start_mission,true))
         modal_body.add_child(_button("Survivor profiles",func():_show_panel("profiles")))
         var continue_button := _button("Continue saved mission",func():game_command("load"))
@@ -359,7 +363,8 @@ func _show_panel(screen: String) -> void:
                 row.add_child(_button(labels[order],func():game_command("order",{"id":id,"order":order})))
         modal_body.add_child(_button("Back to game",func():game_command("squad"),true))
     elif screen=="profiles" or screen=="inspect":
-        _title("SURVIVOR INSPECTOR","Memory shapes strategy","Scores and learned preferences persist between missions until reset. The inspector shows internal AI knowledge for debugging.")
+        var description := "The neural checkpoint and learned preferences are fixed. Current observations and memory still update." if state.get("fixed_profiles",false) else "Scores and learned preferences persist between missions until reset."
+        _title("SURVIVOR INSPECTOR","Survivor observations",description)
         var selector:=OptionButton.new()
         for person in state.get("profiles",[]):selector.add_item(["Maya","Rafi","Lian","Omar"][int(person["id"])-2],int(person["id"]))
         selector.select(clampi(inspected_id-2,0,3))
@@ -482,7 +487,9 @@ func _refresh_state() -> void:
         tactical_map_control.set("state",state)
         tactical_map_control.queue_redraw()
     debug_label.visible=state.get("debug",false)
-    debug_label.text="FPS %d   Draws %d   Nav %d   Python %s\nWASD / Shift / Ctrl / Space  ·  F10 autoplay %s" % [state.get("fps",0),state.get("draw_calls",0),state.get("navigation_polygons",0),"connected" if state.get("python",false) else "authored",state.get("autoplay",false)]
+    var checkpoint: String = state.get("checkpoint","")
+    var policy_status := "Native " + checkpoint.left(12) if not checkpoint.is_empty() else ("Python" if state.get("python",false) else "Planner")
+    debug_label.text="FPS %d   Draws %d   Nav %d   %s\nWASD / Shift / Ctrl / Space  ·  F10 autoplay %s" % [state.get("fps",0),state.get("draw_calls",0),state.get("navigation_polygons",0),policy_status,state.get("autoplay",false)]
     var health := int(state.get("health",100))
     if health<last_player_health:
         flash.color.a=.25

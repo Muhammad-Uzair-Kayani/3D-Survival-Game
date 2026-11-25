@@ -1,0 +1,252 @@
+{
+  "engine_sha256": "001f4878621d3c74c2bc7ca2cf9dc60684daabd2810d5db5146528cbb319225d",
+  "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+  "training_groups": 34993,
+  "teacher_agreement_in_sample": 0.9996570742719972,
+  "validation": {
+    "overall": {
+      "missions": 6,
+      "missions_with_extraction": 5,
+      "survivor_extraction_rate": 0.5666666666666667,
+      "survivor_losses": 1,
+      "mean_time_to_extraction_seconds": 303.6431507783778,
+      "mean_damage": 43.333333333333336
+    },
+    "by_mode": {
+      "Peaceful": {
+        "missions": 2,
+        "missions_with_extraction": 2,
+        "survivor_extraction_rate": 1.0,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": 196.5333435058594,
+        "mean_damage": 0.0
+      },
+      "Standard": {
+        "missions": 2,
+        "missions_with_extraction": 1,
+        "survivor_extraction_rate": 0.1,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": 556.683349609375,
+        "mean_damage": 54.0
+      },
+      "Hostile": {
+        "missions": 2,
+        "missions_with_extraction": 2,
+        "survivor_extraction_rate": 0.6,
+        "survivor_losses": 1,
+        "mean_time_to_extraction_seconds": 439.9861297607422,
+        "mean_damage": 76.0
+      }
+    },
+    "episodes": [
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 230.200012005866,
+        "arrival_times": [
+          228.150009155273,
+          179.350006103516,
+          164.783340454102,
+          180.183349609375,
+          230.200012207031
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 13815,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          4313,
+          134,
+          134
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 1613
+      },
+      {
+        "phase": "Victory",
+        "arrived": 5,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 230.200012005866,
+        "arrival_times": [
+          228.150009155273,
+          179.350006103516,
+          164.783340454102,
+          180.183349609375,
+          230.200012207031
+        ],
+        "damage_received": 0.0,
+        "physics_frames": 13815,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          4313,
+          134,
+          134
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Peaceful",
+        "seed": 1699
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 0,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [],
+        "damage_received": 74.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          13422,
+          168,
+          168
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 1,
+        "power_on": false,
+        "key": true,
+        "radio": false,
+        "mode": "Standard",
+        "seed": 1613
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 1,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          556.683349609375
+        ],
+        "damage_received": 34.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          12956,
+          237,
+          237
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Standard",
+        "seed": 1699
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 3,
+        "alive": 4,
+        "losses": 1,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          436.233367919922,
+          405.350006103516,
+          405.350006103516
+        ],
+        "damage_received": 100.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          10363,
+          237,
+          237
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": false,
+        "key": true,
+        "radio": true,
+        "mode": "Hostile",
+        "seed": 1613
+      },
+      {
+        "phase": "Incomplete",
+        "arrived": 3,
+        "alive": 5,
+        "losses": 0,
+        "elapsed": 600.950031341985,
+        "arrival_times": [
+          423.316680908203,
+          428.016693115234,
+          541.650024414062
+        ],
+        "damage_received": 52.0,
+        "physics_frames": 36060,
+        "controller": "native",
+        "checkpoint": "09a82b7accf7a15a6c2322f3953e5d720fbf1e15420db87f65087c2375916581",
+        "neural_decisions": [
+          11532,
+          244,
+          244
+        ],
+        "neural_fallbacks": [
+          0,
+          0,
+          0
+        ],
+        "mission": 2,
+        "power_on": true,
+        "key": true,
+        "radio": true,
+        "mode": "Hostile",
+        "seed": 1699
+      }
+    ]
+  },
+  "frames": 36060,
+  "process_fps": 60,
+  "seeds": {
+    "train": [
+      91,
+      127,
+      241
+    ],
+    "validation": [
+      1613,
+      1699
+    ],
+    "test": [
+      9721,
+      9829,
+      9931
+    ]
+  }
+}

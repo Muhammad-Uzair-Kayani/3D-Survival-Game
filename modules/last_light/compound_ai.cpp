@@ -147,7 +147,7 @@ void LastLightGame::evaluate_positions(Actor &a, const Vector3 &threat) {
 	a.flank_clear = false;
 	Vector3 self = a.body->get_position();
 	a.cover_protected = !can_see(threat + Vector3(0, 1.15, 0), self + Vector3(0, .7, 0));
-	std::vector<std::pair<float, int>> near;
+	std::vector<std::pair<float, int>> nearby_cover;
 	for (auto &p : cover_points) {
 		if (a.failed_jobs.count(20000 + p.id) && a.failed_jobs[20000 + p.id] > elapsed) {
 			continue;
@@ -159,15 +159,16 @@ void LastLightGame::evaluate_positions(Actor &a, const Vector3 &threat) {
 		if (p.owner && p.owner != a.stats.id && p.reserved_until > elapsed) {
 			continue;
 		}
-		near.push_back({ d, p.id });
+		nearby_cover.push_back({ d, p.id });
 	}
-	std::sort(near.begin(), near.end());
+	std::sort(nearby_cover.begin(), nearby_cover.end());
 	float best = -1e6, flank_best = -1e6, retreat_best = -1e6;
 	a.cover_id = -1;
+	a.neural_cover_options.clear();
 	auto server = NavigationServer3D::get_singleton();
 	RID map = get_world_3d()->get_navigation_map();
-	for (size_t i = 0; i < near.size() && i < 6; ++i) {
-		auto &p = cover_points[near[i].second];
+	for (size_t i = 0; i < nearby_cover.size() && i < 6; ++i) {
+		auto &p = cover_points[nearby_cover[i].second];
 		Vector3 projected = server->map_get_closest_point(map, p.position);
 		if (flat(projected, p.position) > .65f || Math::abs(projected.y - p.position.y) > .75f) {
 			continue;
@@ -190,10 +191,10 @@ void LastLightGame::evaluate_positions(Actor &a, const Vector3 &threat) {
 			for (int n = 1; n < route.size(); ++n) {
 				length += route[n].distance_to(route[n - 1]);
 			}
-			if (length > near[i].first * 2.5f + 6) {
+			if (length > nearby_cover[i].first * 2.5f + 6) {
 				continue;
 			}
-			near[i].first = length;
+			nearby_cover[i].first = length;
 		}
 
 		Vector3 peek = p.position;
@@ -208,7 +209,10 @@ void LastLightGame::evaluate_positions(Actor &a, const Vector3 &threat) {
 				}
 			}
 		}
-		float score = 35 - near[i].first * 1.15f + (firing ? 9 : 0) + p.normal.dot((self - threat).normalized()) * 6;
+		float score = 35 - nearby_cover[i].first * 1.15f + (firing ? 9 : 0) + p.normal.dot((self - threat).normalized()) * 6;
+		if (neural_choices_enabled(a)) {
+			a.neural_cover_options.push_back({ p.id, p.position, peek, score, nearby_cover[i].first, firing });
+		}
 		if (score > best) {
 			best = score;
 			a.cover_id = p.id;
@@ -218,13 +222,13 @@ void LastLightGame::evaluate_positions(Actor &a, const Vector3 &threat) {
 		}
 		Vector3 old = (self - threat).normalized(), next = (peek - threat).normalized();
 		float angle = 1 - old.dot(next);
-		float flank = angle * 40 - near[i].first * .8f + (firing ? 12 : 0);
+		float flank = angle * 40 - nearby_cover[i].first * .8f + (firing ? 12 : 0);
 		if (firing && angle > .15f && flat(peek, threat) > 5 && flank > flank_best) {
 			flank_best = flank;
 			a.flank_goal = peek;
 			a.flank_clear = true;
 		}
-		float retreat = flat(p.position, threat) - flat(self, threat) - near[i].first * .35f + 12;
+		float retreat = flat(p.position, threat) - flat(self, threat) - nearby_cover[i].first * .35f + 12;
 		if (retreat > retreat_best) {
 			retreat_best = retreat;
 			a.retreat_goal = p.position;
@@ -542,6 +546,158 @@ void LastLightGame::decide_compound(Actor &a) {
 	}
 	a.tactical_decision = choose_tactic(c, a.tactic, elapsed < a.tactical_until);
 	Tactic choice = a.tactical_decision.action;
+	if (neural_choices_enabled(a)) {
+		NeuralFeatures context = neural_context(a);
+		context.set(Feature::tactical, 1);
+		context.set(Feature::allies, c.allies, 4);
+		context.set(Feature::enemies, c.enemies, 8);
+		context.set(Feature::distance, c.distance, 100);
+		context.set(Feature::contact_age, c.contact_age, 100);
+		context.set(Feature::contact_confidence, enemy ? enemy->confidence : 0);
+		context.set(Feature::contact_health, enemy ? enemy->health_band : 0, 100);
+		context.set(Feature::contact_speed, enemy ? enemy->velocity.length() : 0, 6);
+		context.set(Feature::danger, c.danger);
+		context.set(Feature::visible, c.visible);
+		context.set(Feature::hostile, c.hostile);
+		context.set(Feature::firing_lane, c.firing_lane);
+		context.set(Feature::ready, c.ready);
+		context.set(Feature::protected_here, c.protected_here);
+		context.set(Feature::cover_available, c.cover_available);
+		context.set(Feature::peek_available, c.peek_available);
+		context.set(Feature::flank_available, c.flank_available);
+		context.set(Feature::retreat_available, c.retreat_available);
+		context.set(Feature::needs_loot, c.needs_loot);
+		context.set(Feature::has_medical, c.has_medical);
+		context.set(Feature::downed_ally, c.downed_ally);
+		context.set(Feature::rescue_safe, c.rescue_safe);
+		context.set(Feature::heard, c.heard);
+		context.set(Feature::waiting, c.waiting);
+		context.set(Feature::cover_distance, c.cover_distance, 28);
+		context.set(Feature::committed, elapsed < a.tactical_until);
+		std::vector<NeuralChoice> choices;
+		int teacher = -1;
+		auto add = [&](Tactic action, int target, float score, bool preferred) -> NeuralFeatures & {
+			if (preferred && action == choice) {
+				teacher = int(choices.size());
+			}
+			if (action == a.tactic && elapsed < a.tactical_until) {
+				score += 8;
+			}
+			auto &row = choices.emplace_back(NeuralChoice{ context, score / 40.f, int(action), target });
+			static_assert(int(Feature::t_smoke) - int(Feature::t_progress) + 1 == TACTIC_COUNT);
+			row.features.set(Feature(int(Feature::t_progress) + int(action)), 1);
+			row.features.set(Feature::previous, action == a.tactic);
+			return row.features;
+		};
+		for (int n = 0; n < TACTIC_COUNT; ++n) {
+			const Tactic action = Tactic(n);
+			if (!a.tactical_decision.legal[n] || action == Tactic::Acquire || action == Tactic::Rescue || action == Tactic::Cover ||
+					(action == Tactic::Reload && !inv.pistol)) {
+				continue;
+			}
+			auto &x = add(action, 0, a.tactical_decision.score[n], true);
+			if (action == Tactic::Flank || action == Tactic::Withdraw || action == Tactic::Investigate || action == Tactic::Peek || action == Tactic::Suppress) {
+				Vector3 goal = action == Tactic::Flank ? a.flank_goal : action == Tactic::Withdraw ? a.retreat_goal :
+						action == Tactic::Investigate ? a.last_noise : threat;
+				neural_target(x, a, goal);
+				if (enemy && (action == Tactic::Peek || action == Tactic::Suppress)) {
+					x.set(Feature::target_visible, enemy->visible);
+					x.set(Feature::target_speed, enemy->velocity.length(), 6);
+				}
+			}
+		}
+		if (a.tactical_decision.legal[int(Tactic::Acquire)]) {
+			for (const auto &[id, target] : a.known_items) {
+				const String kind = a.known_item_kinds[id];
+				float utility = loot_value(a.stats, kind) - flat(pos, target) * .7f;
+				if (utility <= 0) {
+					continue;
+				}
+				auto &x = add(Tactic::Acquire, id, a.tactical_decision.score[int(Tactic::Acquire)] + utility - loot_score, id == loot);
+				neural_target(x, a, target);
+				neural_item(x, kind);
+				x.set(Feature::target_visible, a.visible_items.count(id));
+				x.set(Feature::target_value, utility, 35);
+			}
+		}
+		if (inv.medkits > 0) {
+			for (const auto &other : actors) {
+				auto seen = a.contacts.find(other.stats.id);
+				if (!other.stats.survivor || other.stats.state != State::Downed || seen == a.contacts.end() ||
+						!seen->second.visible || seen->second.hostile || flat(pos, seen->second.position) >= 22) {
+					continue;
+				}
+				const Vector3 target = seen->second.position;
+				if (danger && (!enemy || can_see(threat + Vector3(0, 1.2, 0), target + Vector3(0, .5, 0)))) {
+					continue;
+				}
+				TacticalInput rescue = c;
+				rescue.rescue_safe = true;
+				auto evaluated = choose_tactic(rescue);
+				const bool preferred = &other == casualty;
+				if (!evaluated.legal[int(Tactic::Rescue)]) {
+					continue;
+				}
+				auto &x = add(Tactic::Rescue, other.stats.id,
+						evaluated.score[int(Tactic::Rescue)] - (preferred ? 0.f : 3.f), preferred);
+				neural_target(x, a, target);
+				x.set(Feature::target_visible, 1);
+				x.set(Feature::target_trust, a.memory[other.stats.id].trust);
+				x.set(Feature::target_fear, a.memory[other.stats.id].threat);
+				x.set(Feature::target_health, seen->second.health_band, 100);
+				x.set(Feature::target_bleed, other.stats.bleed, 60);
+				x.set(Feature::rescue_safe, 1);
+			}
+		}
+		if (a.tactical_decision.legal[int(Tactic::Cover)]) {
+			auto preferred = std::find_if(a.neural_cover_options.begin(), a.neural_cover_options.end(),
+					[&](const Actor::CoverOption &option) { return option.id == a.cover_id; });
+			if (preferred != a.neural_cover_options.end()) {
+				for (const auto &option : a.neural_cover_options) {
+					const auto &point = cover_points[option.id];
+					const bool occupied = point.owner && point.owner != a.stats.id && point.reserved_until > elapsed;
+					if (occupied && controller == "native") {
+						continue;
+					}
+					auto &x = add(Tactic::Cover, option.id,
+							a.tactical_decision.score[int(Tactic::Cover)] + option.score - preferred->score, option.id == a.cover_id);
+					neural_target(x, a, option.position);
+					x.set(Feature::plan_cost, option.route, 28);
+					x.set(Feature::target_visible, option.firing);
+					x.set(Feature::target_value, option.score, 35);
+					x.set(Feature::target_reserved, occupied);
+				}
+			}
+		}
+		if (teacher < 0 && !choices.empty()) {
+			teacher = std::max_element(choices.begin(), choices.end(), [](const NeuralChoice &left, const NeuralChoice &right) {
+				return left.teacher < right.teacher;
+			}) - choices.begin();
+		}
+		const int selected = neural_choose(a, choices, teacher, 0);
+		if (controller == "native" && selected >= 0) {
+			const auto &row = choices[selected];
+			choice = Tactic(row.kind);
+			a.tactical_decision.action = choice;
+			a.tactical_decision.legal[row.kind] = true;
+			if (choice == Tactic::Rescue) {
+				casualty = find_actor(row.target);
+				a.tactical_decision.reason[row.kind] = "Neural choice using a visible casualty and a protected approach";
+			} else if (choice == Tactic::Acquire) {
+				loot = row.target;
+			} else if (choice == Tactic::Cover) {
+				for (const auto &option : a.neural_cover_options) {
+					if (option.id == row.target) {
+						a.cover_id = option.id;
+						a.cover_goal = option.position;
+						a.peek_goal = option.peek;
+						a.peek_clear = option.firing;
+						break;
+					}
+				}
+			}
+		}
+	}
 	if (choice != a.tactic) {
 		a.tactic = choice;
 		a.tactical_since = elapsed;

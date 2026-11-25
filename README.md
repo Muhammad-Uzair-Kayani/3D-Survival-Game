@@ -15,7 +15,7 @@ The C++ game is a built-in module compiled with Godot **4.5.1** source. Godot is
 
 Keep `LastLight.exe`, `LastLight.pck`, the launch scripts, and the bundled folders together. Players do not need to install Visual Studio, Premake, Godot, or Python.
 
-Use `Play-With-Neural-AI.bat` to enable the optional bundled Python neural guide. Normal gameplay works without that guide.
+`Play.bat` loads the bundled frozen Frostworks policy in C++. Press **F1** for its checkpoint ID. `Play-With-Live-Training.bat` runs the game alongside headless training and evaluation. A promoted checkpoint applies the next time a mission starts from a reloaded scene. The older `Play-With-Neural-AI.bat` still launches the Python intent guide. See [native neural policy](docs/native-policy.md) for how the controllers, training and evaluation work.
 
 The default **960×540 GL Compatibility** settings target integrated graphics. Use **F1** to inspect FPS; performance depends on your hardware.
 
@@ -68,7 +68,7 @@ Press **F3** to request independent planning, following, holding position, scave
 
 Press **I** to inspect personality/social scores, trust and fear, remembered contacts, confidence, resources, plans, tactical scores, and rejected actions. Planning uses bounded search, local evidence, personal memories, and learned action values. The optional Python neural guide and offline training are separate systems; the bundled neural weights are a historical baseline, with no claim of improved Frostworks performance.
 
-Learning persists across missions and launches. To reset it:
+When playing with the legacy rule controller, learning persists across missions and launches. The frozen neural controller starts from baseline profiles and holds learned profile parameters fixed. Survivors still remember observed contacts, items and events during the mission. To reset a legacy profile:
 
 - Open **I**, select a survivor, and choose **Reset this survivor's learned profile**.
 - Use the main-menu reset checkbox to reset all four for a new game.
@@ -144,7 +144,8 @@ Run `Setup.bat` before the first source upload so the engine is registered as a 
 After changing code or assets, rebuild and test, then replace the playable ZIP. To package a rebuilt `dist/`, reuse the `python-runtime` directory from the tested Windows package:
 
 ```bat
-py -3 scripts\package_windows.py --dist dist --python-runtime "C:\Path\LastLight-Windows-x64\python-runtime" --output Deliverables\LastLight-Windows-x64.zip
+py -3 -m pip download --only-binary=:all: --no-deps --platform win_amd64 --python-version 3.12 --implementation cp -r requirements-training.txt -d build\wheels
+py -3 scripts\package_windows.py --dist dist --python-runtime "C:\Path\LastLight-Windows-x64\python-runtime" --numpy-wheel build\wheels\numpy-2.1.3-cp312-cp312-win_amd64.whl --output Deliverables\LastLight-Windows-x64.zip
 ```
 
 Replace the example runtime path with its actual location. Extract the new ZIP and run its `Verify-Game.bat` before publishing. Larger distributions can be attached to GitHub Releases.

@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
-def package(dist,runtime,destination,build_run=''):
+def package(dist,runtime,destination,build_run='',numpy_wheel=None):
     dist=Path(dist);runtime=Path(runtime);destination=Path(destination).resolve()
     for path in (dist/'LastLight.exe',dist/'LastLight.pck',runtime/'python.exe',runtime/'python312.dll'):
         if not path.is_file():raise ValueError('Required package file missing: '+str(path))
@@ -23,7 +23,23 @@ def package(dist,runtime,destination,build_run=''):
         (output/'python').mkdir()
         for name in ('service.py','neural.py'):shutil.copy2(ROOT/'python'/name,output/'python'/name)
         shutil.copy2(ROOT/'game/content/ASSET-CREDITS.txt',output/'ASSET-CREDITS.txt')
+        native = ROOT/'game/content/frostworks-policy.llnp'
+        if native.exists():
+            if not numpy_wheel or not numpy_wheel.name.endswith('-cp312-cp312-win_amd64.whl'):
+                raise ValueError('The live training package requires the Windows AMD64 CPython 3.12 NumPy wheel.')
+            shutil.copy2(native,output/native.name)
+            shutil.copy2(ROOT/'python/frostworks_train.py',output/'python/frostworks_train.py')
+            shutil.copy2(ROOT/'modules/last_light/neural_features.def',output/'python/neural_features.def')
+            with zipfile.ZipFile(numpy_wheel) as wheel:
+                wheel.extractall(output/'python-runtime/Lib/site-packages')
+            pth=output/'python-runtime/python312._pth'
+            pth.write_text(pth.read_text(encoding='utf-8')+'\nLib/site-packages\n',encoding='utf-8')
+        else:
+            (output/'Play-With-Live-Training.bat').unlink(missing_ok=True)
         info={'name':'Last Light Windows x64 survival MVP','godot':json.loads((ROOT/'godot.lock.json').read_text()),'windows_build_and_tests':build_run,'executable_sha256':digest(output/'LastLight.exe'),'resources_sha256':digest(output/'LastLight.pck'),'policy_sha256':digest(ROOT/'game/content/champion.json'),'python_runtime':'Official CPython 3.12.10 Windows x64 embeddable package','python_runtime_source':'https://www.python.org/ftp/python/3.12.10/python-3.12.10-embed-amd64.zip','python_runtime_archive_sha256':'4acbed6dd1c744b0376e3b1cf57ce906f9dc9e95e68824584c8099a63025a3c3','portable_validation_workflow':'https://github.com/Muhammad-Uzair-Kayani/PlagC-Public/actions/workflows/lastlight-binary.yml'}
+        if native.exists():
+            info['native_policy_sha256'] = digest(native)
+            info['numpy_wheel_sha256'] = digest(numpy_wheel)
         (output/'BUILD-INFO.json').write_text(json.dumps(info,indent=2))
         manifest=[]
         for path in sorted(output.rglob('*')):
@@ -41,4 +57,4 @@ def package(dist,runtime,destination,build_run=''):
     print(str(destination),destination.stat().st_size,'bytes; SHA256',digest(destination))
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--dist',type=Path,default=ROOT/'dist');parser.add_argument('--python-runtime',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--build-run',default='');args=parser.parse_args();package(args.dist,args.python_runtime,args.output,args.build_run)
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--dist',type=Path,default=ROOT/'dist');parser.add_argument('--python-runtime',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--build-run',default='');parser.add_argument('--numpy-wheel',type=Path);args=parser.parse_args();package(args.dist,args.python_runtime,args.output,args.build_run,args.numpy_wheel)

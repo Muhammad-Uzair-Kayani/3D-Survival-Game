@@ -5,6 +5,17 @@ Godot editor required. Start a NEW mission: the level and mission-save format
 changed. Your old mission save is preserved. Choose Peaceful for exploration,
 Standard for five distractors, or Hostile for eight.
 
+NEURAL POLICY
+Play.bat runs the bundled frozen Frostworks model in C++. The main menu and
+F1 display its checkpoint ID. Survivor observations update during play. The
+model weights and baseline survivor profiles stay fixed for the mission.
+
+Play-With-Live-Training.bat runs the game with a background trainer. It uses
+the packaged Python runtime and NumPy to train on headless Frostworks missions.
+It evaluates each candidate on separate missions before promoting it. A
+promoted checkpoint loads when the scene restarts for a new mission. Training
+results and previous checkpoints are under %LOCALAPPDATA%\Last Light\policy-training.
+
 SOURCE: Keep vendor/godot and .tools when updating. Setup.bat, then
 GenerateProjects.bat vs2022. Open build/premake/vs2022/LastLightGodot.sln.
 Release | x64, build LastLight. BuildGame.bat --jobs 1 remains supported.
@@ -46,16 +57,12 @@ precedence over ordinary orders. Independent mode restores normal task bidding.
 
 I shows six social/personality scores, trust/fear, historical risk, private
 contacts and their confidence/age, current task, resource estimate, alternative
-routes, all 13 tactical choices and legality/rejection reasons. Persistent
-contextual action values rank legal choices within a bounded influence; safety
-rules always apply. This is bounded planning and learned utility, not an LLM.
+routes, all 13 tactical choices and legality/rejection reasons. C++ validates
+available actions before the model ranks them.
 
-Reset the selected profile in I or the pause menu; use the main-menu checkbox
-to reset all four for a new mission. Health/inventory are preserved by live
-reset. Learning resumes immediately. Mission loading does not rewind persistent
-learning or resurrect a profile reset. Profiles migrate from survivors-v1.json
-to survivors-v2.json. Frostworks mission: save-frostworks.json. Previous save.json
-is preserved. Files live in %APPDATA%\Godot\app_userdata\Last Light\.
+In legacy planner mode, the inspector can reset a single profile and the
+main-menu checkbox can reset all four. The Frostworks save file is named
+save-frostworks.json. Files live in %APPDATA%\Godot\app_userdata\Last Light\.
 
 PERFORMANCE AND TESTING
 Default 960x540 GL Compatibility targets integrated graphics. Static art is

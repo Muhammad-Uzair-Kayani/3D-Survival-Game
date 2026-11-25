@@ -4,6 +4,7 @@
 #include "core/io/tcp_server.h"
 #include "domain.h"
 #include "hard_policy.h"
+#include "neural_policy.h"
 #include "scene/3d/bone_attachment_3d.h"
 #include "scene/3d/camera_3d.h"
 #include "scene/3d/label_3d.h"
@@ -40,6 +41,13 @@ class LastLightGame : public Node3D {
 		std::map<int, Contact> contacts;
 		std::map<int, double> failed_jobs;
 		std::set<int> known_caches;
+		struct CoverOption {
+			int id;
+			Vector3 position, peek;
+			float score, route;
+			bool firing;
+		};
+		std::vector<CoverOption> neural_cover_options;
 		lastlight::TacticalDecision tactical_decision;
 		lastlight::Tactic tactic = lastlight::Tactic::Progress;
 		std::array<float, lastlight::TACTIC_COUNT> tactical_learning{};
@@ -260,6 +268,21 @@ class LastLightGame : public Node3D {
 	bool reported = false;
 	bool integration_ok = true;
 	Ref<FileAccess> trace_file;
+	Ref<FileAccess> neural_trace;
+	lastlight::NeuralPolicy neural_policy;
+	std::mt19937 neural_rng;
+	String neural_checkpoint, neural_path, neural_trace_path;
+	bool fixed_profiles = false, controller_explicit = false, neural_trace_failed = false;
+	float neural_temperature = 0.f;
+	std::array<int, 3> neural_decisions{}, neural_fallbacks{};
+	bool load_native_policy(const String &path);
+	bool neural_choices_enabled(const Actor &a) const;
+	lastlight::NeuralFeatures neural_context(const Actor &a) const;
+	void neural_target(lastlight::NeuralFeatures &features, const Actor &a, const Vector3 &target) const;
+	void neural_item(lastlight::NeuralFeatures &features, const String &kind) const;
+	int neural_choose(const Actor &a, std::vector<lastlight::NeuralChoice> &choices, int teacher, int stage);
+	void neural_outcome();
+	void neural_status(Dictionary &data) const;
 	void integration_step();
 	bool gate_open = false, key_found = false, radio_done = false, paused = false, victory = false, defeat = false, autoplay = false, smoke = false, debug_overlay = false;
 	double elapsed = 0, ai_clock = 0, hud_clock = 0, gate_hold = 0;

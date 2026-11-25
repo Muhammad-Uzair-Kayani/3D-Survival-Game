@@ -1,0 +1,60 @@
+{
+  "environment": "Windows x64 executable under Wine on Linux",
+  "windows_executable_sha256": "6f2c8e22249be9c5bb3e3d7597189906c99d08c286990dadace3491f08120760",
+  "zip_sha256": "bafddc651b6e24ea95be9bcac57ef31ec6553d58d8c52296913bcbb1aeaaf368",
+  "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+  "frozen_missions": {
+    "Peaceful": {
+      "seed": 9721,
+      "arrived": 5,
+      "losses": 0,
+      "elapsed": 230.200012005866,
+      "neural_decisions": [
+        4313,
+        134,
+        134
+      ],
+      "neural_fallbacks": [
+        0,
+        0,
+        0
+      ]
+    },
+    "Standard": {
+      "seed": 9721,
+      "arrived": 0,
+      "losses": 0,
+      "elapsed": 600.950031341985,
+      "neural_decisions": [
+        13232,
+        250,
+        250
+      ],
+      "neural_fallbacks": [
+        0,
+        0,
+        0
+      ]
+    },
+    "Hostile": {
+      "seed": 9721,
+      "arrived": 4,
+      "losses": 0,
+      "elapsed": 600.950031341985,
+      "neural_decisions": [
+        10839,
+        213,
+        213
+      ],
+      "neural_fallbacks": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "live_training": {
+    "groups": 1441,
+    "promoted": false
+  }
+}
