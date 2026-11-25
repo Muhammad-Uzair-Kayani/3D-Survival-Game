@@ -29,6 +29,7 @@ struct TacticalInput {
 	float cover_distance = 0, distance = 100, range = 30, contact_age = 100, time_pressure = 0;
 	bool danger = false, visible = false, hostile = false, firing_lane = false, ready = false;
 	bool protected_here = false, cover_available = false, peek_available = false, flank_available = false, retreat_available = true;
+	bool finishing_peek = false;
 	bool needs_loot = false, has_medical = false, downed_ally = false, rescue_safe = false, heard = false, waiting = false;
 	std::array<float, TACTIC_COUNT> learned{};
 };
@@ -62,14 +63,21 @@ inline TacticalDecision choose_tactic(const TacticalInput &c, Tactic previous = 
 	auto option = [&](Tactic a, bool valid, float score, const char *why, const char *veto) {int i=int(a);out.legal[i]=valid;out.score[i]=valid?score+std::clamp(c.learned[i],-2.f,2.f)*3.f:-100000;out.reason[i]=valid?why:veto; };
 	const bool critical = c.health < 32;
 	const bool outgunned = c.enemies > c.allies + 1 || c.rounds < 2 || critical;
-	const bool recovering_safe = !c.danger || (c.protected_here && c.suppression < .24f && c.distance > 15);
+	const bool recovering_safe = !c.danger || (c.protected_here && c.suppression < .4f && (!c.visible || c.distance > 10));
 	const bool fire_safe = c.hostile && c.visible && c.firing_lane && c.ready && c.rounds > 0 && c.distance <= c.range;
-	option(Tactic::Progress, !c.danger && !c.waiting, 36 + c.time_pressure * 12, "Continue the committed mission route", "Current danger must be resolved before ordinary travel");
+	const bool can_peek = c.hostile && c.peek_available && c.cover_available && c.contact_age < 4 &&
+			c.ready && c.rounds > 0 && c.distance <= c.range;
+	const bool close_shot = fire_safe && c.distance <= std::min(18.f, c.range * .7f);
+	const bool close_cover = c.cover_available && !c.protected_here && c.cover_distance < 4;
+	const float engagement_bonus = c.finishing_peek && !outgunned && c.suppression < .5f ? 32.f :
+			close_cover ? 0.f : close_shot ? 35.f : fire_safe ? 16.f : 0.f;
+	const bool sheltered_route = c.protected_here && !c.visible && c.suppression < .22f;
+	option(Tactic::Progress, (!c.danger || sheltered_route) && !c.waiting, (sheltered_route ? 49 : 36) + c.time_pressure * 12, "Continue the committed mission route", "Current danger must be resolved before ordinary travel");
 	option(Tactic::Acquire, c.needs_loot && !c.danger, 48, "Acquire a real known supply that improves readiness", "No useful capacity-compatible supply or exposed under threat");
 	option(Tactic::Cover, c.danger && c.cover_available && !c.protected_here, 68 + c.suppression * 30 + c.caution * 12 + (outgunned ? 12 : 0) - std::min(30.f, c.cover_distance) * .85f, "Reach physically verified cover before spending health", "No available reachable protection or already sheltered");
-	option(Tactic::Peek, (fire_safe || (!c.visible && c.hostile && c.contact_age < 8 && c.protected_here && c.peek_available && c.rounds > 0)) && (!critical || c.protected_here) && (c.protected_here || c.enemies <= c.allies + 1), 48 + c.confidence * 16 + c.aggression * 9 - c.suppression * 18 + (c.protected_here ? 10 : 0), "Expose briefly for a confirmed hostile and clear firing lane", "Requires observed hostile, ammunition, reaction time, range and safe firing lane");
+	option(Tactic::Peek, (fire_safe || can_peek) && (!critical || c.protected_here) && (c.protected_here || c.enemies <= c.allies + 1), 48 + c.confidence * 16 + c.aggression * 9 - c.suppression * 18 + (c.protected_here ? 10 : 0) + engagement_bonus, "Expose briefly for a confirmed hostile and clear firing lane", "Requires observed hostile, ammunition, reaction time, range and safe firing lane");
 	option(Tactic::Flank, c.hostile && c.contact_age < 4 && c.flank_available && c.rounds >= 2 && !critical && c.suppression < .65f, 51 + c.confidence * 12 + (c.firing_lane ? 0 : 21) + (c.enemies <= c.allies ? 8 : 0), "Change angle while respecting cover and friendly positions", "Flank is unavailable, stale, pinned or unaffordable in health/ammunition");
-	option(Tactic::Withdraw, c.danger && c.retreat_available, 47 + c.caution * 20 + (outgunned ? 32 : 0) + (critical ? 32 : 0) + c.suppression * 25, "Preserve the survivor when the engagement budget is poor", "No present danger or safe retreat candidate");
+	option(Tactic::Withdraw, c.danger && c.retreat_available, 47 + c.caution * 20 + (outgunned ? 32 : 0) + (critical ? 32 : 0) + c.suppression * 20 - (close_shot && !outgunned ? 15 : 0), "Preserve the survivor when the engagement budget is poor", "No present danger or safe retreat candidate");
 	option(Tactic::Reload, c.rounds < c.magazine && c.reserve > 0 && recovering_safe, 32 + (c.rounds == 0 ? 57 : 0) + (c.rounds < c.magazine * .3f ? 20 : 0), "Reload with compatible reserve while protected", "No compatible reserve or reload would expose the survivor");
 	option(Tactic::Treat, c.has_medical && c.health < 85 && recovering_safe, 30 + (100 - c.health) * .8f, "Treat injury after reaching safety", "Medical supply missing, unnecessary or unsafe under fire");
 	option(Tactic::Rescue, c.downed_ally && c.has_medical && c.rescue_safe, 44 + c.loyalty * 36, "Rescue with a safe approach and adequate medical supplies", "A casualty needs a protected approach or smoke/support first");

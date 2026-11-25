@@ -131,11 +131,17 @@ def reward_at(before, after, actor):
     team_progress = after["progress"] - before["progress"]
     reward = .45 * team_progress
     for old, new in zip(before["actors"], after["actors"]):
-        actor_id, hp, state, revives, _ = old
-        _, next_hp, next_state, next_revives, _ = new
+        actor_id, hp, state, revives, _ = old[:5]
+        _, next_hp, next_state, next_revives, _ = new[:5]
         own = actor_id == actor
         reward += (next_hp - hp) * (.012 if own else .002)
         reward += (next_revives - revives) * (.65 if own else .15)
+        if own and len(old) >= 10 and len(new) >= 10:
+            shots, hostile_damage, tactic_changes, job_changes, stalled_aim = (
+                max(0., end - start) for start, end in zip(old[5:10], new[5:10])
+            )
+            reward += .012 * hostile_damage - .018 * shots
+            reward -= .006 * tactic_changes + .06 * job_changes + .07 * stalled_aim
         if state != next_state:
             if next_state == 14:  # Extracted.
                 reward += 2.0 if own else .8
@@ -248,8 +254,8 @@ def train(policy, data, *, epochs, seed, reinforcement=False):
                 probs[row, selected] -= 1
                 gradient = probs * (ratio * advantage)[:, None] / temperature
                 # Anchor exploratory updates to the expert's score differences.
-                gradient += .10 * (logits - targets) * mask
-                rate = .00010
+                gradient += .06 * (logits - targets) * mask
+                rate = .00022
             else:
                 # Distill relative teacher margins. A small preference resolves
                 # exact rule ties while leaving meaningful score gaps intact.
@@ -278,12 +284,13 @@ def project_args(project):
     return ["--main-pack" if project.is_file() else "--path", str(project)]
 
 
-def episode(args, workspace, label, mode, seed, model=None, *, trace=False, explore=False, fixture=None):
+def episode(args, workspace, label, mode, seed, model=None, *, trace=False, explore=False,
+            fixture=None, require_pass=True):
     directory = workspace / label / f"{mode.lower()}-{seed}"
     directory.mkdir(parents=True, exist_ok=True)
     outcome_path, decisions = directory / "mission.json", directory / "decisions.jsonl"
     outcome_path.unlink(missing_ok=True)
-    frames = 1450 if fixture else args.frames
+    frames = (220 if fixture.startswith("compound_response_") else 1450) if fixture else args.frames
     user_args = ["--autoplay", "--world", "arctic", "--bots", str(MODES[mode]),
                  "--seed", str(seed), "--controller", "native" if model else "rule",
                  "--fixed-profiles", "--frames", str(frames), "--report", str(outcome_path)]
@@ -324,14 +331,23 @@ def episode(args, workspace, label, mode, seed, model=None, *, trace=False, expl
     report = json.loads(outcome_path.read_text(encoding="utf-8"))
     if report["world"] != "frostworks" or not report["fixed_profiles"] or report["python_failures"] or report["neural_trace_failed"]:
         raise RuntimeError(f"Unexpected simulation configuration in {outcome_path}")
-    if fixture and not report["test_passed"]:
+    if fixture and require_pass and not report["test_passed"]:
         raise RuntimeError(f"Fixture failed; see {directory / 'engine.log'}")
-    if model and (report["checkpoint"] != checkpoint_id(model) or not report["neural_decisions"][0]):
+    expects_neural_choices = fixture != "compound_response_raider"
+    if model and (report["checkpoint"] != checkpoint_id(model) or
+                  (expects_neural_choices and not report["neural_decisions"][0])):
         raise RuntimeError(f"Native checkpoint did not control the mission {outcome_path}")
     metrics = {key: report[key] for key in ("phase", "arrived", "alive", "losses", "elapsed",
                "arrival_times", "damage_received", "physics_frames", "controller", "checkpoint",
                "neural_decisions", "neural_fallbacks", "mission", "power_on", "key", "radio")}
     metrics.update(mode=mode, seed=seed)
+    if fixture:
+        metrics["test_passed"] = report["test_passed"]
+    if "behavior" in report:
+        metrics["behavior"] = {
+            key: sum(actor[key] for actor in report["behavior"])
+            for key in ("shots", "hostile_damage", "tactical_switches", "job_switches", "stalled_aim_seconds")
+        }
     return metrics, decisions
 
 
@@ -365,10 +381,12 @@ def summarize(rows):
 
 
 def selection_score(rows):
-    # Sort lexicographically. Damage and extraction time can improve an
-    # otherwise tied candidate. They cannot outweigh the loss of a survivor.
+    # Preserve mission outcomes before comparing behavior costs.
     return (sum(r["arrived"] for r in rows), -sum(r["losses"] for r in rows),
-            sum(r["mission"] for r in rows), -sum(r["damage_received"] for r in rows),
+            sum(r["mission"] for r in rows),
+            -sum(r.get("behavior", {}).get("stalled_aim_seconds", 0) for r in rows),
+            -sum(r.get("behavior", {}).get("job_switches", 0) for r in rows),
+            -sum(r["damage_received"] for r in rows),
             -sum(sum(r["arrival_times"]) for r in rows))
 
 
@@ -385,31 +403,43 @@ def evaluate(args, workspace, split, model, label):
     return [row for row, _ in run_cases(args, workspace, f"{label}-{split}", cases(split), model)]
 
 
+def response_checks(args, workspace, label, model):
+    cases = ("ally", "raider", "unarmed", "friendly_noise", "exposure")
+    return {
+        case: episode(args, workspace, f"{label}/{case}", "Standard", 113, model,
+                      fixture=f"compound_response_{case}", require_pass=False)[0]["test_passed"]
+        for case in cases
+    }
+
+
 def improve(args, workspace, active, round_id, scenarios, reference=None):
     snapshot = workspace / f"round-{round_id}" / "starting.llnp"
     atomic(snapshot, active.read_bytes())
     coverage = Coverage()
     data = collect(args, workspace, f"round-{round_id}/experience", scenarios, coverage, snapshot, explore=True)
     model = Policy.load(snapshot)
-    updates = train(model, data, epochs=1, seed=round_id, reinforcement=True)
+    updates = train(model, data, epochs=2, seed=round_id, reinforcement=True)
     candidate = snapshot.with_name("candidate.llnp")
     model.save(candidate)
     if reference is None:
         reference = evaluate(args, workspace, "validation", snapshot, f"round-{round_id}/starting")
-    trial = evaluate(args, workspace, "validation", candidate, f"round-{round_id}/candidate")
+    response = response_checks(args, workspace, f"round-{round_id}/response", candidate)
+    trial = (evaluate(args, workspace, "validation", candidate, f"round-{round_id}/candidate")
+             if all(response.values()) else [])
     mode_totals = lambda rows, mode: (sum(row["arrived"] for row in rows if row["mode"] == mode),
                                      -sum(row["losses"] for row in rows if row["mode"] == mode))
-    stable_modes = all(mode_totals(trial, mode) >= mode_totals(reference, mode) for mode in MODES)
+    stable_modes = bool(trial) and all(mode_totals(trial, mode) >= mode_totals(reference, mode) for mode in MODES)
     accepted = stable_modes and selection_score(trial) > selection_score(reference)
     decision = {
         "round": round_id,
         "training_examples": updates,
         "accepted": accepted,
         "no_difficulty_regression": stable_modes,
+        "response_checks": response,
         "starting_id": checkpoint_id(snapshot),
         "candidate_id": checkpoint_id(candidate),
         "starting": summarize(reference),
-        "candidate": summarize(trial),
+        "candidate": summarize(trial) if trial else None,
         "coverage": coverage.report(),
     }
     write_json(snapshot.with_name("promotion.json"), decision)
@@ -423,11 +453,16 @@ def bootstrap(args):
     coverage = Coverage()
     data = collect(args, args.output, "expert", cases("train"), coverage)
     data.extend(collect(args, args.output, "fixtures", [("Standard", 43)], coverage, fixture="compound_neural_training"))
+    data.extend(collect(args, args.output, "shot-response", [("Standard", 71), ("Standard", 83)], coverage,
+                        fixture="compound_response_ally"))
     write_json(args.output / "feature-coverage.json", coverage.report())
     policy = Policy(args.seed)
     examples_used = train(policy, data, epochs=3, seed=args.seed)
     model = args.output / "approved.llnp"
     policy.save(model)
+    response = response_checks(args, args.output, "imitation-response", model)
+    if not all(response.values()):
+        raise RuntimeError(f"The initial policy failed a response check: {response}")
     distance = mean(float(np.argmax(policy.score(g.features)[0]) == g.teacher) for g in data)
     print(f"Distilled {examples_used} decision groups; in-sample teacher agreement {distance:.1%}", flush=True)
     reference = evaluate(args, args.output, "validation", model, "imitation")
@@ -439,6 +474,7 @@ def bootstrap(args):
     write_json(args.output / "training.json", {
         "engine_sha256": checkpoint_id(args.engine), "checkpoint": checkpoint_id(model),
         "training_groups": examples_used, "teacher_agreement_in_sample": distance,
+        "imitation_response_checks": response,
         "validation": summarize(reference), "frames": args.frames, "process_fps": args.process_fps, "seeds": SEEDS,
     })
 
@@ -516,6 +552,8 @@ def main():
                      help="Headless processing cadence. Physics remains at 60 ticks per simulated second.")
     cli.add_argument("--keep-traces", action="store_true")
     cli.add_argument("--play", action="store_true", help="Run the playable game during live training")
+    cli.add_argument("--versioned-output", action="store_true",
+                     help="Store live learning under the SHA-256 of its starting model")
     args = cli.parse_args()
     for name in ("engine", "project", "output", "model"):
         setattr(args, name, getattr(args, name).resolve())
@@ -525,6 +563,10 @@ def main():
         cli.error("An engine containing the LastLight module and its project/PCK are required")
     if args.command != "bootstrap":
         Policy.load(args.model)
+    if args.versioned_output:
+        if args.command != "live":
+            cli.error("--versioned-output is available for live training")
+        args.output = args.output / checkpoint_id(args.model)
     args.output.mkdir(parents=True, exist_ok=True)
     try:
         with training_lock(args.output):

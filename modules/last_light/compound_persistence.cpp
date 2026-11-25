@@ -157,10 +157,13 @@ bool LastLightGame::validate_compound_save(const Dictionary &data, std::vector<A
 		}
 		a.suppression = d["suppression"];
 		a.last_damage_at = d["damage_at"];
+		a.recent_attack_at = -100;
+		a.recent_attacker = 0;
+		a.retreat_clear = false;
+		a.next_burst_at = 0;
 		a.last_noise_at = d["noise_at"];
 		a.react_at = d["react_at"];
 		a.noise_danger = d["noise_danger"];
-		a.seen_damage = a.stats.damage_received;
 		a.next_investigate = d["next_investigate"];
 		a.order = d["order"];
 		a.order_peer = d["order_peer"];

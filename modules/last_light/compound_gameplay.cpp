@@ -131,17 +131,21 @@ void LastLightGame::shoot_compound(Actor &a) {
 				}
 			}
 		}
-		if (!human && victim && victim->stats.survivor == a.stats.survivor && !a.contacts[victim->stats.id].hostile) {
-			a.reason = "Fire vetoed: neutral or teammate crosses the actual ray";
-			a.flank_clear = true;
-			a.tactical_until = 0;
-			return;
+		if (!human && victim) {
+			const auto contact = a.contacts.find(victim->stats.id);
+			if (contact == a.contacts.end() || !contact->second.hostile || !victim->stats.active()) {
+				a.reason = "Fire vetoed: a non-hostile or downed actor crosses the ray";
+				a.next_tactical_scan = 0;
+				a.tactical_until = 0;
+				return;
+			}
 		}
 		hits.push_back({ victim, hit ? impact.position : ray.to, hit });
 	}
 	if (!fire(a.stats)) {
 		return;
 	}
+	a.last_shot_at = elapsed;
 	std::map<int, int> damage_by_actor;
 	for (auto &hit : hits) {
 		if (hit.victim && hit.victim->stats.active()) {
@@ -177,12 +181,13 @@ void LastLightGame::shoot_compound(Actor &a) {
 		if (a.stats.survivor && victim->stats.survivor && a.memory[id].threat < .25f) {
 			++harmful_attacks;
 		}
+		const int previous_health = victim->stats.health;
 		damage(victim->stats, amount);
-		victim->last_damage_at = elapsed;
+		auto evidence = a.contacts.find(id);
+		if (evidence != a.contacts.end() && evidence->second.hostile) {
+			a.hostile_damage += previous_health - victim->stats.health;
+		}
 		victim->suppression = MIN(1.f, victim->suppression + .45f);
-		victim->last_noise = from;
-		victim->last_noise_at = elapsed;
-		victim->noise_danger = true;
 		++shots_hit;
 		a.hit_feedback_time = elapsed;
 		emit_event(a.stats.id, id, "attack", from);
@@ -241,6 +246,10 @@ void LastLightGame::update_compound(float dt) {
 			}
 		}
 
+		if (a.aiming && (a.tactic == Tactic::Peek || a.tactic == Tactic::Suppress) &&
+				elapsed - a.tactical_since > 1.3 && elapsed - a.last_shot_at > 1.3) {
+			a.stalled_aim_seconds += dt;
+		}
 		if (a.tactical_decision.legal[int(Tactic::Peek)] && !a.cover_protected) {
 			a.exposure_seconds += dt;
 		}

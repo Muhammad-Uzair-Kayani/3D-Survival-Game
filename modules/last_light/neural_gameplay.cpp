@@ -181,6 +181,11 @@ void LastLightGame::neural_outcome() {
 			row.push_back(int(actor.stats.state));
 			row.push_back(actor.stats.revives);
 			row.push_back(actor.stats.damage_received);
+			row.push_back(actor.stats.shots);
+			row.push_back(actor.hostile_damage);
+			row.push_back(actor.tactical_switches);
+			row.push_back(actor.job_switches);
+			row.push_back(actor.stalled_aim_seconds);
 			states.push_back(row);
 		}
 	}

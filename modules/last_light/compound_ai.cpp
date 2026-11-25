@@ -28,6 +28,9 @@ float loot_value(const lastlight::Stats &s, const String &k) {
 	if (k == "fuel") {
 		return i.fuel == 0 ? 9 : 0;
 	}
+	if (k == "tools") {
+		return i.tools ? 0 : 12;
+	}
 	if (k == "smoke") {
 		return i.smoke < 2 ? 14 : 0;
 	}
@@ -70,6 +73,14 @@ void LastLightGame::perceive_compound(Actor &a) {
 	}
 	Vector3 eye = a.body->get_position() + Vector3(0, a.crouching ? .8f : 1.35f, 0);
 	Vector3 front = -Basis(Vector3(0, 1, 0), a.yaw).get_column(2);
+	// A recent impact redirects attention even when the actor was facing away.
+	if (elapsed - a.recent_attack_at < 1.4) {
+		Vector3 direction = a.last_attack_position - eye;
+		direction.y = 0;
+		if (direction.length_squared() > .01f) {
+			front = direction.normalized();
+		}
+	}
 	for (auto &other : actors) {
 		if (other.stats.state == lastlight::State::Dead && a.contacts.count(other.stats.id) && flat(other.body->get_position(), a.body->get_position()) < 36 && can_see(eye, other.body->get_position() + Vector3(0, .3, 0))) {
 			a.contacts.erase(other.stats.id);
@@ -101,7 +112,8 @@ void LastLightGame::perceive_compound(Actor &a) {
 		bool uniform_hostile = a.stats.survivor ? (!other.stats.survivor && (other.bot_role == 0 || other.bot_role == 4)) : ((a.bot_role == 0 || a.bot_role == 4) && other.stats.survivor);
 		c.hostile = uniform_hostile || a.memory[other.stats.id].threat > .25f;
 		if (c.hostile && newly_seen && (controller != "nomemory" || elapsed - a.react_at > 4)) {
-			a.react_at = elapsed + .3 + (1 - a.personality.confidence) * .25;
+			a.react_at = other.stats.id == a.recent_attacker && elapsed - a.recent_attack_at < 1.4 ?
+					a.recent_attack_at + .15 : elapsed + .3 + (1 - a.personality.confidence) * .25;
 		}
 		a.visible_actors.insert(other.stats.id);
 		a.memory[other.stats.id].last_seen = elapsed;
@@ -131,20 +143,17 @@ void LastLightGame::perceive_compound(Actor &a) {
 			a.known_item_kinds.erase(item.id);
 		}
 	}
-	if (a.heard_until > elapsed && elapsed - a.last_noise_at > .5) {
+	if (a.heard_until > elapsed && elapsed - a.last_noise_at > (a.noise_danger ? 2. : .5)) {
 		a.last_noise = a.heard_position;
 		a.last_noise_at = elapsed;
-	}
-	if (a.stats.damage_received > a.seen_damage) {
-		a.last_damage_at = elapsed;
-		a.suppression = MIN(1.f, a.suppression + .5f);
-		a.seen_damage = a.stats.damage_received;
+		a.noise_danger = false;
 	}
 }
 void LastLightGame::evaluate_positions(Actor &a, const Vector3 &threat) {
 	a.next_tactical_scan = elapsed + 1.2;
 	a.peek_clear = false;
 	a.flank_clear = false;
+	a.retreat_clear = false;
 	Vector3 self = a.body->get_position();
 	a.cover_protected = !can_see(threat + Vector3(0, 1.15, 0), self + Vector3(0, .7, 0));
 	std::vector<std::pair<float, int>> nearby_cover;
@@ -229,24 +238,33 @@ void LastLightGame::evaluate_positions(Actor &a, const Vector3 &threat) {
 			a.flank_clear = true;
 		}
 		float retreat = flat(p.position, threat) - flat(self, threat) - nearby_cover[i].first * .35f + 12;
-		if (retreat > retreat_best) {
+		if (retreat > retreat_best && flat(self, p.position) > 2.2f && flat(p.position, threat) >= flat(self, threat) - 2) {
 			retreat_best = retreat;
 			a.retreat_goal = p.position;
+			a.retreat_clear = true;
 		}
 	}
-	if (retreat_best < -1e5) {
+	if (!a.retreat_clear) {
 		Vector3 away = (self - threat).normalized();
-		float best_route = -1e6;
-		for (auto &node : strategic_nodes) {
+		std::vector<std::pair<float, size_t>> candidates;
+		for (size_t n = 0; n < strategic_nodes.size(); ++n) {
+			const auto &node = strategic_nodes[n];
 			Vector3 p(node.position.x, node.elevation, node.position.z);
 			float d = flat(self, p);
-			if (d < 8 || d > 65) {
-				continue;
+			if (d >= 8 && d <= 65 && flat(p, threat) > flat(self, threat) + 3) {
+				candidates.emplace_back((p - self).normalized().dot(away) * 25 - d * .2f + (node.shelter ? 8 : 0), n);
 			}
-			float score = (p - self).normalized().dot(away) * 25 - d * .2f + (node.shelter ? 8 : 0);
-			if (score > best_route) {
-				best_route = score;
-				a.retreat_goal = p;
+		}
+		std::sort(candidates.rbegin(), candidates.rend());
+		for (size_t i = 0; i < candidates.size() && i < 5; ++i) {
+			const auto &node = strategic_nodes[candidates[i].second];
+			const Vector3 target(node.position.x, node.elevation, node.position.z);
+			auto route = server->map_get_path(map, self, target, true);
+			if (!route.is_empty() && flat(route[route.size() - 1], target) < 1.5f &&
+					Math::abs(route[route.size() - 1].y - target.y) < 1.2f) {
+				a.retreat_goal = target;
+				a.retreat_clear = true;
+				break;
 			}
 		}
 	}
@@ -400,6 +418,7 @@ void LastLightGame::decide_compound(Actor &a) {
 	if (!a.stats.active() || a.stats.busy()) {
 		return;
 	}
+	a.environment_target = 0;
 	Vector3 pos = a.body->get_position();
 	if (a.order && elapsed > a.order_until) {
 		a.order = 0;
@@ -422,10 +441,14 @@ void LastLightGame::decide_compound(Actor &a) {
 	for (auto &[id, c] : a.contacts) {
 		if (c.hostile && c.health_band > 0 && c.confidence > .25f && elapsed - c.seen < 8) {
 			float d = flat(pos, c.position);
-			if (d < nearest) {
+			bool recent_attacker = id == a.recent_attacker && elapsed - a.recent_attack_at < 3 && c.visible;
+			if (d < nearest || recent_attacker) {
 				nearest = d;
 				enemy = &c;
 				target_id = id;
+				if (recent_attacker) {
+					break;
+				}
 			}
 		}
 	}
@@ -436,9 +459,12 @@ void LastLightGame::decide_compound(Actor &a) {
 		return;
 	}
 	bool danger = (enemy && (enemy->visible || elapsed - enemy->seen < 3)) || incoming || gun_noise;
-	Vector3 threat = enemy ? enemy->position : a.last_noise;
+	Vector3 threat = enemy ? enemy->position : (elapsed - a.recent_attack_at < 4 ? a.last_attack_position : a.last_noise);
+	if (incoming && !enemy) {
+		a.yaw = Math::atan2(-(threat.x - pos.x), -(threat.z - pos.z));
+	}
 	bool reaching_tactical = (a.tactic == Tactic::Cover || a.tactic == Tactic::Flank || a.tactic == Tactic::Withdraw) && elapsed - a.tactical_since < 3 && flat(pos, a.target) > 1.5;
-	if (danger && elapsed >= a.next_tactical_scan && !reaching_tactical) {
+	if (danger && elapsed >= a.next_tactical_scan && (!reaching_tactical || a.path_retry > 1.f || a.next_tactical_scan == 0)) {
 		evaluate_positions(a, threat);
 	}
 	auto &inv = a.stats.inventory;
@@ -488,14 +514,21 @@ void LastLightGame::decide_compound(Actor &a) {
 	c.smoke = inv.smoke;
 	c.has_medical = inv.medkits || inv.bandages;
 	c.cover_available = a.cover_id >= 0;
+	c.retreat_available = a.retreat_clear && flat(pos, a.retreat_goal) > 2.2f;
 	c.cover_distance = a.cover_id >= 0 ? flat(pos, a.cover_goal) : 0;
 	if (enemy) {
 		a.cover_protected = !can_see(threat + Vector3(0, 1.15, 0), pos + Vector3(0, .7, 0));
 	}
 	c.protected_here = enemy && a.cover_protected;
 	c.peek_available = a.peek_clear;
+	c.finishing_peek = a.tactic == Tactic::Peek && elapsed < a.tactical_until &&
+			a.engagement_id == target_id && a.last_damage_at <= a.tactical_since && a.last_shot_at < a.tactical_since;
 	c.flank_available = a.flank_clear;
-	c.needs_loot = loot > 0;
+	const bool essential_supplies = (a.stats.health < 65 && !c.has_medical) ||
+			(!inv.pistol || inv.rounds + inv.reserve < 6) ||
+			(a.stats.hunger < 42 && !inv.food) || (inv.hydration < 42 && !inv.water);
+	c.needs_loot = loot > 0 && (a.order == 3 ||
+			(!radio_done && (essential_supplies || flat(pos, a.known_items[loot]) < 3.5f)));
 	c.heard = elapsed - a.last_noise_at < 5 && elapsed >= a.next_investigate;
 	if (a.tactic == Tactic::Investigate && elapsed - a.tactical_since > 5) {
 		a.next_investigate = elapsed + 20;
@@ -515,7 +548,9 @@ void LastLightGame::decide_compound(Actor &a) {
 		}
 	}
 	if (enemy) {
-		c.firing_lane = can_see(pos + Vector3(0, 1.2, 0), threat + Vector3(0, 1, 0)) || (a.cover_protected && a.peek_clear);
+		// The present muzzle lane and a prospective peek lane are separate.
+		const auto *target = enemy->visible ? find_actor(target_id) : nullptr;
+		c.firing_lane = can_see(pos + Vector3(0, 1.25f, 0), threat + Vector3(0, target && target->crouching ? .65f : .95f, 0));
 		for (auto &[id, peer] : a.contacts) {
 			if (!peer.visible || peer.hostile || id == target_id) {
 				continue;
@@ -529,7 +564,7 @@ void LastLightGame::decide_compound(Actor &a) {
 	}
 	if (mission == 2) {
 		for (int n = 0; n < 2; ++n) {
-			if (beacon_active[n] && elapsed < beacon_times[n] && flat(pos, n ? alternative_exit : exit_position) < 10) {
+			if (beacon_active[n] && elapsed < beacon_times[n] && flat(pos, n ? alternative_exit : exit_position) < 2.6f) {
 				c.waiting = true;
 			}
 		}
@@ -699,10 +734,12 @@ void LastLightGame::decide_compound(Actor &a) {
 		}
 	}
 	if (choice != a.tactic) {
+		++a.tactical_switches;
 		a.tactic = choice;
 		a.tactical_since = elapsed;
-		a.tactical_until = elapsed + 1.4;
+		a.tactical_until = elapsed + (choice == Tactic::Peek ? 2.5 : 1.4);
 		a.burst_shots = 0;
+		a.next_burst_at = 0;
 	}
 	a.tactical_reason = a.tactical_decision.reason[int(choice)].c_str();
 	a.reason = tactic_name(choice);
@@ -734,6 +771,7 @@ void LastLightGame::decide_compound(Actor &a) {
 		return;
 	}
 	if (choice == Tactic::Acquire && loot) {
+		a.environment_target = loot;
 		travel(a.known_items[loot], false);
 		a.interacting = flat(pos, a.target) < 1.7;
 		return;
@@ -767,27 +805,30 @@ void LastLightGame::decide_compound(Actor &a) {
 	}
 	if (choice == Tactic::Peek || choice == Tactic::Suppress) {
 		a.intent = "Defend";
-		float phase = std::fmod(float(elapsed - a.tactical_since), 2.2f);
-		if (a.cover_id >= 0 && a.peek_clear && !(c.visible && c.firing_lane && !c.protected_here && c.cover_distance > 4)) {
-			Vector3 goal = phase < 1.2f ? a.peek_goal : a.cover_goal;
-			travel(goal, false);
-			if (flat(pos, goal) > .5f) {
-				a.crouching = phase >= 1.2f;
-				return;
-			}
-		}
-		if (c.visible && c.firing_lane && !c.protected_here && c.cover_distance > 4) {
-			a.target = pos;
-			a.nav->set_target_position(pos);
-		}
-		a.crouching = phase >= 1.2f && c.protected_here;
-		a.aiming = !a.crouching;
 		a.yaw = Math::atan2(-(threat.x - pos.x), -(threat.z - pos.z));
-		if (a.aiming && phase > .25f && (choice != Tactic::Suppress || a.burst_shots < 3)) {
-			int shots = a.stats.shots;
+		if (elapsed < a.next_burst_at && c.protected_here) {
+			travel(pos, false);
+			a.crouching = true;
+			return;
+		}
+		if (!c.firing_lane || (!c.visible && choice == Tactic::Peek)) {
+			if (a.peek_clear && flat(pos, a.peek_goal) > .45f) {
+				// Reach the firing position before starting a firing window.
+				travel(a.peek_goal, false);
+			} else {
+				travel(pos, false);
+				a.next_tactical_scan = 0;
+			}
+			return;
+		}
+		travel(pos, false);
+		a.aiming = true;
+		if (c.ready && elapsed - a.tactical_since >= .15) {
+			const int shots = a.stats.shots;
 			shoot(a);
-			if (a.stats.shots > shots) {
-				++a.burst_shots;
+			if (a.stats.shots > shots && ++a.burst_shots >= 3) {
+				a.burst_shots = 0;
+				a.next_burst_at = elapsed + .55;
 			}
 		}
 		return;
@@ -862,8 +903,9 @@ void LastLightGame::step_compound_ai() {
 			a.heard_until = 0;
 		}
 		sense(a);
-		bool fixture = script_case.begins_with("compound_") && script_case != "compound_hostile";
-		if (!fixture && (a.stats.id != 1 || autoplay || smoke)) {
+		const bool idle_player = script_case == "compound_idle_player";
+		const bool fixture = script_case.begins_with("compound_") && script_case != "compound_hostile" && !idle_player;
+		if (!fixture && (!idle_player || a.stats.id != 1) && (a.stats.id != 1 || autoplay || smoke)) {
 			decide(a);
 		}
 	}

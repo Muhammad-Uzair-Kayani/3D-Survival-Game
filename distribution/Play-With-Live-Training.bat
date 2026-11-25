@@ -6,7 +6,7 @@ if not exist "frostworks-policy.llnp" (
     popd
     exit /b 1
 )
-"python-runtime\python.exe" "python\frostworks_train.py" live --engine "LastLight.exe" --project "LastLight.pck" --model "frostworks-policy.llnp" --output "%LOCALAPPDATA%\Last Light\policy-training" --rounds 0 --play
+"python-runtime\python.exe" "python\frostworks_train.py" live --engine "LastLight.exe" --project "LastLight.pck" --model "frostworks-policy.llnp" --output "%LOCALAPPDATA%\Last Light\policy-training" --versioned-output --rounds 0 --play
 set "result=%errorlevel%"
 popd
 exit /b %result%

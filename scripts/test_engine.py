@@ -45,6 +45,8 @@ def main():
         run(engine,case,frames=frames)
     for case,frames in (('compound_animation',120),('compound_security',320),('compound_routes',180),('compound_inventory',180),('compound_engagement',900),('compound_nav',3600),('compound_policy',180),('compound_save',180),('compound_learning',180),('compound_orders',180),('compound_beacon',300)):
         run(engine,case,frames=frames)
+    for response in ("ally", "raider", "unarmed", "friendly_noise", "exposure"):
+        run(engine, "compound_response_" + response, frames=220)
     if a.autoplay:
         compound=run(engine,'compound',frames=30000)
         if compound['phase']!='Victory' or compound['arrived']!=5:raise RuntimeError('Frostworks peaceful team did not all arrive')

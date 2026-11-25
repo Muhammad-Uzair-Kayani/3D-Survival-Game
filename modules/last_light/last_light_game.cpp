@@ -605,7 +605,32 @@ void LastLightGame::emit_event(int source, int target, const String &kind, const
 			if (victim->teammate_id == source) {
 				victim->teammate_id = 0;
 			}
-			record_experience(*victim, "attacked", compound_world && !victim->visible_actors.count(source) ? 0 : source, -.8f);
+			int identified = source;
+			if (compound_world && helper) {
+				const Vector3 eye = victim->body->get_position() + Vector3(0, 1.25f, 0);
+				const Vector3 torso = helper->body->get_position() + Vector3(0, helper->crouching ? .65f : 1.1f, 0);
+				const bool observed = eye.distance_to(torso) <= 40 && can_see(eye, torso);
+				identified = observed ? source : 0;
+				victim->recent_attack_at = elapsed;
+				victim->recent_attacker = identified;
+				victim->last_attack_position = where;
+				victim->last_damage_at = elapsed;
+				victim->last_noise = where;
+				victim->last_noise_at = elapsed;
+				victim->noise_danger = true;
+				victim->next_decision = elapsed + .15;
+				victim->next_tactical_scan = 0;
+				if (identified) {
+					witness(victim->memory[source], "attack", elapsed);
+					if (victim->order_peer == source) {
+						victim->order = 0;
+						victim->order_peer = 0;
+						victim->order_reason = "Order dropped after an attack";
+						victim->next_plan = 0;
+					}
+				}
+			}
+			record_experience(*victim, "attacked", identified, -.8f);
 			if (helper && helper->stats.survivor) {
 				bool defensive = victim->stats.survivor ? helper->memory[target].threat > .25 : true;
 				record_experience(*helper, defensive ? "defended" : "harmful", target, defensive ? .1f : -1.f);
@@ -628,14 +653,16 @@ void LastLightGame::emit_event(int source, int target, const String &kind, const
 		}
 		float distance = flat_distance(observer.body->get_position(), where);
 		const bool witnessed = distance < 18 && can_see(observer.body->get_position() + Vector3(0, 1.2, 0), where + Vector3(0, 1.2, 0));
-		if ((kind == "attack" || kind == "shot" || kind == "noise") && distance < (arctic ? 45 : 25)) {
+		const auto *actor = find_actor(source);
+		const auto belief = observer.memory.find(source);
+		const bool friendly_fire_noise = compound_world && actor && actor->stats.survivor == observer.stats.survivor &&
+				(belief == observer.memory.end() || belief->second.threat <= .25f);
+		if ((kind == "noise" || ((kind == "attack" || kind == "shot") && !friendly_fire_noise)) &&
+				distance < (arctic ? 45 : 25)) {
 			observer.heard_position = where;
-			if (compound_world) {
-				observer.noise_danger = kind == "attack" || kind == "shot";
-			}
 			observer.heard_until = elapsed + 3;
 		}
-		if (!witnessed) {
+		if (!witnessed || (compound_world && kind == "attack" && observer.stats.id == target)) {
 			continue;
 		}
 		if (kind == "sabotage") {
@@ -645,7 +672,15 @@ void LastLightGame::emit_event(int source, int target, const String &kind, const
 		if (kind == "attack") {
 			// Defensive fire at a known aggressor is not evidence of betrayal.
 			auto known = observer.memory.find(target);
-			const bool defending = known != observer.memory.end() && known->second.threat > .25f && target != observer.stats.id;
+			const Actor *recipient = find_actor(target);
+			if (compound_world && (!recipient || !can_see(observer.body->get_position() + Vector3(0, 1.2f, 0),
+						recipient->body->get_position() + Vector3(0, .95f, 0)))) {
+				continue; // A seen muzzle flash alone does not establish who was attacked.
+			}
+			const bool witnessed_raider = compound_world && observer.stats.survivor && actor && actor->stats.survivor &&
+					recipient && !recipient->stats.survivor && (recipient->bot_role == 0 || recipient->bot_role == 4);
+			const bool defending = target != observer.stats.id &&
+					(witnessed_raider || (known != observer.memory.end() && known->second.threat > .25f));
 			if (!defending) {
 				witness(observer.memory[source], "attack", elapsed);
 				record_experience(observer, "aggression_witnessed", source, -.1f);
@@ -1320,6 +1355,22 @@ void LastLightGame::apply_melee(Actor &a) {
 }
 void LastLightGame::interact(Actor &a) {
 	Vector3 position = a.body->get_global_position();
+	if (compound_world && (a.stats.id != 1 || autoplay || smoke) && a.known_items.count(a.environment_target)) {
+		for (auto &item : items) {
+			if (item.id != a.environment_target) {
+				continue;
+			}
+			if (flat_distance(position, item.position) < 1.8f &&
+					clear_line(position + Vector3(0, 1, 0), item.position)) {
+				if (!acquire_item(a, item)) {
+					a.known_items.erase(item.id);
+					a.known_item_kinds.erase(item.id);
+					a.next_plan = 0;
+				}
+			}
+			return;
+		}
+	}
 	for (auto &other : actors) {
 		if (other.stats.state == State::Downed && other.stats.survivor && flat_distance(position, other.body->get_position()) < 1.8 && clear_line(position + Vector3(0, 1, 0), other.body->get_position() + Vector3(0, 1, 0)) && a.stats.inventory.medkits > 0) {
 			begin(a.stats, State::Revive, other.stats.id);

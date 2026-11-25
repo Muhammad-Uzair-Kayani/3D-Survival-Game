@@ -14,7 +14,8 @@ Play-With-Live-Training.bat runs the game with a background trainer. It uses
 the packaged Python runtime and NumPy to train on headless Frostworks missions.
 It evaluates each candidate on separate missions before promoting it. A
 promoted checkpoint loads when the scene restarts for a new mission. Training
-results and previous checkpoints are under %LOCALAPPDATA%\Last Light\policy-training.
+results and previous checkpoints are under %LOCALAPPDATA%\Last Light\policy-training,
+grouped by the SHA-256 of the packaged checkpoint.
 
 SOURCE: Keep vendor/godot and .tools when updating. Setup.bat, then
 GenerateProjects.bat vs2022. Open build/premake/vs2022/LastLightGodot.sln.

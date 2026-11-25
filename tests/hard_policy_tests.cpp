@@ -6,6 +6,9 @@ void require(bool b,const char *why){if(!b)throw std::runtime_error(why);}
 int main(){try{
  TacticalInput c;c.danger=true;c.hostile=true;c.visible=true;c.ready=true;c.firing_lane=true;c.distance=12;c.rounds=12;c.magazine=24;c.reserve=24;c.enemies=1;c.contact_age=0;c.cover_available=true;
  auto a=choose_tactic(c);require(a.action==Tactic::Cover,"Exposed agent reaches cover first");
+ c.finishing_peek=true;require(choose_tactic(c,Tactic::Peek,true).action==Tactic::Peek,"An exposed peek gets a chance to fire before returning to the same cover");
+ c.firing_lane=false;require(!choose_tactic(c,Tactic::Peek,true).legal[int(Tactic::Peek)],"A committed peek still respects the firing lane");
+ c.finishing_peek=false;c.firing_lane=true;
  c.cover_distance=28;c.confidence=.9;require(choose_tactic(c).action==Tactic::Peek,"Healthy confident agent avoids an unnecessary long exposed run to distant cover");c.cover_distance=0;
  c.protected_here=true;c.cover_available=false;c.peek_available=true;c.confidence=.9;auto b=choose_tactic(c);require(b.action==Tactic::Peek,"Prepared protected agent engages a confirmed threat");
  c.firing_lane=false;c.flank_available=true;auto blocked=choose_tactic(c);require(blocked.action==Tactic::Flank,"Neutral firing obstruction produces a new angle, not a shot");require(!blocked.legal[int(Tactic::Peek)],"Friendly lane veto is hard");

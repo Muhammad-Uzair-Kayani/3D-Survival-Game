@@ -754,6 +754,23 @@ void LastLightGame::finish_report() {
 	}
 	report["arrival_times"] = arrival_times;
 	report["losses"] = losses;
+	if (compound_world) {
+		Array behavior;
+		for (const auto &actor : actors) {
+			if (!actor.stats.survivor) {
+				continue;
+			}
+			Dictionary row;
+			row["actor"] = actor.stats.id;
+			row["shots"] = actor.stats.shots;
+			row["hostile_damage"] = actor.hostile_damage;
+			row["tactical_switches"] = actor.tactical_switches;
+			row["job_switches"] = actor.job_switches;
+			row["stalled_aim_seconds"] = actor.stalled_aim_seconds;
+			behavior.push_back(row);
+		}
+		report["behavior"] = behavior;
+	}
 	String output = JSON::stringify(report, "  ");
 	if (!report_path.is_empty()) {
 		DirAccess::make_dir_recursive_absolute(report_path.get_base_dir());

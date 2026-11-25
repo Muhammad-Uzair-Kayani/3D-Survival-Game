@@ -1,0 +1,4201 @@
+{
+  "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+  "updated_engine_sha256": "2eae9d3147bbc3508bda80467388d7f980a3a6fe257f4e7a0a8b89d43cca977d",
+  "frames": 36060,
+  "prior_checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+  "paired_replay": {
+    "original": {
+      "overall": {
+        "missions": 9,
+        "missions_with_extraction": 5,
+        "survivor_extraction_rate": 0.4444444444444444,
+        "survivor_losses": 2,
+        "mean_time_to_extraction_seconds": 256.8900146484375,
+        "mean_damage": 82.77777777777777
+      },
+      "by_mode": {
+        "Peaceful": {
+          "missions": 3,
+          "missions_with_extraction": 3,
+          "survivor_extraction_rate": 1.0,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": 196.5333435058594,
+          "mean_damage": 0.0
+        },
+        "Standard": {
+          "missions": 3,
+          "missions_with_extraction": 0,
+          "survivor_extraction_rate": 0.0,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": null,
+          "mean_damage": 41.666666666666664
+        },
+        "Hostile": {
+          "missions": 3,
+          "missions_with_extraction": 2,
+          "survivor_extraction_rate": 0.3333333333333333,
+          "survivor_losses": 2,
+          "mean_time_to_extraction_seconds": 437.9600280761718,
+          "mean_damage": 206.66666666666666
+        }
+      },
+      "episodes": [
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 230.200012005866,
+          "arrival_times": [
+            228.150009155273,
+            179.350006103516,
+            164.783340454102,
+            180.183349609375,
+            230.200012207031
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 13815,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            4313,
+            134,
+            134
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 9721
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 230.200012005866,
+          "arrival_times": [
+            228.150009155273,
+            179.350006103516,
+            164.783340454102,
+            180.183349609375,
+            230.200012207031
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 13815,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            4313,
+            134,
+            134
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 9829
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 230.200012005866,
+          "arrival_times": [
+            228.150009155273,
+            179.350006103516,
+            164.783340454102,
+            180.183349609375,
+            230.200012207031
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 13815,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            4313,
+            134,
+            134
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 9931
+        },
+        {
+          "phase": "Incomplete",
+          "arrived": 0,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 600.950031341985,
+          "arrival_times": [],
+          "damage_received": 59.0,
+          "physics_frames": 36060,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            13232,
+            250,
+            250
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Standard",
+          "seed": 9721
+        },
+        {
+          "phase": "Incomplete",
+          "arrived": 0,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 600.950031341985,
+          "arrival_times": [],
+          "damage_received": 4.0,
+          "physics_frames": 36060,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            12868,
+            246,
+            246
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            2
+          ],
+          "mission": 1,
+          "power_on": true,
+          "key": true,
+          "radio": false,
+          "mode": "Standard",
+          "seed": 9829
+        },
+        {
+          "phase": "Incomplete",
+          "arrived": 0,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 600.950031341985,
+          "arrival_times": [],
+          "damage_received": 62.0,
+          "physics_frames": 36060,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            12995,
+            217,
+            217
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 1,
+          "power_on": true,
+          "key": true,
+          "radio": false,
+          "mode": "Standard",
+          "seed": 9931
+        },
+        {
+          "phase": "Incomplete",
+          "arrived": 4,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 600.950031341985,
+          "arrival_times": [
+            422.316680908203,
+            564.133361816406,
+            426.233367919922,
+            420.250030517578
+          ],
+          "damage_received": 16.0,
+          "physics_frames": 36060,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            10839,
+            213,
+            213
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 9721
+        },
+        {
+          "phase": "Incomplete",
+          "arrived": 1,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 600.950031341985,
+          "arrival_times": [
+            356.86669921875
+          ],
+          "damage_received": 82.0,
+          "physics_frames": 36060,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            12400,
+            364,
+            364
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": false,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 9829
+        },
+        {
+          "phase": "Incomplete",
+          "arrived": 0,
+          "alive": 3,
+          "losses": 2,
+          "elapsed": 600.950031341985,
+          "arrival_times": [],
+          "damage_received": 522.0,
+          "physics_frames": 36060,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            12231,
+            221,
+            221
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": false,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 9931
+        }
+      ]
+    },
+    "updated": {
+      "overall": {
+        "missions": 9,
+        "missions_with_extraction": 9,
+        "survivor_extraction_rate": 0.8888888888888888,
+        "survivor_losses": 5,
+        "mean_time_to_extraction_seconds": 268.2629291534423,
+        "mean_damage": 86.0
+      },
+      "by_mode": {
+        "Peaceful": {
+          "missions": 3,
+          "missions_with_extraction": 3,
+          "survivor_extraction_rate": 1.0,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": 233.207787068685,
+          "mean_damage": 0.0
+        },
+        "Standard": {
+          "missions": 3,
+          "missions_with_extraction": 3,
+          "survivor_extraction_rate": 1.0,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": 225.59445597330708,
+          "mean_damage": 41.666666666666664
+        },
+        "Hostile": {
+          "missions": 3,
+          "missions_with_extraction": 3,
+          "survivor_extraction_rate": 0.6666666666666666,
+          "survivor_losses": 5,
+          "mean_time_to_extraction_seconds": 384.8483520507812,
+          "mean_damage": 216.33333333333334
+        }
+      },
+      "episodes": [
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 248.416679622605,
+          "arrival_times": [
+            248.416687011719,
+            231.716674804688,
+            231.716674804688,
+            231.716674804688,
+            246.100006103516
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 14908,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5128,
+            192,
+            192
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 9721,
+          "behavior": {
+            "shots": 0,
+            "hostile_damage": 0,
+            "tactical_switches": 18,
+            "job_switches": 27,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 280.866681315005,
+          "arrival_times": [
+            235.41667175293,
+            280.866668701172,
+            214.16667175293,
+            214.16667175293,
+            220.816680908203
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 16855,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5045,
+            188,
+            188
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 9829,
+          "behavior": {
+            "shots": 0,
+            "hostile_damage": 0,
+            "tactical_switches": 18,
+            "job_switches": 25,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 250.583346402273,
+          "arrival_times": [
+            250.583343505859,
+            213.950012207031,
+            250.583343505859,
+            213.950012207031,
+            213.950012207031
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 15038,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            4980,
+            172,
+            172
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 9931,
+          "behavior": {
+            "shots": 0,
+            "hostile_damage": 0,
+            "tactical_switches": 20,
+            "job_switches": 27,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 245.55001280643,
+          "arrival_times": [
+            245.550018310547,
+            235.650009155273,
+            235.650009155273,
+            235.650009155273,
+            235.650009155273
+          ],
+          "damage_received": 100.0,
+          "physics_frames": 14736,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5230,
+            189,
+            189
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Standard",
+          "seed": 9721,
+          "behavior": {
+            "shots": 6,
+            "hostile_damage": 125,
+            "tactical_switches": 183,
+            "job_switches": 23,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 213.483344467357,
+          "arrival_times": [
+            210.933349609375,
+            210.933349609375,
+            201.816680908203,
+            213.383346557617,
+            213.483337402344
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 12812,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            4629,
+            165,
+            165
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            1
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Standard",
+          "seed": 9829,
+          "behavior": {
+            "shots": 4,
+            "hostile_damage": 100,
+            "tactical_switches": 47,
+            "job_switches": 25,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 229.150011951104,
+          "arrival_times": [
+            229.150009155273,
+            229.016677856445,
+            229.016677856445,
+            229.016677856445,
+            229.016677856445
+          ],
+          "damage_received": 25.0,
+          "physics_frames": 13752,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5057,
+            191,
+            191
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Standard",
+          "seed": 9931,
+          "behavior": {
+            "shots": 6,
+            "hostile_damage": 125,
+            "tactical_switches": 120,
+            "job_switches": 23,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 3,
+          "alive": 3,
+          "losses": 2,
+          "elapsed": 521.983360556886,
+          "arrival_times": [
+            392.650024414062,
+            521.983337402344,
+            392.650024414062
+          ],
+          "damage_received": 278.0,
+          "physics_frames": 31322,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            6512,
+            209,
+            209
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 9721,
+          "behavior": {
+            "shots": 21,
+            "hostile_damage": 495,
+            "tactical_switches": 150,
+            "job_switches": 42,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 3,
+          "alive": 3,
+          "losses": 2,
+          "elapsed": 434.95002268441,
+          "arrival_times": [
+            428.683349609375,
+            434.950012207031,
+            412.850036621094
+          ],
+          "damage_received": 271.0,
+          "physics_frames": 26100,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            6317,
+            204,
+            204
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            1
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 9829,
+          "behavior": {
+            "shots": 21,
+            "hostile_damage": 495,
+            "tactical_switches": 170,
+            "job_switches": 47,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 4,
+          "alive": 4,
+          "losses": 1,
+          "elapsed": 378.650019748136,
+          "arrival_times": [
+            298.466674804688,
+            300.383361816406,
+            287.216674804688,
+            378.650024414062
+          ],
+          "damage_received": 100.0,
+          "physics_frames": 22722,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5736,
+            181,
+            181
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 9931,
+          "behavior": {
+            "shots": 14,
+            "hostile_damage": 325,
+            "tactical_switches": 148,
+            "job_switches": 34,
+            "stalled_aim_seconds": 0.0
+          }
+        }
+      ]
+    }
+  },
+  "fresh_seeds": {
+    "original": {
+      "overall": {
+        "missions": 3,
+        "missions_with_extraction": 3,
+        "survivor_extraction_rate": 0.6666666666666666,
+        "survivor_losses": 0,
+        "mean_time_to_extraction_seconds": 359.1966888427735,
+        "mean_damage": 29.0
+      },
+      "by_mode": {
+        "Peaceful": {
+          "missions": 1,
+          "missions_with_extraction": 1,
+          "survivor_extraction_rate": 1.0,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": 196.5333435058594,
+          "mean_damage": 0.0
+        },
+        "Standard": {
+          "missions": 1,
+          "missions_with_extraction": 1,
+          "survivor_extraction_rate": 0.4,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": 587.850036621094,
+          "mean_damage": 55.0
+        },
+        "Hostile": {
+          "missions": 1,
+          "missions_with_extraction": 1,
+          "survivor_extraction_rate": 0.6,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": 477.86669921875,
+          "mean_damage": 32.0
+        }
+      },
+      "episodes": [
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 230.200012005866,
+          "arrival_times": [
+            228.150009155273,
+            179.350006103516,
+            164.783340454102,
+            180.183349609375,
+            230.200012207031
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 13815,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            4313,
+            134,
+            134
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 4103
+        },
+        {
+          "phase": "Incomplete",
+          "arrived": 2,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 600.950031341985,
+          "arrival_times": [
+            587.033386230469,
+            588.666687011719
+          ],
+          "damage_received": 55.0,
+          "physics_frames": 36060,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            13052,
+            250,
+            250
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Standard",
+          "seed": 4139
+        },
+        {
+          "phase": "Incomplete",
+          "arrived": 3,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 600.950031341985,
+          "arrival_times": [
+            539.933349609375,
+            536.800048828125,
+            356.86669921875
+          ],
+          "damage_received": 32.0,
+          "physics_frames": 36060,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            11774,
+            250,
+            250
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 4177
+        }
+      ]
+    },
+    "repaired_with_previous_weights": {
+      "overall": {
+        "missions": 3,
+        "missions_with_extraction": 3,
+        "survivor_extraction_rate": 0.9333333333333333,
+        "survivor_losses": 1,
+        "mean_time_to_extraction_seconds": 255.91430119105743,
+        "mean_damage": 50.0
+      },
+      "by_mode": {
+        "Peaceful": {
+          "missions": 1,
+          "missions_with_extraction": 1,
+          "survivor_extraction_rate": 1.0,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": 223.0100128173826,
+          "mean_damage": 0.0
+        },
+        "Standard": {
+          "missions": 1,
+          "missions_with_extraction": 1,
+          "survivor_extraction_rate": 1.0,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": 240.8233459472658,
+          "mean_damage": 0.0
+        },
+        "Hostile": {
+          "missions": 1,
+          "missions_with_extraction": 1,
+          "survivor_extraction_rate": 0.8,
+          "survivor_losses": 1,
+          "mean_time_to_extraction_seconds": 315.9083557128905,
+          "mean_damage": 150.0
+        }
+      },
+      "episodes": [
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 234.116678876802,
+          "arrival_times": [
+            234.116683959961,
+            220.016677856445,
+            220.016677856445,
+            220.016677856445,
+            220.883346557617
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 14050,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            4833,
+            180,
+            180
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 4103,
+          "behavior": {
+            "shots": 0,
+            "hostile_damage": 0,
+            "tactical_switches": 14,
+            "job_switches": 26,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 395.783353975043,
+          "arrival_times": [
+            395.783355712891,
+            201.600006103516,
+            200.816680908203,
+            205.100006103516,
+            200.816680908203
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 23750,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            5323,
+            179,
+            179
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Standard",
+          "seed": 4139,
+          "behavior": {
+            "shots": 4,
+            "hostile_damage": 100,
+            "tactical_switches": 146,
+            "job_switches": 26,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 4,
+          "alive": 4,
+          "losses": 1,
+          "elapsed": 346.63335141167,
+          "arrival_times": [
+            346.633361816406,
+            285.183349609375,
+            346.633361816406,
+            285.183349609375
+          ],
+          "damage_received": 150.0,
+          "physics_frames": 20801,
+          "controller": "native",
+          "checkpoint": "c02c5983a1f6ccfb44f950cd57fbdb19fa50b8df50387fa06e92fe3387c0a7e8",
+          "neural_decisions": [
+            5721,
+            192,
+            192
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 4177,
+          "behavior": {
+            "shots": 19,
+            "hostile_damage": 395,
+            "tactical_switches": 120,
+            "job_switches": 36,
+            "stalled_aim_seconds": 0.0
+          }
+        }
+      ]
+    },
+    "updated": {
+      "overall": {
+        "missions": 3,
+        "missions_with_extraction": 3,
+        "survivor_extraction_rate": 0.9333333333333333,
+        "survivor_losses": 1,
+        "mean_time_to_extraction_seconds": 255.91430119105743,
+        "mean_damage": 50.0
+      },
+      "by_mode": {
+        "Peaceful": {
+          "missions": 1,
+          "missions_with_extraction": 1,
+          "survivor_extraction_rate": 1.0,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": 223.0100128173826,
+          "mean_damage": 0.0
+        },
+        "Standard": {
+          "missions": 1,
+          "missions_with_extraction": 1,
+          "survivor_extraction_rate": 1.0,
+          "survivor_losses": 0,
+          "mean_time_to_extraction_seconds": 240.8233459472658,
+          "mean_damage": 0.0
+        },
+        "Hostile": {
+          "missions": 1,
+          "missions_with_extraction": 1,
+          "survivor_extraction_rate": 0.8,
+          "survivor_losses": 1,
+          "mean_time_to_extraction_seconds": 315.9083557128905,
+          "mean_damage": 150.0
+        }
+      },
+      "episodes": [
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 234.116678876802,
+          "arrival_times": [
+            234.116683959961,
+            220.016677856445,
+            220.016677856445,
+            220.016677856445,
+            220.883346557617
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 14050,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            4833,
+            180,
+            180
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 4103,
+          "behavior": {
+            "shots": 0,
+            "hostile_damage": 0,
+            "tactical_switches": 14,
+            "job_switches": 26,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 395.783353975043,
+          "arrival_times": [
+            395.783355712891,
+            201.600006103516,
+            200.816680908203,
+            205.100006103516,
+            200.816680908203
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 23750,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5323,
+            179,
+            179
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Standard",
+          "seed": 4139,
+          "behavior": {
+            "shots": 4,
+            "hostile_damage": 100,
+            "tactical_switches": 146,
+            "job_switches": 26,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 4,
+          "alive": 4,
+          "losses": 1,
+          "elapsed": 346.63335141167,
+          "arrival_times": [
+            346.633361816406,
+            285.183349609375,
+            346.633361816406,
+            285.183349609375
+          ],
+          "damage_received": 150.0,
+          "physics_frames": 20801,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5721,
+            192,
+            192
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 4177,
+          "behavior": {
+            "shots": 19,
+            "hostile_damage": 395,
+            "tactical_switches": 120,
+            "job_switches": 36,
+            "stalled_aim_seconds": 0.0
+          }
+        }
+      ]
+    }
+  },
+  "stationary_player": {
+    "extracted": 3,
+    "player_travel": 0.0,
+    "radio": true,
+    "mission": 2,
+    "phase": "Victory",
+    "survivor_losses": 2
+  },
+  "shot_response": {
+    "ally": {
+      "initial_reproduction": {
+        "passed": false,
+        "actor_id": 4,
+        "shots": 0,
+        "actor_travel": 13.78,
+        "player_final_health": 100
+      },
+      "updated": {
+        "passed": true,
+        "actor_id": 4,
+        "shots": 4,
+        "actor_travel": 5.96,
+        "player_final_health": 0
+      }
+    },
+    "raider": {
+      "initial_reproduction": {
+        "passed": false,
+        "actor_id": 10,
+        "shots": 0,
+        "actor_travel": 13.78,
+        "player_final_health": 100
+      },
+      "updated": {
+        "passed": true,
+        "actor_id": 10,
+        "shots": 4,
+        "actor_travel": 5.96,
+        "player_final_health": 0
+      }
+    },
+    "unarmed": {
+      "initial_reproduction": {
+        "passed": true,
+        "actor_id": 4,
+        "shots": 0,
+        "actor_travel": 13.78,
+        "player_final_health": 100
+      },
+      "updated": {
+        "passed": true,
+        "actor_id": 4,
+        "shots": 0,
+        "actor_travel": 13.96,
+        "player_final_health": 100
+      }
+    },
+    "friendly_noise": {
+      "initial_reproduction": {
+        "passed": false,
+        "actor_id": 3,
+        "shots": 0,
+        "actor_travel": 8.49,
+        "player_final_health": 100
+      },
+      "updated": {
+        "passed": true,
+        "actor_id": 3,
+        "shots": 0,
+        "actor_travel": 13.88,
+        "player_final_health": 100
+      }
+    },
+    "exposure": {
+      "updated": {
+        "passed": true,
+        "actor_id": 4,
+        "shots": 0,
+        "actor_travel": 14.15,
+        "player_final_health": 100
+      }
+    }
+  },
+  "training": {
+    "before_exposure_fix": {
+      "imitation": {
+        "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+        "imitation_examples": 8704,
+        "source_executable_sha256": "e7e5ccf200bc491cc01ca79a099676ceebe830720e6c1a393397078d26796147",
+        "training_cases": [
+          [
+            "Peaceful",
+            91
+          ],
+          [
+            "Peaceful",
+            305
+          ],
+          [
+            "Standard",
+            91
+          ],
+          [
+            "Standard",
+            305
+          ],
+          [
+            "Hostile",
+            91
+          ],
+          [
+            "Hostile",
+            305
+          ]
+        ],
+        "validation": [
+          {
+            "phase": "Victory",
+            "arrived": 5,
+            "alive": 5,
+            "losses": 0,
+            "elapsed": 253.833346571773,
+            "arrival_times": [
+              253.833343505859,
+              229.983352661133,
+              229.983352661133,
+              229.983352661133,
+              253.383346557617
+            ],
+            "damage_received": 0.0,
+            "physics_frames": 15233,
+            "controller": "native",
+            "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+            "neural_decisions": [
+              5161,
+              185,
+              185
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              0
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Peaceful",
+            "seed": 1613,
+            "behavior": {
+              "shots": 0,
+              "hostile_damage": 0,
+              "tactical_switches": 22,
+              "job_switches": 26,
+              "stalled_aim_seconds": 0.0
+            }
+          },
+          {
+            "phase": "Victory",
+            "arrived": 5,
+            "alive": 5,
+            "losses": 0,
+            "elapsed": 336.650017557666,
+            "arrival_times": [
+              336.650024414062,
+              335.950012207031,
+              201.816680908203,
+              250.166687011719,
+              228.083343505859
+            ],
+            "damage_received": 85.0,
+            "physics_frames": 20202,
+            "controller": "native",
+            "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+            "neural_decisions": [
+              5971,
+              216,
+              216
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              0
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Standard",
+            "seed": 1823,
+            "behavior": {
+              "shots": 2,
+              "hostile_damage": 57,
+              "tactical_switches": 221,
+              "job_switches": 22,
+              "stalled_aim_seconds": 0.0
+            }
+          },
+          {
+            "phase": "Victory",
+            "arrived": 2,
+            "alive": 2,
+            "losses": 3,
+            "elapsed": 361.066685497761,
+            "arrival_times": [
+              361.066680908203,
+              354.933349609375
+            ],
+            "damage_received": 450.0,
+            "physics_frames": 21667,
+            "controller": "native",
+            "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+            "neural_decisions": [
+              4355,
+              133,
+              133
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              0
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Hostile",
+            "seed": 1913,
+            "behavior": {
+              "shots": 11,
+              "hostile_damage": 225,
+              "tactical_switches": 363,
+              "job_switches": 20,
+              "stalled_aim_seconds": 0.0
+            }
+          }
+        ],
+        "behavior": {
+          "ally": true,
+          "raider": true,
+          "unarmed": true,
+          "friendly_noise": true
+        },
+        "previous_weights_behavior_on_updated_code": {
+          "ally": true,
+          "raider": true,
+          "unarmed": true,
+          "friendly_noise": true
+        }
+      },
+      "rounds": [
+        {
+          "rollouts": [
+            [
+              "Peaceful",
+              2400
+            ],
+            [
+              "Standard",
+              2407
+            ],
+            [
+              "Hostile",
+              2414
+            ]
+          ],
+          "training_examples": 24068,
+          "starting_checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+          "checkpoint": "cd74e624be4742ccfa74dc04196cc9c3d14bf799213f88c75400d6f4d2d1d612",
+          "starting": [
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 253.833346571773,
+              "arrival_times": [
+                253.833343505859,
+                229.983352661133,
+                229.983352661133,
+                229.983352661133,
+                253.383346557617
+              ],
+              "damage_received": 0.0,
+              "physics_frames": 15233,
+              "controller": "native",
+              "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+              "neural_decisions": [
+                5161,
+                185,
+                185
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Peaceful",
+              "seed": 1613,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 22,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 336.650017557666,
+              "arrival_times": [
+                336.650024414062,
+                335.950012207031,
+                201.816680908203,
+                250.166687011719,
+                228.083343505859
+              ],
+              "damage_received": 85.0,
+              "physics_frames": 20202,
+              "controller": "native",
+              "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+              "neural_decisions": [
+                5971,
+                216,
+                216
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Standard",
+              "seed": 1823,
+              "behavior": {
+                "shots": 2,
+                "hostile_damage": 57,
+                "tactical_switches": 221,
+                "job_switches": 22,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 2,
+              "alive": 2,
+              "losses": 3,
+              "elapsed": 361.066685497761,
+              "arrival_times": [
+                361.066680908203,
+                354.933349609375
+              ],
+              "damage_received": 450.0,
+              "physics_frames": 21667,
+              "controller": "native",
+              "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+              "neural_decisions": [
+                4355,
+                133,
+                133
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Hostile",
+              "seed": 1913,
+              "behavior": {
+                "shots": 11,
+                "hostile_damage": 225,
+                "tactical_switches": 363,
+                "job_switches": 20,
+                "stalled_aim_seconds": 0.0
+              }
+            }
+          ],
+          "candidate": [
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 253.833346571773,
+              "arrival_times": [
+                253.833343505859,
+                229.983352661133,
+                229.983352661133,
+                229.983352661133,
+                253.383346557617
+              ],
+              "damage_received": 0.0,
+              "physics_frames": 15233,
+              "controller": "native",
+              "checkpoint": "cd74e624be4742ccfa74dc04196cc9c3d14bf799213f88c75400d6f4d2d1d612",
+              "neural_decisions": [
+                5161,
+                185,
+                185
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Peaceful",
+              "seed": 1613,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 22,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 336.650017557666,
+              "arrival_times": [
+                336.650024414062,
+                335.950012207031,
+                201.816680908203,
+                250.166687011719,
+                228.083343505859
+              ],
+              "damage_received": 85.0,
+              "physics_frames": 20202,
+              "controller": "native",
+              "checkpoint": "cd74e624be4742ccfa74dc04196cc9c3d14bf799213f88c75400d6f4d2d1d612",
+              "neural_decisions": [
+                5971,
+                216,
+                216
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Standard",
+              "seed": 1823,
+              "behavior": {
+                "shots": 2,
+                "hostile_damage": 57,
+                "tactical_switches": 221,
+                "job_switches": 22,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Incomplete",
+              "arrived": 1,
+              "alive": 3,
+              "losses": 2,
+              "elapsed": 479.950025031343,
+              "arrival_times": [
+                347.200012207031
+              ],
+              "damage_received": 387.0,
+              "physics_frames": 28800,
+              "controller": "native",
+              "checkpoint": "cd74e624be4742ccfa74dc04196cc9c3d14bf799213f88c75400d6f4d2d1d612",
+              "neural_decisions": [
+                6019,
+                154,
+                154
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Hostile",
+              "seed": 1913,
+              "behavior": {
+                "shots": 12,
+                "hostile_damage": 175,
+                "tactical_switches": 1177,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            }
+          ],
+          "behavior": {
+            "ally": true,
+            "raider": true,
+            "unarmed": true,
+            "friendly_noise": true
+          },
+          "accepted": false
+        },
+        {
+          "rollouts": [
+            [
+              "Peaceful",
+              2500
+            ],
+            [
+              "Standard",
+              2507
+            ],
+            [
+              "Hostile",
+              2514
+            ]
+          ],
+          "training_examples": 21413,
+          "starting_checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+          "checkpoint": "66af1bfc2b5c59f68971c7af8673049eb6f7df936290e6775054d584211778df",
+          "starting": [
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 253.833346571773,
+              "arrival_times": [
+                253.833343505859,
+                229.983352661133,
+                229.983352661133,
+                229.983352661133,
+                253.383346557617
+              ],
+              "damage_received": 0.0,
+              "physics_frames": 15233,
+              "controller": "native",
+              "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+              "neural_decisions": [
+                5161,
+                185,
+                185
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Peaceful",
+              "seed": 1613,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 22,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 336.650017557666,
+              "arrival_times": [
+                336.650024414062,
+                335.950012207031,
+                201.816680908203,
+                250.166687011719,
+                228.083343505859
+              ],
+              "damage_received": 85.0,
+              "physics_frames": 20202,
+              "controller": "native",
+              "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+              "neural_decisions": [
+                5971,
+                216,
+                216
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Standard",
+              "seed": 1823,
+              "behavior": {
+                "shots": 2,
+                "hostile_damage": 57,
+                "tactical_switches": 221,
+                "job_switches": 22,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 2,
+              "alive": 2,
+              "losses": 3,
+              "elapsed": 361.066685497761,
+              "arrival_times": [
+                361.066680908203,
+                354.933349609375
+              ],
+              "damage_received": 450.0,
+              "physics_frames": 21667,
+              "controller": "native",
+              "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+              "neural_decisions": [
+                4355,
+                133,
+                133
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Hostile",
+              "seed": 1913,
+              "behavior": {
+                "shots": 11,
+                "hostile_damage": 225,
+                "tactical_switches": 363,
+                "job_switches": 20,
+                "stalled_aim_seconds": 0.0
+              }
+            }
+          ],
+          "candidate": [
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 253.833346571773,
+              "arrival_times": [
+                253.833343505859,
+                229.983352661133,
+                229.983352661133,
+                229.983352661133,
+                253.383346557617
+              ],
+              "damage_received": 0.0,
+              "physics_frames": 15233,
+              "controller": "native",
+              "checkpoint": "66af1bfc2b5c59f68971c7af8673049eb6f7df936290e6775054d584211778df",
+              "neural_decisions": [
+                5161,
+                185,
+                185
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Peaceful",
+              "seed": 1613,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 22,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 333.366684053093,
+              "arrival_times": [
+                333.36669921875,
+                333.316680908203,
+                201.816680908203,
+                250.166687011719,
+                228.083343505859
+              ],
+              "damage_received": 85.0,
+              "physics_frames": 20005,
+              "controller": "native",
+              "checkpoint": "66af1bfc2b5c59f68971c7af8673049eb6f7df936290e6775054d584211778df",
+              "neural_decisions": [
+                5945,
+                214,
+                214
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Standard",
+              "seed": 1823,
+              "behavior": {
+                "shots": 2,
+                "hostile_damage": 57,
+                "tactical_switches": 221,
+                "job_switches": 23,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 2,
+              "alive": 2,
+              "losses": 3,
+              "elapsed": 361.066685497761,
+              "arrival_times": [
+                361.066680908203,
+                354.933349609375
+              ],
+              "damage_received": 450.0,
+              "physics_frames": 21667,
+              "controller": "native",
+              "checkpoint": "66af1bfc2b5c59f68971c7af8673049eb6f7df936290e6775054d584211778df",
+              "neural_decisions": [
+                4355,
+                133,
+                133
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Hostile",
+              "seed": 1913,
+              "behavior": {
+                "shots": 11,
+                "hostile_damage": 225,
+                "tactical_switches": 363,
+                "job_switches": 20,
+                "stalled_aim_seconds": 0.0
+              }
+            }
+          ],
+          "behavior": {
+            "ally": true,
+            "raider": true,
+            "unarmed": true,
+            "friendly_noise": true
+          },
+          "accepted": false
+        },
+        {
+          "rollouts": [
+            [
+              "Peaceful",
+              2600
+            ],
+            [
+              "Standard",
+              2607
+            ],
+            [
+              "Hostile",
+              2614
+            ]
+          ],
+          "training_examples": 23850,
+          "starting_checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+          "checkpoint": "9701f4aa2a23a534b5a9b461b0dbd461fe9797da1ec4f99d90fe9e75bdb6f9e1",
+          "starting": [
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 253.833346571773,
+              "arrival_times": [
+                253.833343505859,
+                229.983352661133,
+                229.983352661133,
+                229.983352661133,
+                253.383346557617
+              ],
+              "damage_received": 0.0,
+              "physics_frames": 15233,
+              "controller": "native",
+              "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+              "neural_decisions": [
+                5161,
+                185,
+                185
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Peaceful",
+              "seed": 1613,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 22,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 336.650017557666,
+              "arrival_times": [
+                336.650024414062,
+                335.950012207031,
+                201.816680908203,
+                250.166687011719,
+                228.083343505859
+              ],
+              "damage_received": 85.0,
+              "physics_frames": 20202,
+              "controller": "native",
+              "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+              "neural_decisions": [
+                5971,
+                216,
+                216
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Standard",
+              "seed": 1823,
+              "behavior": {
+                "shots": 2,
+                "hostile_damage": 57,
+                "tactical_switches": 221,
+                "job_switches": 22,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 2,
+              "alive": 2,
+              "losses": 3,
+              "elapsed": 361.066685497761,
+              "arrival_times": [
+                361.066680908203,
+                354.933349609375
+              ],
+              "damage_received": 450.0,
+              "physics_frames": 21667,
+              "controller": "native",
+              "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f",
+              "neural_decisions": [
+                4355,
+                133,
+                133
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Hostile",
+              "seed": 1913,
+              "behavior": {
+                "shots": 11,
+                "hostile_damage": 225,
+                "tactical_switches": 363,
+                "job_switches": 20,
+                "stalled_aim_seconds": 0.0
+              }
+            }
+          ],
+          "candidate": [
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 253.833346571773,
+              "arrival_times": [
+                253.833343505859,
+                229.783340454102,
+                229.783340454102,
+                229.783340454102,
+                252.983352661133
+              ],
+              "damage_received": 0.0,
+              "physics_frames": 15233,
+              "controller": "native",
+              "checkpoint": "9701f4aa2a23a534b5a9b461b0dbd461fe9797da1ec4f99d90fe9e75bdb6f9e1",
+              "neural_decisions": [
+                5157,
+                185,
+                185
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Peaceful",
+              "seed": 1613,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 22,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 265.500013846904,
+              "arrival_times": [
+                229.016677856445,
+                229.016677856445,
+                229.016677856445,
+                229.016677856445,
+                265.5
+              ],
+              "damage_received": 25.0,
+              "physics_frames": 15933,
+              "controller": "native",
+              "checkpoint": "9701f4aa2a23a534b5a9b461b0dbd461fe9797da1ec4f99d90fe9e75bdb6f9e1",
+              "neural_decisions": [
+                5182,
+                192,
+                192
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Standard",
+              "seed": 1823,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 74,
+                "job_switches": 24,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Incomplete",
+              "arrived": 0,
+              "alive": 3,
+              "losses": 2,
+              "elapsed": 479.950025031343,
+              "arrival_times": [],
+              "damage_received": 256.0,
+              "physics_frames": 28800,
+              "controller": "native",
+              "checkpoint": "9701f4aa2a23a534b5a9b461b0dbd461fe9797da1ec4f99d90fe9e75bdb6f9e1",
+              "neural_decisions": [
+                6385,
+                153,
+                153
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Hostile",
+              "seed": 1913,
+              "behavior": {
+                "shots": 8,
+                "hostile_damage": 200,
+                "tactical_switches": 193,
+                "job_switches": 36,
+                "stalled_aim_seconds": 0.0
+              }
+            }
+          ],
+          "behavior": {
+            "ally": true,
+            "raider": true,
+            "unarmed": true,
+            "friendly_noise": true
+          },
+          "accepted": false
+        }
+      ]
+    },
+    "before_peek_fix": {
+      "imitation": {
+        "checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+        "imitation_examples": 4969,
+        "source_executable_sha256": "73e8033d770894fafd8c4bd43153adae34ebc83ea6694bdb9c3ad6666edbc76c",
+        "training_cases": [
+          [
+            "Peaceful",
+            91
+          ],
+          [
+            "Standard",
+            91
+          ],
+          [
+            "Hostile",
+            91
+          ]
+        ],
+        "validation": [
+          {
+            "phase": "Victory",
+            "arrived": 5,
+            "alive": 5,
+            "losses": 0,
+            "elapsed": 253.833346571773,
+            "arrival_times": [
+              253.833343505859,
+              229.983352661133,
+              229.983352661133,
+              229.983352661133,
+              253.383346557617
+            ],
+            "damage_received": 0.0,
+            "physics_frames": 15233,
+            "controller": "native",
+            "checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+            "neural_decisions": [
+              5161,
+              185,
+              185
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              0
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Peaceful",
+            "seed": 1613,
+            "behavior": {
+              "shots": 0,
+              "hostile_damage": 0,
+              "tactical_switches": 22,
+              "job_switches": 26,
+              "stalled_aim_seconds": 0.0
+            }
+          },
+          {
+            "phase": "Victory",
+            "arrived": 5,
+            "alive": 5,
+            "losses": 0,
+            "elapsed": 336.650017557666,
+            "arrival_times": [
+              336.650024414062,
+              335.950012207031,
+              201.816680908203,
+              250.166687011719,
+              228.083343505859
+            ],
+            "damage_received": 85.0,
+            "physics_frames": 20202,
+            "controller": "native",
+            "checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+            "neural_decisions": [
+              5971,
+              216,
+              216
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              0
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Standard",
+            "seed": 1823,
+            "behavior": {
+              "shots": 2,
+              "hostile_damage": 57,
+              "tactical_switches": 221,
+              "job_switches": 22,
+              "stalled_aim_seconds": 0.0
+            }
+          },
+          {
+            "phase": "Victory",
+            "arrived": 2,
+            "alive": 2,
+            "losses": 3,
+            "elapsed": 361.066685497761,
+            "arrival_times": [
+              361.066680908203,
+              354.933349609375
+            ],
+            "damage_received": 450.0,
+            "physics_frames": 21667,
+            "controller": "native",
+            "checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+            "neural_decisions": [
+              4355,
+              133,
+              133
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              0
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Hostile",
+            "seed": 1913,
+            "behavior": {
+              "shots": 11,
+              "hostile_damage": 225,
+              "tactical_switches": 363,
+              "job_switches": 20,
+              "stalled_aim_seconds": 0.0
+            }
+          }
+        ],
+        "behavior": {
+          "ally": true,
+          "raider": true,
+          "unarmed": true,
+          "friendly_noise": true,
+          "exposure": true
+        },
+        "previous_weights_behavior_on_updated_code": {
+          "ally": true,
+          "raider": true,
+          "unarmed": true,
+          "friendly_noise": true,
+          "exposure": true
+        }
+      },
+      "rounds": [
+        {
+          "rollouts": [
+            [
+              "Peaceful",
+              3400
+            ],
+            [
+              "Standard",
+              3407
+            ],
+            [
+              "Hostile",
+              3414
+            ]
+          ],
+          "training_examples": 21252,
+          "starting_checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+          "checkpoint": "241077235d5fc9a3ff1cdc315943de0a14b9a36334d5a0cac1220a1a14be1aa2",
+          "starting": [
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 253.833346571773,
+              "arrival_times": [
+                253.833343505859,
+                229.983352661133,
+                229.983352661133,
+                229.983352661133,
+                253.383346557617
+              ],
+              "damage_received": 0.0,
+              "physics_frames": 15233,
+              "controller": "native",
+              "checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+              "neural_decisions": [
+                5161,
+                185,
+                185
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Peaceful",
+              "seed": 1613,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 22,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 336.650017557666,
+              "arrival_times": [
+                336.650024414062,
+                335.950012207031,
+                201.816680908203,
+                250.166687011719,
+                228.083343505859
+              ],
+              "damage_received": 85.0,
+              "physics_frames": 20202,
+              "controller": "native",
+              "checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+              "neural_decisions": [
+                5971,
+                216,
+                216
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Standard",
+              "seed": 1823,
+              "behavior": {
+                "shots": 2,
+                "hostile_damage": 57,
+                "tactical_switches": 221,
+                "job_switches": 22,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 2,
+              "alive": 2,
+              "losses": 3,
+              "elapsed": 361.066685497761,
+              "arrival_times": [
+                361.066680908203,
+                354.933349609375
+              ],
+              "damage_received": 450.0,
+              "physics_frames": 21667,
+              "controller": "native",
+              "checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+              "neural_decisions": [
+                4355,
+                133,
+                133
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Hostile",
+              "seed": 1913,
+              "behavior": {
+                "shots": 11,
+                "hostile_damage": 225,
+                "tactical_switches": 363,
+                "job_switches": 20,
+                "stalled_aim_seconds": 0.0
+              }
+            }
+          ],
+          "candidate": [
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 253.833346571773,
+              "arrival_times": [
+                253.833343505859,
+                229.983352661133,
+                229.983352661133,
+                229.983352661133,
+                253.383346557617
+              ],
+              "damage_received": 0.0,
+              "physics_frames": 15233,
+              "controller": "native",
+              "checkpoint": "241077235d5fc9a3ff1cdc315943de0a14b9a36334d5a0cac1220a1a14be1aa2",
+              "neural_decisions": [
+                5161,
+                185,
+                185
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Peaceful",
+              "seed": 1613,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 22,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Incomplete",
+              "arrived": 1,
+              "alive": 2,
+              "losses": 3,
+              "elapsed": 479.950025031343,
+              "arrival_times": [
+                201.816680908203
+              ],
+              "damage_received": 389.0,
+              "physics_frames": 28800,
+              "controller": "native",
+              "checkpoint": "241077235d5fc9a3ff1cdc315943de0a14b9a36334d5a0cac1220a1a14be1aa2",
+              "neural_decisions": [
+                6669,
+                201,
+                201
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Standard",
+              "seed": 1823,
+              "behavior": {
+                "shots": 1,
+                "hostile_damage": 25,
+                "tactical_switches": 786,
+                "job_switches": 23,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Incomplete",
+              "arrived": 1,
+              "alive": 3,
+              "losses": 2,
+              "elapsed": 479.950025031343,
+              "arrival_times": [
+                352.61669921875
+              ],
+              "damage_received": 387.0,
+              "physics_frames": 28800,
+              "controller": "native",
+              "checkpoint": "241077235d5fc9a3ff1cdc315943de0a14b9a36334d5a0cac1220a1a14be1aa2",
+              "neural_decisions": [
+                6046,
+                155,
+                155
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Hostile",
+              "seed": 1913,
+              "behavior": {
+                "shots": 12,
+                "hostile_damage": 175,
+                "tactical_switches": 1169,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            }
+          ],
+          "behavior": {
+            "ally": true,
+            "raider": true,
+            "unarmed": true,
+            "friendly_noise": true,
+            "exposure": true
+          },
+          "accepted": false
+        },
+        {
+          "rollouts": [
+            [
+              "Peaceful",
+              3500
+            ],
+            [
+              "Standard",
+              3507
+            ],
+            [
+              "Hostile",
+              3514
+            ]
+          ],
+          "training_examples": 18934,
+          "starting_checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+          "checkpoint": "485ba1a464b952c8fdea77cbac9cbb4a68c6ee903b7f21c1198e08ea1d4931f9",
+          "starting": [
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 253.833346571773,
+              "arrival_times": [
+                253.833343505859,
+                229.983352661133,
+                229.983352661133,
+                229.983352661133,
+                253.383346557617
+              ],
+              "damage_received": 0.0,
+              "physics_frames": 15233,
+              "controller": "native",
+              "checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+              "neural_decisions": [
+                5161,
+                185,
+                185
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Peaceful",
+              "seed": 1613,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 22,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 336.650017557666,
+              "arrival_times": [
+                336.650024414062,
+                335.950012207031,
+                201.816680908203,
+                250.166687011719,
+                228.083343505859
+              ],
+              "damage_received": 85.0,
+              "physics_frames": 20202,
+              "controller": "native",
+              "checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+              "neural_decisions": [
+                5971,
+                216,
+                216
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Standard",
+              "seed": 1823,
+              "behavior": {
+                "shots": 2,
+                "hostile_damage": 57,
+                "tactical_switches": 221,
+                "job_switches": 22,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 2,
+              "alive": 2,
+              "losses": 3,
+              "elapsed": 361.066685497761,
+              "arrival_times": [
+                361.066680908203,
+                354.933349609375
+              ],
+              "damage_received": 450.0,
+              "physics_frames": 21667,
+              "controller": "native",
+              "checkpoint": "e936d1772d90fa8bce356b2d8066ce63bd657161d2af7a6689948430ab711526",
+              "neural_decisions": [
+                4355,
+                133,
+                133
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Hostile",
+              "seed": 1913,
+              "behavior": {
+                "shots": 11,
+                "hostile_damage": 225,
+                "tactical_switches": 363,
+                "job_switches": 20,
+                "stalled_aim_seconds": 0.0
+              }
+            }
+          ],
+          "candidate": [
+            {
+              "phase": "Victory",
+              "arrived": 5,
+              "alive": 5,
+              "losses": 0,
+              "elapsed": 253.833346571773,
+              "arrival_times": [
+                253.833343505859,
+                229.783340454102,
+                229.783340454102,
+                229.783340454102,
+                252.983352661133
+              ],
+              "damage_received": 0.0,
+              "physics_frames": 15233,
+              "controller": "native",
+              "checkpoint": "485ba1a464b952c8fdea77cbac9cbb4a68c6ee903b7f21c1198e08ea1d4931f9",
+              "neural_decisions": [
+                5157,
+                185,
+                185
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Peaceful",
+              "seed": 1613,
+              "behavior": {
+                "shots": 0,
+                "hostile_damage": 0,
+                "tactical_switches": 22,
+                "job_switches": 26,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 4,
+              "alive": 4,
+              "losses": 1,
+              "elapsed": 341.71668448858,
+              "arrival_times": [
+                220.783340454102,
+                257.616668701172,
+                191.616683959961,
+                247.900009155273
+              ],
+              "damage_received": 100.0,
+              "physics_frames": 20506,
+              "controller": "native",
+              "checkpoint": "485ba1a464b952c8fdea77cbac9cbb4a68c6ee903b7f21c1198e08ea1d4931f9",
+              "neural_decisions": [
+                5531,
+                168,
+                168
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Standard",
+              "seed": 1823,
+              "behavior": {
+                "shots": 4,
+                "hostile_damage": 100,
+                "tactical_switches": 351,
+                "job_switches": 24,
+                "stalled_aim_seconds": 0.0
+              }
+            },
+            {
+              "phase": "Victory",
+              "arrived": 3,
+              "alive": 3,
+              "losses": 2,
+              "elapsed": 397.350020723417,
+              "arrival_times": [
+                397.350006103516,
+                348.066680908203,
+                348.066680908203
+              ],
+              "damage_received": 452.0,
+              "physics_frames": 23844,
+              "controller": "native",
+              "checkpoint": "485ba1a464b952c8fdea77cbac9cbb4a68c6ee903b7f21c1198e08ea1d4931f9",
+              "neural_decisions": [
+                5103,
+                166,
+                166
+              ],
+              "neural_fallbacks": [
+                0,
+                0,
+                0
+              ],
+              "mission": 2,
+              "power_on": true,
+              "key": true,
+              "radio": true,
+              "mode": "Hostile",
+              "seed": 1913,
+              "behavior": {
+                "shots": 10,
+                "hostile_damage": 150,
+                "tactical_switches": 203,
+                "job_switches": 27,
+                "stalled_aim_seconds": 0.0
+              }
+            }
+          ],
+          "behavior": {
+            "ally": true,
+            "raider": true,
+            "unarmed": true,
+            "friendly_noise": true,
+            "exposure": true
+          },
+          "accepted": false
+        }
+      ]
+    },
+    "imitation": {
+      "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+      "imitation_examples": 3527,
+      "imitation_promoted": true,
+      "source_executable_sha256": "2eae9d3147bbc3508bda80467388d7f980a3a6fe257f4e7a0a8b89d43cca977d",
+      "training_cases": [
+        [
+          "Peaceful",
+          305
+        ],
+        [
+          "Standard",
+          305
+        ],
+        [
+          "Hostile",
+          305
+        ]
+      ],
+      "validation": [
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 253.833346571773,
+          "arrival_times": [
+            253.833343505859,
+            229.983352661133,
+            229.983352661133,
+            229.983352661133,
+            253.383346557617
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 15233,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5161,
+            185,
+            185
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 1613,
+          "behavior": {
+            "shots": 0,
+            "hostile_damage": 0,
+            "tactical_switches": 22,
+            "job_switches": 26,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 279.516681244597,
+          "arrival_times": [
+            230.766677856445,
+            279.516693115234,
+            201.816680908203,
+            214.116683959961,
+            221.333343505859
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 16774,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5066,
+            184,
+            184
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            1
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Standard",
+          "seed": 1823,
+          "behavior": {
+            "shots": 8,
+            "hostile_damage": 200,
+            "tactical_switches": 75,
+            "job_switches": 24,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 1,
+          "alive": 1,
+          "losses": 4,
+          "elapsed": 391.85002043657,
+          "arrival_times": [
+            391.850006103516
+          ],
+          "damage_received": 717.0,
+          "physics_frames": 23514,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            3929,
+            130,
+            130
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 1913,
+          "behavior": {
+            "shots": 22,
+            "hostile_damage": 583,
+            "tactical_switches": 189,
+            "job_switches": 20,
+            "stalled_aim_seconds": 0.0
+          }
+        }
+      ],
+      "behavior": {
+        "ally": true,
+        "raider": true,
+        "unarmed": true,
+        "friendly_noise": true,
+        "exposure": true
+      },
+      "previous_weights_behavior_on_updated_code": {
+        "ally": true,
+        "raider": true,
+        "unarmed": true,
+        "friendly_noise": true,
+        "exposure": true
+      }
+    },
+    "rounds": [
+      {
+        "rollouts": [
+          [
+            "Peaceful",
+            4600
+          ],
+          [
+            "Standard",
+            4607
+          ],
+          [
+            "Hostile",
+            4614
+          ]
+        ],
+        "training_examples": 18787,
+        "starting_checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+        "checkpoint": "66e6e6f80a6e606076804a1b8484023e648a8288bd776064a805b2084de2d160",
+        "starting": [
+          {
+            "phase": "Victory",
+            "arrived": 5,
+            "alive": 5,
+            "losses": 0,
+            "elapsed": 253.833346571773,
+            "arrival_times": [
+              253.833343505859,
+              229.983352661133,
+              229.983352661133,
+              229.983352661133,
+              253.383346557617
+            ],
+            "damage_received": 0.0,
+            "physics_frames": 15233,
+            "controller": "native",
+            "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+            "neural_decisions": [
+              5161,
+              185,
+              185
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              0
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Peaceful",
+            "seed": 1613,
+            "behavior": {
+              "shots": 0,
+              "hostile_damage": 0,
+              "tactical_switches": 22,
+              "job_switches": 26,
+              "stalled_aim_seconds": 0.0
+            }
+          },
+          {
+            "phase": "Victory",
+            "arrived": 5,
+            "alive": 5,
+            "losses": 0,
+            "elapsed": 279.516681244597,
+            "arrival_times": [
+              230.766677856445,
+              279.516693115234,
+              201.816680908203,
+              214.116683959961,
+              221.333343505859
+            ],
+            "damage_received": 0.0,
+            "physics_frames": 16774,
+            "controller": "native",
+            "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+            "neural_decisions": [
+              5066,
+              184,
+              184
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              1
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Standard",
+            "seed": 1823,
+            "behavior": {
+              "shots": 8,
+              "hostile_damage": 200,
+              "tactical_switches": 75,
+              "job_switches": 24,
+              "stalled_aim_seconds": 0.0
+            }
+          },
+          {
+            "phase": "Victory",
+            "arrived": 1,
+            "alive": 1,
+            "losses": 4,
+            "elapsed": 391.85002043657,
+            "arrival_times": [
+              391.850006103516
+            ],
+            "damage_received": 717.0,
+            "physics_frames": 23514,
+            "controller": "native",
+            "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+            "neural_decisions": [
+              3929,
+              130,
+              130
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              0
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Hostile",
+            "seed": 1913,
+            "behavior": {
+              "shots": 22,
+              "hostile_damage": 583,
+              "tactical_switches": 189,
+              "job_switches": 20,
+              "stalled_aim_seconds": 0.0
+            }
+          }
+        ],
+        "candidate": [
+          {
+            "phase": "Victory",
+            "arrived": 5,
+            "alive": 5,
+            "losses": 0,
+            "elapsed": 253.833346571773,
+            "arrival_times": [
+              253.833343505859,
+              229.983352661133,
+              229.983352661133,
+              229.983352661133,
+              253.383346557617
+            ],
+            "damage_received": 0.0,
+            "physics_frames": 15233,
+            "controller": "native",
+            "checkpoint": "66e6e6f80a6e606076804a1b8484023e648a8288bd776064a805b2084de2d160",
+            "neural_decisions": [
+              5161,
+              185,
+              185
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              0
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Peaceful",
+            "seed": 1613,
+            "behavior": {
+              "shots": 0,
+              "hostile_damage": 0,
+              "tactical_switches": 22,
+              "job_switches": 26,
+              "stalled_aim_seconds": 0.0
+            }
+          },
+          {
+            "phase": "Victory",
+            "arrived": 5,
+            "alive": 5,
+            "losses": 0,
+            "elapsed": 279.516681244597,
+            "arrival_times": [
+              230.766677856445,
+              279.516693115234,
+              201.816680908203,
+              214.116683959961,
+              221.333343505859
+            ],
+            "damage_received": 0.0,
+            "physics_frames": 16774,
+            "controller": "native",
+            "checkpoint": "66e6e6f80a6e606076804a1b8484023e648a8288bd776064a805b2084de2d160",
+            "neural_decisions": [
+              5066,
+              184,
+              184
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              1
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Standard",
+            "seed": 1823,
+            "behavior": {
+              "shots": 8,
+              "hostile_damage": 200,
+              "tactical_switches": 75,
+              "job_switches": 24,
+              "stalled_aim_seconds": 0.0
+            }
+          },
+          {
+            "phase": "Victory",
+            "arrived": 1,
+            "alive": 1,
+            "losses": 4,
+            "elapsed": 391.85002043657,
+            "arrival_times": [
+              391.850006103516
+            ],
+            "damage_received": 717.0,
+            "physics_frames": 23514,
+            "controller": "native",
+            "checkpoint": "66e6e6f80a6e606076804a1b8484023e648a8288bd776064a805b2084de2d160",
+            "neural_decisions": [
+              3929,
+              130,
+              130
+            ],
+            "neural_fallbacks": [
+              0,
+              0,
+              0
+            ],
+            "mission": 2,
+            "power_on": true,
+            "key": true,
+            "radio": true,
+            "mode": "Hostile",
+            "seed": 1913,
+            "behavior": {
+              "shots": 22,
+              "hostile_damage": 583,
+              "tactical_switches": 187,
+              "job_switches": 20,
+              "stalled_aim_seconds": 0.0
+            }
+          }
+        ],
+        "behavior": {
+          "ally": true,
+          "raider": true,
+          "unarmed": true,
+          "friendly_noise": true,
+          "exposure": true
+        },
+        "accepted": false
+      }
+    ],
+    "selected": {
+      "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+      "imitation_examples": 3527,
+      "imitation_promoted": true,
+      "validation": [
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 253.833346571773,
+          "arrival_times": [
+            253.833343505859,
+            229.983352661133,
+            229.983352661133,
+            229.983352661133,
+            253.383346557617
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 15233,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5161,
+            185,
+            185
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Peaceful",
+          "seed": 1613,
+          "behavior": {
+            "shots": 0,
+            "hostile_damage": 0,
+            "tactical_switches": 22,
+            "job_switches": 26,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 5,
+          "alive": 5,
+          "losses": 0,
+          "elapsed": 279.516681244597,
+          "arrival_times": [
+            230.766677856445,
+            279.516693115234,
+            201.816680908203,
+            214.116683959961,
+            221.333343505859
+          ],
+          "damage_received": 0.0,
+          "physics_frames": 16774,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            5066,
+            184,
+            184
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            1
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Standard",
+          "seed": 1823,
+          "behavior": {
+            "shots": 8,
+            "hostile_damage": 200,
+            "tactical_switches": 75,
+            "job_switches": 24,
+            "stalled_aim_seconds": 0.0
+          }
+        },
+        {
+          "phase": "Victory",
+          "arrived": 1,
+          "alive": 1,
+          "losses": 4,
+          "elapsed": 391.85002043657,
+          "arrival_times": [
+            391.850006103516
+          ],
+          "damage_received": 717.0,
+          "physics_frames": 23514,
+          "controller": "native",
+          "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+          "neural_decisions": [
+            3929,
+            130,
+            130
+          ],
+          "neural_fallbacks": [
+            0,
+            0,
+            0
+          ],
+          "mission": 2,
+          "power_on": true,
+          "key": true,
+          "radio": true,
+          "mode": "Hostile",
+          "seed": 1913,
+          "behavior": {
+            "shots": 22,
+            "hostile_damage": 583,
+            "tactical_switches": 189,
+            "job_switches": 20,
+            "stalled_aim_seconds": 0.0
+          }
+        }
+      ],
+      "behavior": {
+        "ally": true,
+        "raider": true,
+        "unarmed": true,
+        "friendly_noise": true,
+        "exposure": true
+      },
+      "frames": 28800
+    },
+    "imitation_coverage": {
+      "decision_groups": [
+        14150,
+        557,
+        557
+      ],
+      "candidate_counts_by_kind": [
+        {
+          "0": 13094,
+          "11": 14150,
+          "1": 135,
+          "5": 958,
+          "9": 1102,
+          "2": 1134,
+          "3": 393,
+          "6": 871,
+          "4": 29,
+          "8": 75,
+          "7": 23,
+          "12": 25
+        },
+        {
+          "113": 267,
+          "112": 193,
+          "121": 260,
+          "114": 276,
+          "117": 32,
+          "115": 73,
+          "116": 174,
+          "120": 95
+        },
+        {
+          "113": 584,
+          "121": 1595,
+          "112": 311,
+          "120": 537,
+          "114": 366,
+          "117": 89,
+          "115": 119,
+          "116": 97,
+          "122": 59
+        }
+      ],
+      "chosen_counts_by_kind": [
+        {
+          "1": 46,
+          "0": 12015,
+          "11": 365,
+          "5": 352,
+          "9": 605,
+          "2": 432,
+          "3": 263,
+          "6": 7,
+          "8": 43,
+          "7": 11,
+          "12": 2,
+          "4": 9
+        },
+        {
+          "113": 222,
+          "112": 65,
+          "121": 19,
+          "114": 83,
+          "117": 15,
+          "115": 47,
+          "116": 87,
+          "120": 19
+        },
+        {
+          "113": 214,
+          "112": 65,
+          "121": 19,
+          "114": 83,
+          "117": 15,
+          "115": 47,
+          "116": 83,
+          "120": 19,
+          "122": 12
+        }
+      ],
+      "observed_range": {
+        "health": [
+          0.03999999910593033,
+          1.0
+        ],
+        "stamina": [
+          0.16800139844417572,
+          1.0
+        ],
+        "hunger": [
+          0.18000000715255737,
+          1.0
+        ],
+        "hydration": [
+          0.2199999988079071,
+          1.0
+        ],
+        "cold": [
+          0.0,
+          0.8399999737739563
+        ],
+        "armour": [
+          0.0,
+          1.0
+        ],
+        "loaded": [
+          0.0,
+          0.800000011920929
+        ],
+        "reserve": [
+          0.0,
+          0.4000000059604645
+        ],
+        "magazine": [
+          0.1666666716337204,
+          0.800000011920929
+        ],
+        "weapon_range": [
+          0.23333333432674408,
+          0.9166666865348816
+        ],
+        "weapon_kind": [
+          0.0,
+          1.0
+        ],
+        "owned_weapons": [
+          0.0,
+          0.8666666746139526
+        ],
+        "medkits": [
+          0.0,
+          0.6666666865348816
+        ],
+        "bandages": [
+          0.0,
+          1.0
+        ],
+        "food": [
+          0.0,
+          1.0
+        ],
+        "water": [
+          0.0,
+          1.0
+        ],
+        "fuel": [
+          0.0,
+          0.3333333432674408
+        ],
+        "smoke": [
+          0.0,
+          0.6666666865348816
+        ],
+        "decoys": [
+          0.0,
+          0.6666666865348816
+        ],
+        "tools": [
+          0.0,
+          1.0
+        ],
+        "coat": [
+          0.0,
+          1.0
+        ],
+        "backpack": [
+          0.0,
+          1.0
+        ],
+        "weight": [
+          0.0,
+          0.49958333373069763
+        ],
+        "capacity": [
+          0.5833333134651184,
+          1.0
+        ],
+        "caution": [
+          0.4000000059604645,
+          0.800000011920929
+        ],
+        "confidence": [
+          0.5,
+          0.699999988079071
+        ],
+        "aggression": [
+          0.25,
+          0.44999998807907104
+        ],
+        "loyalty": [
+          0.5,
+          0.800000011920929
+        ],
+        "generosity": [
+          0.30000001192092896,
+          0.800000011920929
+        ],
+        "curiosity": [
+          0.5,
+          0.8500000238418579
+        ],
+        "role": [
+          0.0,
+          1.0
+        ],
+        "order": [
+          0.0,
+          1.0
+        ],
+        "order_time": [
+          0.0,
+          0.7333333492279053
+        ],
+        "key": [
+          0.0,
+          1.0
+        ],
+        "power": [
+          0.0,
+          1.0
+        ],
+        "relays": [
+          0.0,
+          1.0
+        ],
+        "radio": [
+          0.0,
+          1.0
+        ],
+        "shortcut": [
+          0.0,
+          1.0
+        ],
+        "time_left": [
+          2.200305700302124,
+          2.999972105026245
+        ],
+        "north_active": [
+          0.0,
+          1.0
+        ],
+        "north_time": [
+          0.0,
+          0.6875
+        ],
+        "west_active": [
+          0.0,
+          1.0
+        ],
+        "west_time": [
+          0.0,
+          0.995312511920929
+        ],
+        "known_items": [
+          0.0,
+          0.5333333611488342
+        ],
+        "known_caches": [
+          0.0,
+          1.5
+        ],
+        "known_contacts": [
+          0.0,
+          0.75
+        ],
+        "suppression": [
+          0.0,
+          0.9369995594024658
+        ],
+        "allies": [
+          0.0,
+          1.0
+        ],
+        "enemies": [
+          0.0,
+          0.25
+        ],
+        "distance": [
+          0.0,
+          1.0
+        ],
+        "contact_age": [
+          0.0,
+          1.0
+        ],
+        "contact_confidence": [
+          0.0,
+          1.0
+        ],
+        "contact_health": [
+          0.0,
+          1.0
+        ],
+        "contact_speed": [
+          0.0,
+          0.8333694934844971
+        ],
+        "danger": [
+          0.0,
+          1.0
+        ],
+        "visible": [
+          0.0,
+          1.0
+        ],
+        "hostile": [
+          0.0,
+          1.0
+        ],
+        "firing_lane": [
+          0.0,
+          1.0
+        ],
+        "ready": [
+          0.0,
+          1.0
+        ],
+        "protected_here": [
+          0.0,
+          1.0
+        ],
+        "cover_available": [
+          0.0,
+          1.0
+        ],
+        "peek_available": [
+          0.0,
+          1.0
+        ],
+        "flank_available": [
+          0.0,
+          1.0
+        ],
+        "retreat_available": [
+          0.0,
+          1.0
+        ],
+        "needs_loot": [
+          0.0,
+          1.0
+        ],
+        "has_medical": [
+          0.0,
+          1.0
+        ],
+        "downed_ally": [
+          0.0,
+          1.0
+        ],
+        "rescue_safe": [
+          0.0,
+          1.0
+        ],
+        "heard": [
+          0.0,
+          1.0
+        ],
+        "waiting": [
+          0.0,
+          1.0
+        ],
+        "cover_distance": [
+          0.0,
+          4.0
+        ],
+        "committed": [
+          0.0,
+          1.0
+        ],
+        "tactical": [
+          0.0,
+          1.0
+        ],
+        "job": [
+          0.0,
+          1.0
+        ],
+        "route": [
+          0.0,
+          1.0
+        ],
+        "teacher_prior": [
+          -4.0,
+          0.0
+        ],
+        "previous": [
+          0.0,
+          1.0
+        ],
+        "target_present": [
+          0.0,
+          1.0
+        ],
+        "target_dx": [
+          -2.5096962451934814,
+          2.1839358806610107
+        ],
+        "target_dy": [
+          -0.02763725072145462,
+          0.3520302474498749
+        ],
+        "target_dz": [
+          -2.5012471675872803,
+          2.200000047683716
+        ],
+        "target_distance": [
+          0.0,
+          2.8906097412109375
+        ],
+        "target_visible": [
+          0.0,
+          1.0
+        ],
+        "target_trust": [
+          0.0,
+          0.75
+        ],
+        "target_fear": [
+          0.0,
+          0.0
+        ],
+        "target_speed": [
+          0.0,
+          0.8333332538604736
+        ],
+        "target_value": [
+          0.0,
+          1.4070334434509277
+        ],
+        "target_risk": [
+          0.0,
+          0.8999999761581421
+        ],
+        "target_reserved": [
+          0.0,
+          1.0
+        ],
+        "target_contested": [
+          0.0,
+          1.0
+        ],
+        "target_health": [
+          0.0,
+          0.0
+        ],
+        "target_bleed": [
+          0.0,
+          0.28333333134651184
+        ],
+        "plan_cost": [
+          0.0,
+          3.8956453800201416
+        ],
+        "plan_risk": [
+          0.0,
+          0.32544001936912537
+        ],
+        "plan_complete": [
+          0.0,
+          1.0
+        ],
+        "plan_steps": [
+          0.0,
+          2.0833332538604736
+        ],
+        "plan_health": [
+          0.0,
+          1.0
+        ],
+        "plan_ammo": [
+          0.0,
+          1.5364999771118164
+        ],
+        "plan_weight": [
+          0.0,
+          0.5845833420753479
+        ],
+        "t_progress": [
+          0.0,
+          1.0
+        ],
+        "t_acquire": [
+          0.0,
+          1.0
+        ],
+        "t_cover": [
+          0.0,
+          1.0
+        ],
+        "t_peek": [
+          0.0,
+          1.0
+        ],
+        "t_flank": [
+          0.0,
+          1.0
+        ],
+        "t_withdraw": [
+          0.0,
+          1.0
+        ],
+        "t_reload": [
+          0.0,
+          1.0
+        ],
+        "t_treat": [
+          0.0,
+          1.0
+        ],
+        "t_rescue": [
+          0.0,
+          1.0
+        ],
+        "t_investigate": [
+          0.0,
+          1.0
+        ],
+        "t_suppress": [
+          0.0,
+          0.0
+        ],
+        "t_hold": [
+          0.0,
+          1.0
+        ],
+        "t_smoke": [
+          0.0,
+          1.0
+        ],
+        "s_key": [
+          0.0,
+          1.0
+        ],
+        "s_power": [
+          0.0,
+          1.0
+        ],
+        "s_relay": [
+          0.0,
+          1.0
+        ],
+        "s_radio": [
+          0.0,
+          1.0
+        ],
+        "s_extract": [
+          0.0,
+          1.0
+        ],
+        "s_secure": [
+          0.0,
+          1.0
+        ],
+        "s_gate": [
+          0.0,
+          0.0
+        ],
+        "s_guard": [
+          0.0,
+          0.0
+        ],
+        "s_loot": [
+          0.0,
+          1.0
+        ],
+        "s_search": [
+          0.0,
+          1.0
+        ],
+        "s_heal": [
+          0.0,
+          1.0
+        ],
+        "s_warm": [
+          0.0,
+          0.0
+        ],
+        "s_travel": [
+          0.0,
+          0.0
+        ],
+        "s_other": [
+          0.0,
+          0.0
+        ],
+        "i_pistol": [
+          0.0,
+          0.0
+        ],
+        "i_smg": [
+          0.0,
+          1.0
+        ],
+        "i_rifle": [
+          0.0,
+          1.0
+        ],
+        "i_shotgun": [
+          0.0,
+          1.0
+        ],
+        "i_ammo": [
+          0.0,
+          0.0
+        ],
+        "i_smg_ammo": [
+          0.0,
+          1.0
+        ],
+        "i_rifle_ammo": [
+          0.0,
+          1.0
+        ],
+        "i_shells": [
+          0.0,
+          1.0
+        ],
+        "i_medkit": [
+          0.0,
+          1.0
+        ],
+        "i_bandage": [
+          0.0,
+          1.0
+        ],
+        "i_food": [
+          0.0,
+          1.0
+        ],
+        "i_water": [
+          0.0,
+          1.0
+        ],
+        "i_fuel": [
+          0.0,
+          1.0
+        ],
+        "i_smoke": [
+          0.0,
+          1.0
+        ],
+        "i_armour": [
+          0.0,
+          1.0
+        ],
+        "i_coat": [
+          0.0,
+          1.0
+        ],
+        "i_backpack": [
+          0.0,
+          0.0
+        ],
+        "i_tools": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    "imitation_varying_features": 133
+  },
+  "windows": {
+    "checkpoint": "026876cf6fe62cdfb9c0214478639720f1f911c08a1ee0ea00b9acbc69907643",
+    "tests": {
+      "ally": true,
+      "raider": true,
+      "unarmed": true,
+      "friendly_noise": true,
+      "exposure": true
+    },
+    "standard_extracted": 5,
+    "standard_losses": 0,
+    "live_training_examples": 1446,
+    "live_response_checks": {
+      "ally": true,
+      "raider": true,
+      "unarmed": true,
+      "friendly_noise": true,
+      "exposure": true
+    },
+    "live_accepted": false,
+    "zip_sha256": "39af971ea70d18e5dde6dc0d0783137e2b1e1700f062dcf536668043648bb1e2"
+  },
+  "stationary_player_comparison": {
+    "extractions_before_after": [
+      2,
+      3
+    ],
+    "tactic_switches_before_after": [
+      715,
+      107
+    ]
+  },
+  "isolated_peek_fix": {
+    "extractions_before_after": [
+      2,
+      3
+    ],
+    "tactic_switches_before_after": [
+      992,
+      107
+    ],
+    "checkpoint": "905d5460d67a9fc104bbd1919e3835c032de95c460db09c9695205394b96991f"
+  }
+}

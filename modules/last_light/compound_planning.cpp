@@ -210,13 +210,30 @@ void LastLightGame::build_compound_plan(Actor &a) {
 	};
 	std::vector<Job> jobs;
 	auto known_claim = [&](const MissionClaim &c) { return c.owner == a.stats.id || power_on || (a.contacts.count(c.owner) && a.visible_actors.count(c.owner)); };
-	auto offer = [&](int id, uint32_t goal, Vector3 p, const String &name, float affinity) {if(a.failed_jobs.count(id)&&a.failed_jobs[id]>elapsed){return;
-}float cost=flat(a.body->get_position(),p)/3+(input.current_risk[nearest_region(p)]+input.personality.region_risk[nearest_region(p)]*.5f)*(15+25*input.personality.caution)-(a.order==4?0.f:affinity) - ((a.order==3&&id>=14000)?22.f:0.f);
-  auto found=mission_claims.find(id);if(id!=10003&&id!=10004&&found!=mission_claims.end()&&found->second.owner!=a.stats.id&&found->second.until>elapsed&&known_claim(found->second)){if(cost>=found->second.bid-12){cost+=65;
-}}
-  if(a.task_claim==id){cost-=7;
-}jobs.push_back({id,goal,p,name,cost}); };
-	if (!gate_open && flat(a.body->get_position(), control_a) < 30 && a.personality.loyalty > .6f) {
+	auto primary = [](uint32_t goal) {
+		return goal == HaveKey || goal == Power || goal == HaveSignal || goal == Escaped ||
+				goal == RelayOne || goal == RelayTwo || goal == RelayThree;
+	};
+	auto offer = [&](int id, uint32_t goal, Vector3 position, const String &name, float affinity) {
+		const auto failure = a.failed_jobs.find(id);
+		if (failure != a.failed_jobs.end() && failure->second > elapsed) {
+			return;
+		}
+		const int region = nearest_region(position);
+		const float risk = input.current_risk[region] + input.personality.region_risk[region] * .5f;
+		float cost = flat(a.body->get_position(), position) / 3 + risk * (15 + 25 * a.personality.caution);
+		cost -= a.order == 4 ? 0.f : affinity;
+		cost -= primary(goal) ? 19.f : 0.f;
+		cost -= a.order == 3 && id >= 14000 ? 22.f : 0.f;
+		auto lease = mission_claims.find(id);
+		if (id != 10003 && id != 10004 && lease != mission_claims.end() && lease->second.owner != a.stats.id &&
+				lease->second.until > elapsed && known_claim(lease->second) && cost >= lease->second.bid - 12) {
+			cost += 55;
+		}
+		cost -= a.task_claim == id ? 12.f : 0.f;
+		jobs.push_back({ id, goal, position, name, cost });
+	};
+	if (!radio_done && key_found && power_on && !gate_open && flat(a.body->get_position(), control_a) < 30 && a.personality.loyalty > .6f) {
 		int helpers = 1;
 		for (auto &[peer, c] : a.contacts) {
 			auto other = find_actor(peer);
@@ -234,14 +251,14 @@ void LastLightGame::build_compound_plan(Actor &a) {
 		}
 	}
 	for (auto &o : world_objects) {
-		if (o.kind == "security" && !o.used && power_on && i.tools) {
+		if (!radio_done && o.kind == "security" && !o.used && power_on && i.tools) {
 			offer(o.id, SecuredPower, o.position, "Secure turbine controls", a.role == 4 ? 32 : 10);
 		}
 	}
 	if (!key_found) {
 		offer(10000, HaveKey, key_position, "Access key", a.role == 2 ? 24 : input.personality.curiosity * 6);
 	}
-	if (!power_on) {
+	if (!radio_done && !power_on) {
 		offer(10001, Power, generator_position, "Restore power", a.role == 4 ? 30 : i.fuel ? 14
 																						   : 0);
 	}
@@ -251,7 +268,7 @@ void LastLightGame::build_compound_plan(Actor &a) {
 		if (o.kind == "relay") {
 			if (o.used) {
 				++calibrated;
-			} else if (power_on) {
+			} else if (power_on && !radio_done) {
 				offer(o.id, uint32_t(RelayOne) << relay, o.position, o.name, a.role == 4 ? 10 : 4);
 			}
 			++relay;
@@ -261,14 +278,23 @@ void LastLightGame::build_compound_plan(Actor &a) {
 		offer(10002, HaveSignal, radio_position, "Rescue signal", a.role == 2 ? 12 : 0);
 	}
 	if (radio_done) {
-		offer(10003, Escaped, exit_position, "North extraction", -input.personality.caution * 4);
-		offer(10004, Escaped, alternative_exit, "West extraction", input.personality.caution * 6);
+		offer(10003, Escaped, exit_position, "North extraction", (beacon_active[0] ? 12.f : 0.f) - input.personality.caution * 4);
+		offer(10004, Escaped, alternative_exit, "West extraction", (beacon_active[1] ? 12.f : 0.f) + input.personality.caution * 6);
 	}
 	// Guard/medic support is an explicit shared task, not a hidden read of a peer's
 	// current position. Last-confirmed contacts and public claims supply evidence.
-	if (!radio_done && a.order != 4 && (a.role == 1 || a.role == 3)) {
+	const bool primary_available = std::any_of(jobs.begin(), jobs.end(), [&](const Job &job) {
+		if (!primary(job.goal)) {
+			return false;
+		}
+		const auto lease = mission_claims.find(job.id);
+		return lease == mission_claims.end() || lease->second.owner == a.stats.id ||
+				lease->second.until <= elapsed || !known_claim(lease->second);
+	});
+	if (!radio_done && !primary_available && a.order != 4 && (a.role == 1 || a.role == 3)) {
 		for (auto &[id, claim] : mission_claims) {
-			if (claim.owner == a.stats.id || claim.until <= elapsed || !known_claim(claim) || id >= 12000) {
+			if (claim.owner == a.stats.id || claim.until <= elapsed || !known_claim(claim) || id >= 12000 ||
+					input.current_risk[nearest_region(claim.position)] < .3f) {
 				continue;
 			}
 			float d = flat(a.body->get_position(), claim.position);
@@ -284,7 +310,9 @@ void LastLightGame::build_compound_plan(Actor &a) {
 			jobs.push_back(job);
 		}
 	}
-	if (a.order == 3 || i.rounds + i.reserve < 8 || (a.stats.health < 65 && i.medkits + i.bandages == 0) || (a.stats.hunger < 45 && i.food == 0) || (i.hydration < 45 && i.water == 0)) {
+	if (a.order == 3 || (!radio_done && (i.rounds + i.reserve < 6 ||
+			(a.stats.health < 65 && i.medkits + i.bandages == 0) ||
+			(a.stats.hunger < 45 && i.food == 0) || (i.hydration < 45 && i.water == 0)))) {
 		for (auto &[id, pos] : a.known_items) {
 			String k = a.known_item_kinds[id];
 			bool ammo = (k == "ammo" && i.weapon_kind == 0) || (k == "smg_ammo" && i.weapon_kind == 1) || (k == "rifle_ammo" && i.weapon_kind == 2) || (k == "shells" && i.weapon_kind == 3);
@@ -429,6 +457,7 @@ void LastLightGame::build_compound_plan(Actor &a) {
 		}
 		mission_claims[chosen.id] = { a.stats.id, elapsed + 12, chosen.bid, chosen.position, chosen.label, a.body->get_position() };
 		if (changed_task) {
+			a.job_switches += previous_task != 0;
 			a.task_progress_at = elapsed;
 			a.task_distance = flat(a.body->get_position(), chosen.position);
 		}

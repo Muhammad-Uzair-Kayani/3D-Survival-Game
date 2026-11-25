@@ -194,6 +194,93 @@ void LastLightGame::compound_integration_step() {
 		integration_ok = integration_ok && !game_command("discard_item", d);
 		frontend_mode = before;
 	}
+	if (script_case == "compound_response_exposure" && physics_frames == 32) {
+		auto &recipient = *find_actor(4);
+		recipient.body->set_position(Vector3(160, .1, 230));
+		recipient.stats.health = 100;
+		recipient.stats.state = State::Idle;
+		for (auto &actor : actors) {
+			if (!actor.stats.survivor) {
+				actor.stats.health = 0;
+				actor.stats.state = State::Dead;
+				actor.body->set_collision_layer(0);
+			}
+		}
+		damage(recipient.stats, 2); // The world inflicts hunger and cold damage through this path.
+	}
+	if (script_case == "compound_response_exposure" && physics_frames == 44) {
+		auto &recipient = *find_actor(4);
+		perceive_compound(recipient);
+		decide_compound(recipient);
+		integration_ok = integration_ok && recipient.stats.health < 100 && recipient.suppression < .1f &&
+				recipient.tactical_decision.legal[int(Tactic::Progress)] && recipient.stats.shots == 0;
+	}
+	if (script_case == "compound_response_ally" || script_case == "compound_response_raider" ||
+			script_case == "compound_response_unarmed" || script_case == "compound_response_friendly_noise") {
+		const bool friendly_noise = script_case == "compound_response_friendly_noise";
+		const bool armed = script_case != "compound_response_unarmed";
+		auto &recipient = *find_actor(script_case == "compound_response_raider" || friendly_noise ? 10 : 4);
+		auto &observer = *find_actor(3);
+		if (physics_frames == 20) {
+			player->body->set_position(Vector3(160, .1, 240));
+			recipient.body->set_position(Vector3(160, .1, 230));
+			observer.body->set_position(friendly_noise ? Vector3(201, .1, 245) : Vector3(208, .1, 250));
+			for (auto &actor : actors) {
+				if (!actor.stats.survivor && actor.stats.id != recipient.stats.id) {
+					actor.stats.health = 0;
+					actor.stats.state = State::Dead;
+					actor.body->set_collision_layer(0);
+				}
+			}
+			for (Actor *actor : { player, &recipient, &observer }) {
+				actor->target = actor->body->get_position();
+				actor->nav->set_target_position(actor->target);
+				actor->stats.state = State::Idle;
+				actor->stats.health = 100;
+				actor->body->set_collision_layer(2);
+				actor->yaw = 0;
+				actor->contacts.clear();
+				actor->memory.clear();
+			}
+			observer.yaw = Math::PI;
+			recipient.stats.inventory.armour = 0;
+			recipient.stats.inventory.smoke = 0;
+			recipient.stats.inventory.tools = 0;
+			recipient.stats.inventory.pistol = armed;
+			recipient.stats.inventory.owned_weapons = armed ? 1 : 0;
+			recipient.stats.inventory.weapon_kind = 0;
+			recipient.stats.inventory.rounds = armed ? 6 : 0;
+			recipient.stats.inventory.reserve = armed ? 12 : 0;
+			player->stats.inventory.pistol = true;
+			player->stats.inventory.weapon_kind = 0;
+			player->stats.inventory.rounds = 6;
+		}
+		if (physics_frames == 32) {
+			// Script the player's trigger through the live projectile and attack-event paths.
+			player->engagement_id = recipient.stats.id;
+			player->aiming = true;
+			player->contacts[recipient.stats.id] = { recipient.body->get_position(), Vector3(), elapsed, 1.f, true, true, 100 };
+			shoot(*player);
+			integration_ok = integration_ok && recipient.stats.health < 100;
+		}
+		if (friendly_noise && physics_frames == 48) {
+			perceive_compound(observer);
+			decide_compound(observer);
+			const bool progress = observer.tactical_decision.legal[int(Tactic::Progress)];
+			integration_ok = integration_ok && progress && observer.stats.shots == 0;
+			print_line("Squadmate can continue safe mission work " + itos(progress));
+		}
+		if (!friendly_noise && physics_frames >= 36 && physics_frames < 190 && physics_frames % 12 == 0) {
+			perceive_compound(recipient);
+			decide_compound(recipient);
+		}
+		if (!friendly_noise && physics_frames == 190) {
+			const float distance = flat(recipient.body->get_position(), Vector3(160, .1, 230));
+			integration_ok = integration_ok && (armed ? recipient.stats.shots > 0 && player->stats.health < 100 :
+					distance > 3 && recipient.stats.shots == 0);
+			print_line("Attack response shots " + itos(recipient.stats.shots) + " movement " + String::num(distance, 1));
+		}
+	}
 	if (script_case == "compound_engagement") {
 		auto guard = find_actor(4), enemy = find_actor(10);
 		if (physics_frames == 8) {
